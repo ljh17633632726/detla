@@ -1,0 +1,53 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.list-page.data-v-ebe9e38b {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.list.data-v-ebe9e38b {
+  height: 100vh;
+}
+.record-item.data-v-ebe9e38b {
+  margin: 20rpx 24rpx 0;
+  padding: 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+}
+.record-item .top-row.data-v-ebe9e38b {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.record-item .amount.data-v-ebe9e38b {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.85);
+}
+.record-item .info-row.data-v-ebe9e38b {
+  display: flex;
+  justify-content: space-between;
+}
+.record-item .info-row .account.data-v-ebe9e38b {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.55);
+}
+.record-item .info-row .time.data-v-ebe9e38b {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+}
+.loading-tip.data-v-ebe9e38b {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.3);
+}

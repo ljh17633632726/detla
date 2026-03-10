@@ -1,0 +1,1 @@
+<view class="progress-page data-v-e2287179"><block wx:if="{{r0}}"><textarea class="data-v-e2287179" placeholder="描述当前进度" maxlength="{{500}}" value="{{a}}" bindinput="{{b}}"/></block><image-uploader wx:if="{{d}}" class="data-v-e2287179" u-i="e2287179-0" bind:__l="__l" bindupdateModelValue="{{c}}" u-p="{{d}}"/><view class="btn data-v-e2287179" bindtap="{{e}}">提交</view></view>

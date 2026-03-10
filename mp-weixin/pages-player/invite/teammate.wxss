@@ -1,0 +1,195 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.invite-page.data-v-e09f31ee {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.search-bar.data-v-e09f31ee {
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 24rpx;
+  background: #f1f5f9;
+}
+.search-bar .search-input.data-v-e09f31ee {
+  flex: 1;
+  background: #e2e8f0;
+  padding: 16rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+.search-bar .search-btn.data-v-e09f31ee {
+  padding: 16rpx 32rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+.list.data-v-e09f31ee {
+  height: calc(100vh - 120rpx);
+  padding: 20rpx 24rpx;
+}
+.player-card.data-v-e09f31ee {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 24rpx;
+  background: #f1f5f9;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+}
+.player-card .avatar.data-v-e09f31ee {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.player-card .info.data-v-e09f31ee {
+  flex: 1;
+}
+.player-card .info .name.data-v-e09f31ee {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+}
+.player-card .info .tags.data-v-e09f31ee {
+  display: flex;
+  gap: 8rpx;
+  margin-top: 8rpx;
+  flex-wrap: wrap;
+}
+.player-card .info .tag.data-v-e09f31ee {
+  font-size: 22rpx;
+  color: #64748b;
+  background: #e2e8f0;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+.player-card .info .tag.tag-warn.data-v-e09f31ee {
+  color: #ee0a24;
+  background: rgba(238, 10, 36, 0.1);
+}
+.player-card .invite-btn.data-v-e09f31ee {
+  padding: 12rpx 32rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+}
+.loading-tip.data-v-e09f31ee {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+
+/* 分成弹窗 */
+.modal-mask.data-v-e09f31ee {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-box.data-v-e09f31ee {
+  width: 85%;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
+  border: 1rpx solid #e2e8f0;
+}
+.modal-title.data-v-e09f31ee {
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  color: #ff4544;
+}
+.modal-sub.data-v-e09f31ee {
+  font-size: 24rpx;
+  color: #94a3b8;
+  display: block;
+  text-align: center;
+  margin-top: 8rpx;
+}
+.split-options.data-v-e09f31ee {
+  margin-top: 24rpx;
+}
+.split-opt.data-v-e09f31ee {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  margin-bottom: 12rpx;
+  background: #f1f5f9;
+  border-radius: 12rpx;
+  border: 2rpx solid transparent;
+}
+.split-opt.active.data-v-e09f31ee {
+  border-color: #ff4544;
+  background: rgba(255, 69, 68, 0.1);
+}
+.split-opt .opt-label.data-v-e09f31ee {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.split-opt .opt-desc.data-v-e09f31ee {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+.custom-input-row.data-v-e09f31ee {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+.custom-input-row .custom-label.data-v-e09f31ee {
+  font-size: 26rpx;
+  color: #64748b;
+  white-space: nowrap;
+}
+.custom-input-row .custom-input.data-v-e09f31ee {
+  flex: 1;
+  background: #e2e8f0;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+.modal-actions.data-v-e09f31ee {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 32rpx;
+}
+.modal-cancel.data-v-e09f31ee {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border: 1rpx solid #cbd5e1;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #64748b;
+}
+.modal-confirm.data-v-e09f31ee {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}

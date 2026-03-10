@@ -1,0 +1,21 @@
+"use strict";
+const api_request = require("./request.js");
+const createOrder = (data) => api_request.post("/order", data);
+const getOrderList = (params, opts = {}) => api_request.get("/order/my", params, opts);
+const getOrderDetail = (id) => api_request.get(`/order/${id}`);
+const getOrderProgress = (id) => api_request.get(`/order/${id}/progress`);
+const confirmOrder = (id) => api_request.post(`/order/${id}/confirm`);
+const cancelOrder = (id) => api_request.post(`/order/${id}/cancel`);
+const requestReplace = (id, data) => api_request.post(`/order/${id}/replace`, data);
+const getAvailablePlayers = (params) => api_request.get("/cs/player/assign-list", params);
+const designatePlayer = (id, playerId) => api_request.post(`/order/${id}/designate-player`, { playerId });
+exports.cancelOrder = cancelOrder;
+exports.confirmOrder = confirmOrder;
+exports.createOrder = createOrder;
+exports.designatePlayer = designatePlayer;
+exports.getAvailablePlayers = getAvailablePlayers;
+exports.getOrderDetail = getOrderDetail;
+exports.getOrderList = getOrderList;
+exports.getOrderProgress = getOrderProgress;
+exports.requestReplace = requestReplace;
+//# sourceMappingURL=../../.sourcemap/mp-weixin/api/order.js.map

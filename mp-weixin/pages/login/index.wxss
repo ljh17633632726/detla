@@ -1,0 +1,149 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.login-page.data-v-d08ef7d4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f1f5f9;
+  padding: 0 60rpx;
+  position: relative;
+}
+.logo-area.data-v-d08ef7d4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80rpx;
+  position: relative;
+  z-index: 1;
+}
+.logo-area .logo.data-v-d08ef7d4 {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 24rpx;
+  border-radius: 24rpx;
+}
+.logo-area .title.data-v-d08ef7d4 {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #ff4544;
+}
+.logo-area .subtitle.data-v-d08ef7d4 {
+  font-size: 26rpx;
+  color: #94a3b8;
+  margin-top: 12rpx;
+}
+.tab-bar.data-v-d08ef7d4 {
+  display: flex;
+  width: 100%;
+  margin-bottom: 60rpx;
+  border-bottom: 2rpx solid #e2e8f0;
+  position: relative;
+  z-index: 1;
+}
+.tab-bar .tab-item.data-v-d08ef7d4 {
+  flex: 1;
+  text-align: center;
+  font-size: 30rpx;
+  color: #94a3b8;
+  padding-bottom: 20rpx;
+  position: relative;
+  transition: color 0.2s;
+}
+.tab-bar .tab-item.active.data-v-d08ef7d4 {
+  color: #ff4544;
+  font-weight: bold;
+}
+.tab-bar .tab-item.active.data-v-d08ef7d4::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, #ff4544, #e63939);
+  border-radius: 2rpx;
+}
+.login-area.data-v-d08ef7d4 {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.login-area .input.data-v-d08ef7d4 {
+  height: 88rpx;
+  background: #f1f5f9;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  padding: 0 32rpx;
+  font-size: 30rpx;
+  color: #1e293b;
+  margin-bottom: 32rpx;
+}
+.login-area .login-btn.data-v-d08ef7d4 {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-radius: 999rpx;
+  border: none;
+}
+.login-area .login-btn.data-v-d08ef7d4::after {
+  border: none;
+}
+.login-area .wechat-btn.data-v-d08ef7d4 {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+}
+.login-area .account-btn.data-v-d08ef7d4 {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  margin-top: 8rpx;
+}
+.login-area .agreement.data-v-d08ef7d4 {
+  margin-top: 32rpx;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: center;
+}
+.login-area .agreement .agree-row.data-v-d08ef7d4 {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.login-area .agreement .checkbox.data-v-d08ef7d4 {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 6rpx;
+  border: 2rpx solid rgba(99, 102, 241, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.login-area .agreement .checkbox.checked.data-v-d08ef7d4 {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  border-color: transparent;
+}
+.login-area .agreement .check-icon.data-v-d08ef7d4 {
+  font-size: 22rpx;
+  color: #ffffff;
+}
+.login-area .agreement .text.data-v-d08ef7d4 {
+  color: #94a3b8;
+}
+.login-area .agreement .link.data-v-d08ef7d4 {
+  color: #ff4544;
+}

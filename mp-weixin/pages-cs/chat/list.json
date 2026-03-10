@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "客服消息",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#f1f5f9",
+  "backgroundColorTop": "#f1f5f9",
+  "backgroundColorBottom": "#f1f5f9",
+  "initialRenderingCache": "static",
+  "usingComponents": {
+    "custom-tab-bar": "../../components/CustomTabBar",
+    "empty-state": "../../components/EmptyState"
+  }
+}

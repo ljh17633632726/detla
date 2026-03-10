@@ -1,0 +1,154 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.category-page.data-v-3cdc7548 {
+  height: 100vh;
+  background: #f1f5f9;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.category-body.data-v-3cdc7548 {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+.side.data-v-3cdc7548 {
+  width: 200rpx;
+  height: 100%;
+  background: #ffffff;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.side-item.data-v-3cdc7548 {
+  padding: 28rpx 16rpx;
+  font-size: 26rpx;
+  color: #64748b;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+.side-item .side-text.data-v-3cdc7548 {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.side-item.active.data-v-3cdc7548 {
+  background: #f1f5f9;
+  color: #ff4544;
+  font-weight: 600;
+  border-left: 6rpx solid #ff4544;
+}
+.main.data-v-3cdc7548 {
+  flex: 1;
+  height: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.children-wrap.data-v-3cdc7548 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  align-content: flex-start;
+  margin-bottom: 24rpx;
+}
+.child-tag.data-v-3cdc7548 {
+  padding: 14rpx 28rpx;
+  font-size: 24rpx;
+  color: #64748b;
+  background: #ffffff;
+  border-radius: 999rpx;
+  box-shadow: 0 2rpx 10rpx rgba(99, 102, 241, 0.06);
+}
+.child-tag.active.data-v-3cdc7548 {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(255, 69, 68, 0.3);
+  color: #ff4544;
+  font-weight: 600;
+}
+.child-tag.data-v-3cdc7548:active {
+  background: rgba(99, 102, 241, 0.08);
+  border-color: rgba(255, 69, 68, 0.3);
+  color: #ff4544;
+}
+.product-section.data-v-3cdc7548 {
+  min-height: 200rpx;
+}
+.product-row.data-v-3cdc7548 {
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(99, 102, 241, 0.06);
+}
+.product-cover.data-v-3cdc7548 {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+.product-info.data-v-3cdc7548 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.product-name.data-v-3cdc7548 {
+  font-size: 26rpx;
+  color: #1e293b;
+  font-weight: 600;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-subtitle.data-v-3cdc7548 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-top: 6rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-bottom.data-v-3cdc7548 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 8rpx;
+}
+.product-price.data-v-3cdc7548 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff4544;
+}
+.product-sales.data-v-3cdc7548 {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+.loading-tip.data-v-3cdc7548 {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+.empty-tip.data-v-3cdc7548 {
+  width: 100%;
+  text-align: center;
+  padding: 60rpx;
+  font-size: 26rpx;
+  color: #94a3b8;
+}

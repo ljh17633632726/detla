@@ -1,0 +1,87 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.cs-chat-list.data-v-4546dd9c {
+  background: #ffffff;
+  min-height: 100vh;
+  position: relative;
+}
+.session-item.data-v-4546dd9c {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.04);
+  position: relative;
+  z-index: 1;
+}
+.avatar.data-v-4546dd9c {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  border: 2rpx solid rgba(99, 102, 241, 0.1);
+}
+.avatar-placeholder.data-v-4546dd9c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.session-info.data-v-4546dd9c {
+  flex: 1;
+  overflow: hidden;
+}
+.top-row.data-v-4546dd9c {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-row .name.data-v-4546dd9c {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  flex: 1;
+}
+.top-row .time.data-v-4546dd9c {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+.bottom-row.data-v-4546dd9c {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8rpx;
+}
+.bottom-row .last-msg.data-v-4546dd9c {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.35);
+  flex: 1;
+}
+.badge.data-v-4546dd9c {
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  color: #ffffff;
+  background: #ff4544;
+  border-radius: 32rpx;
+  text-align: center;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}

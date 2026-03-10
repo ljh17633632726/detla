@@ -1,0 +1,58 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.image-uploader.data-v-7bd1ddd2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.image-uploader .preview-item.data-v-7bd1ddd2 {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+}
+.image-uploader .preview-item image.data-v-7bd1ddd2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+.image-uploader .preview-item .remove-btn.data-v-7bd1ddd2 {
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+.image-uploader .add-btn.data-v-7bd1ddd2 {
+  width: 160rpx;
+  height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx dashed rgba(99, 102, 241, 0.3);
+  border-radius: 8rpx;
+}
+.image-uploader .add-btn .add-icon.data-v-7bd1ddd2 {
+  font-size: 48rpx;
+  color: rgba(99, 102, 241, 0.5);
+}
+.image-uploader .add-btn .add-text.data-v-7bd1ddd2 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-top: 4rpx;
+}

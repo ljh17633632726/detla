@@ -1,0 +1,67 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.product-card.data-v-fe52aa40 {
+  background: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(99, 102, 241, 0.08);
+}
+.product-card .cover.data-v-fe52aa40 {
+  width: 100%;
+  height: 340rpx;
+}
+.product-card .info.data-v-fe52aa40 {
+  padding: 16rpx 20rpx 20rpx;
+}
+.product-card .info .name.data-v-fe52aa40 {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #1e293b;
+  line-height: 1.4;
+}
+.product-card .info .subtitle.data-v-fe52aa40 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 4rpx;
+}
+.product-card .info .bottom.data-v-fe52aa40 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 12rpx;
+}
+.product-card .info .bottom .price.data-v-fe52aa40 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff4544;
+}
+.product-card .info .bottom .sales.data-v-fe52aa40 {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+.product-card.dense .info.data-v-fe52aa40 {
+  padding: 14rpx 16rpx 16rpx;
+}
+.product-card.dense .info .name.data-v-fe52aa40 {
+  font-size: 24rpx;
+}
+.product-card.dense .info .bottom.data-v-fe52aa40 {
+  margin-top: 10rpx;
+}
+.product-card.dense .info .bottom .price.data-v-fe52aa40 {
+  font-size: 30rpx;
+  color: #ff4544;
+}
+.product-card.dense .info .bottom .sales.data-v-fe52aa40 {
+  font-size: 20rpx;
+}

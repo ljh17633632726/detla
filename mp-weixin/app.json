@@ -1,0 +1,120 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/index",
+    "pages/product/list",
+    "pages/product/detail",
+    "pages/order/create",
+    "pages/order/pay",
+    "pages/order/list",
+    "pages/order/detail",
+    "pages/review/create",
+    "pages/complaint/create",
+    "pages/complaint/detail",
+    "pages/complaint/list",
+    "pages/wallet/index",
+    "pages/mine/index",
+    "pages/mine/profile",
+    "pages/chat/list",
+    "pages/chat/room",
+    "pages/message/index",
+    "pages/agreement/user",
+    "pages/agreement/privacy",
+    "pages/login/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pages-player",
+      "pages": [
+        "apply/index",
+        "hall/index",
+        "order/list",
+        "order/detail",
+        "order/progress",
+        "invite/list",
+        "invite/teammate",
+        "chat/list",
+        "chat/room",
+        "earnings/index",
+        "earnings/detail",
+        "withdraw/index",
+        "withdraw/list",
+        "withdraw/detail",
+        "account/list",
+        "account/edit",
+        "review/list",
+        "mine/index"
+      ]
+    },
+    {
+      "root": "pages-cs",
+      "pages": [
+        "login/index",
+        "dashboard/index",
+        "order/list",
+        "order/detail",
+        "order/assign",
+        "complaint/list",
+        "relay/list",
+        "complaint/handle",
+        "user/list",
+        "player/list",
+        "player/audit",
+        "withdraw/list",
+        "withdraw/handle",
+        "product/list",
+        "product/edit",
+        "category/list",
+        "mine/index",
+        "profile/edit",
+        "chat/list",
+        "chat/room",
+        "quick-reply/index"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundColor": "#f1f5f9",
+    "backgroundColorTop": "#f1f5f9",
+    "backgroundColorBottom": "#f1f5f9",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "white",
+    "initialRenderingCache": "static"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#94a3b8",
+    "selectedColor": "#ff4544",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/index",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/order/list",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/chat/list",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于获取您的位置信息"
+    }
+  },
+  "usingComponents": {}
+}

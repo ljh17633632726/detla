@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "商品列表",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f1f5f9",
+  "backgroundColorTop": "#f1f5f9",
+  "backgroundColorBottom": "#f1f5f9",
+  "initialRenderingCache": "static",
+  "usingComponents": {
+    "product-card": "../../components/ProductCard",
+    "empty-state": "../../components/EmptyState"
+  }
+}

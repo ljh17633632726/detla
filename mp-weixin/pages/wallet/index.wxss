@@ -1,0 +1,70 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.wallet-page.data-v-70996a17 {
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+.balance-card.data-v-70996a17 {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  padding: 48rpx 32rpx;
+  border-radius: 16rpx;
+  margin: 24rpx;
+}
+.balance-card .label.data-v-70996a17 {
+  font-size: 26rpx;
+  display: block;
+  margin-bottom: 16rpx;
+  opacity: 0.9;
+}
+.balance-card .amount.data-v-70996a17 {
+  font-size: 56rpx;
+  font-weight: bold;
+}
+.section-title.data-v-70996a17 {
+  padding: 24rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #ff4544;
+}
+.tx-item.data-v-70996a17 {
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx;
+  background: #ffffff;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.tx-item .tx-type.data-v-70996a17 {
+  font-size: 28rpx;
+  color: #1e293b;
+}
+.tx-item .tx-remark.data-v-70996a17 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-left: 12rpx;
+}
+.tx-item .tx-amount.data-v-70996a17 {
+  font-size: 28rpx;
+  color: #1e293b;
+}
+.tx-item .tx-amount.income.data-v-70996a17 {
+  color: #07c160;
+}
+.tx-item .tx-time.data-v-70996a17 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  display: block;
+  text-align: right;
+}
+.list.data-v-70996a17 {
+  height: calc(100vh - 400rpx);
+}

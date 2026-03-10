@@ -1,0 +1,103 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.withdraw-list.data-v-8bed89a4 {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.filter-bar.data-v-8bed89a4 {
+  white-space: nowrap;
+  padding: 12rpx 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+.filter-item.data-v-8bed89a4 {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  margin-right: 12rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 999rpx;
+}
+.filter-item.active.data-v-8bed89a4 {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+}
+.list.data-v-8bed89a4 {
+  height: calc(100vh - 100rpx);
+  padding: 20rpx 24rpx;
+}
+.withdraw-card.data-v-8bed89a4 {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+.withdraw-card .card-top.data-v-8bed89a4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.withdraw-card .card-top .amount.data-v-8bed89a4 {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.85);
+}
+.withdraw-card .card-body.data-v-8bed89a4 {
+  margin-bottom: 8rpx;
+}
+.withdraw-card .card-body .player.data-v-8bed89a4 {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.85);
+  display: block;
+}
+.withdraw-card .card-body .account.data-v-8bed89a4 {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.55);
+  display: block;
+  margin-top: 4rpx;
+}
+.withdraw-card .time.data-v-8bed89a4 {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+  display: block;
+}
+.withdraw-card .card-actions.data-v-8bed89a4 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  padding-top: 16rpx;
+  margin-top: 12rpx;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+.withdraw-card .btn-approve.data-v-8bed89a4 {
+  padding: 10rpx 28rpx;
+  background: #07c160;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 999rpx;
+}
+.withdraw-card .btn-reject.data-v-8bed89a4 {
+  padding: 10rpx 28rpx;
+  border: 1rpx solid #ee0a24;
+  color: #ee0a24;
+  font-size: 24rpx;
+  border-radius: 999rpx;
+}
+.loading-tip.data-v-8bed89a4 {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,245 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.product-detail.data-v-acf502d9 {
+  background: #f1f5f9;
+  min-height: 100vh;
+  padding-bottom: 140rpx;
+}
+
+/* ---- 轮播 ---- */
+.banner-wrap.data-v-acf502d9 {
+  position: relative;
+}
+.banner.data-v-acf502d9 {
+  height: 650rpx;
+}
+.banner-img.data-v-acf502d9 {
+  width: 100%;
+  height: 650rpx;
+}
+.banner-fade.data-v-acf502d9 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120rpx;
+  background: linear-gradient(to top, #ffffff, transparent);
+  pointer-events: none;
+}
+.banner-dots.data-v-acf502d9 {
+  position: absolute;
+  bottom: 24rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12rpx;
+}
+.banner-dots .dot.data-v-acf502d9 {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #cbd5e1;
+  transition: all 0.3s;
+}
+.banner-dots .dot.active.data-v-acf502d9 {
+  width: 32rpx;
+  border-radius: 6rpx;
+  background: #ff4544;
+}
+.img-counter.data-v-acf502d9 {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+/* ---- 价格卡片 ---- */
+.price-card.data-v-acf502d9 {
+  margin: -40rpx 24rpx 0;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(255, 69, 68, 0.1), rgba(255, 69, 68, 0.05));
+  border: 1rpx solid rgba(255, 69, 68, 0.15);
+  border-radius: 20rpx;
+  padding: 28rpx 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price-main.data-v-acf502d9 {
+  display: flex;
+  align-items: baseline;
+}
+.price-main .yen.data-v-acf502d9 {
+  font-size: 30rpx;
+  color: #ff4544;
+  font-weight: bold;
+  margin-right: 4rpx;
+}
+.price-main .price-int.data-v-acf502d9 {
+  font-size: 56rpx;
+  color: #ff4544;
+  font-weight: 800;
+  line-height: 1;
+}
+.price-main .price-dec.data-v-acf502d9 {
+  font-size: 30rpx;
+  color: #ff4544;
+  font-weight: bold;
+}
+.price-extra.data-v-acf502d9 {
+  display: flex;
+  align-items: center;
+}
+.sales-badge.data-v-acf502d9 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  background: #f1f5f9;
+  padding: 6rpx 18rpx;
+  border-radius: 20rpx;
+}
+
+/* ---- 商品信息 ---- */
+.info-card.data-v-acf502d9 {
+  margin: 20rpx 24rpx 0;
+  padding: 28rpx 32rpx;
+  background: #f1f5f9;
+  border: 1rpx solid #f1f5f9;
+  border-radius: 20rpx;
+}
+.product-name.data-v-acf502d9 {
+  font-size: 34rpx;
+  font-weight: bold;
+  display: block;
+  color: #1e293b;
+  line-height: 1.5;
+}
+.product-subtitle.data-v-acf502d9 {
+  font-size: 24rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 8rpx;
+  line-height: 1.4;
+}
+.meta-row.data-v-acf502d9 {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+.category-tag.data-v-acf502d9 {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 22rpx;
+  color: #ff4544;
+  background: rgba(212, 175, 55, 0.1);
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid rgba(255, 69, 68, 0.15);
+}
+.category-tag .tag-dot.data-v-acf502d9 {
+  font-size: 14rpx;
+  color: #ff4544;
+}
+.desc-wrap.data-v-acf502d9 {
+  margin-top: 20rpx;
+}
+.desc-divider.data-v-acf502d9 {
+  height: 1rpx;
+  background: #f1f5f9;
+  margin-bottom: 20rpx;
+}
+.desc.data-v-acf502d9 {
+  font-size: 26rpx;
+  color: #64748b;
+  display: block;
+  line-height: 1.7;
+}
+
+/* ---- 详情区域 ---- */
+.detail-section.data-v-acf502d9 {
+  margin: 20rpx 24rpx 0;
+  background: #f1f5f9;
+  border: 1rpx solid #f1f5f9;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.section-header.data-v-acf502d9 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 28rpx 32rpx 0;
+}
+.section-line.data-v-acf502d9 {
+  flex: 1;
+  height: 1rpx;
+  background: linear-gradient(to right, transparent, rgba(255, 69, 68, 0.3), transparent);
+}
+.section-title.data-v-acf502d9 {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff4544;
+  white-space: nowrap;
+}
+.detail-body.data-v-acf502d9 {
+  padding: 24rpx 32rpx 32rpx;
+}
+
+/* ---- 底部栏 ---- */
+.bottom-bar.data-v-acf502d9 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1rpx solid #e2e8f0;
+  gap: 20rpx;
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+}
+.btn-chat.data-v-acf502d9 {
+  flex: 1;
+  height: 84rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  border: 1rpx solid rgba(255, 69, 68, 0.4);
+  color: #ff4544;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+.btn-chat .btn-icon.data-v-acf502d9 {
+  width: 36rpx;
+  height: 36rpx;
+}
+.btn-buy.data-v-acf502d9 {
+  flex: 2;
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  letter-spacing: 2rpx;
+}

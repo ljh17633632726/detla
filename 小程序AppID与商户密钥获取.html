@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小程序 AppID 与商户号密钥获取指南</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 24px; background: #f5f5f5; }
+    h1 { color: #1a1a1a; border-bottom: 2px solid #e63939; padding-bottom: 12px; }
+    h2 { color: #2d3748; margin-top: 32px; }
+    h3 { color: #4a5568; margin-top: 24px; }
+    a { color: #e63939; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    hr { border: none; border-top: 1px solid #e2e8f0; margin: 32px 0; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f8fafc; font-weight: 600; color: #475569; }
+    ul, ol { margin: 12px 0; padding-left: 24px; }
+    li { margin: 6px 0; }
+    .doc-content { background: #fff; padding: 32px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    code, pre { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "Consolas", "Monaco", monospace; }
+    pre { padding: 16px; overflow-x: auto; white-space: pre-wrap; display: block; }
+    strong { color: #1a1a1a; }
+  </style>
+</head>
+<body>
+  <div class="doc-content">
+    <h1>小程序 AppID 与商户号密钥获取指南</h1>
+    <p>本文档说明如何获取部署本系统所需的配置：<strong>小程序 AppID/AppSecret</strong>、<strong>商户号及其支付密钥</strong>、<strong>订单状态订阅消息模板</strong>。获取后填入 <code>application-prod.yml</code> 对应配置项即可。</p>
+    <hr>
+    <h2>一、小程序 AppID 与 AppSecret</h2>
+    <h3>1.1 登录微信公众平台</h3>
+    <ol>
+      <li>打开 <a href="https://mp.weixin.qq.com/" target="_blank">微信公众平台</a></li>
+      <li>使用管理员微信扫码登录</li>
+      <li>进入你要部署的小程序管理后台</li>
+    </ol>
+    <h3>1.2 获取 AppID</h3>
+    <ul>
+      <li>路径：<strong>开发管理</strong> → <strong>开发设置</strong></li>
+      <li>在「开发者 ID」区域可以看到 <strong>AppID</strong>，形如：<code>wx1234567890abcdef</code></li>
+    </ul>
+    <h3>1.3 获取 AppSecret</h3>
+    <ul>
+      <li>在同一页「开发者 ID」区域找到 <strong>AppSecret</strong></li>
+      <li>若未生成：点击「生成」</li>
+      <li>若已泄露或忘记：点击「重置」，按提示完成管理员扫码等验证</li>
+      <li><strong>重要</strong>：生成/重置后会展示完整密钥，<strong>请立即复制保存</strong>。关闭页面后将无法再次查看，只能重新生成</li>
+    </ul>
+    <h3>1.4 配置示例</h3>
+    <pre><code>wx:
+  miniapp:
+    appid: wx1234567890abcdef    # 替换为你的 AppID
+    secret: xxxxxxxxxxxxxxxxxxx  # 替换为你的 AppSecret</code></pre>
+    <hr>
+    <h2>二、商户号</h2>
+    <h3>2.1 什么是商户号</h3>
+    <p>商户号是微信支付分配给商家的唯一标识，开通微信支付后由微信提供，通常为一串纯数字。</p>
+    <h3>2.2 获取商户号</h3>
+    <ol>
+      <li>打开 <a href="https://pay.weixin.qq.com/" target="_blank">微信支付商户平台</a></li>
+      <li>使用商户号超级管理员账号登录</li>
+      <li>进入 <strong>账户中心</strong> → <strong>商户信息</strong></li>
+      <li>在页面中可以看到 <strong>商户号</strong>（如 <code>1234567890</code>）</li>
+      <li>填入配置：<code>wx.pay.mch-id</code></li>
+    </ol>
+    <h3>2.3 绑定小程序</h3>
+    <p>在支付前，需将小程序 AppID 与商户号绑定：</p>
+    <ol>
+      <li>商户平台 → <strong>产品中心</strong> → <strong>AppID 授权管理</strong></li>
+      <li>点击「添加 AppID」</li>
+      <li>填入你的小程序 AppID，按提示完成授权</li>
+    </ol>
+    <hr>
+    <h2>三、商户号密钥（APIv3 密钥）</h2>
+    <h3>3.1 设置 APIv3 密钥</h3>
+    <ol>
+      <li>商户平台 → <strong>账户中心</strong> → <strong>API 安全</strong> → <strong>API 密钥</strong></li>
+      <li>点击「设置 APIv3 密钥」</li>
+      <li>输入一个 <strong>32 位密钥</strong>（建议使用随机生成工具，可含大小写字母和数字）</li>
+      <li>完成验证后保存</li>
+      <li><strong>重要</strong>：保存后无法再查看原文，只能重新设置。请务必妥善保存</li>
+      <li>填入配置：<code>wx.pay.api-v3-key</code></li>
+    </ol>
+    <hr>
+    <h2>四、商户 API 证书（私钥）</h2>
+    <p>用于对支付请求进行签名，系统必需。</p>
+    <h3>4.1 申请证书</h3>
+    <ol>
+      <li>商户平台 → <strong>账户中心</strong> → <strong>API 安全</strong> → <strong>申请 API 证书</strong></li>
+      <li>按页面提示下载「证书生成工具」</li>
+      <li>运行工具，按提示操作（需输入商户号、商户名称等）</li>
+      <li>工具会生成以下文件：
+        <ul>
+          <li><code>apiclient_key.pem</code> — <strong>商户私钥，本系统必需</strong></li>
+          <li><code>apiclient_cert.pem</code> — 商户证书（本系统不使用）</li>
+          <li>其他文件</li>
+        </ul>
+      </li>
+    </ol>
+    <h3>4.2 获取证书序列号</h3>
+    <ul>
+      <li>在证书工具完成后，或商户平台 <strong>API 安全</strong> 页面会展示 <strong>证书序列号</strong></li>
+      <li>形如：<code>5F8A9B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F</code></li>
+      <li>填入配置：<code>wx.pay.cert-serial-no</code></li>
+    </ul>
+    <h3>4.3 部署私钥到服务器</h3>
+    <ol>
+      <li>将 <code>apiclient_key.pem</code> 上传到服务器</li>
+      <li>建议路径：<code>/www/certs/apiclient_key.pem</code></li>
+      <li>填入配置：<code>wx.pay.private-key-path</code></li>
+    </ol>
+    <hr>
+    <h2>五、微信支付公钥（平台公钥）</h2>
+    <p>用于验签微信的支付回调和响应。</p>
+    <h3>5.1 申请公钥</h3>
+    <ol>
+      <li>商户平台 → <strong>账户中心</strong> → <strong>API 安全</strong></li>
+      <li>找到「微信支付公钥」或「平台证书」相关入口</li>
+      <li>按提示申请/下载 <strong>微信支付公钥文件</strong>（通常为 <code>pub_key.pem</code>）</li>
+    </ol>
+    <h3>5.2 获取公钥 ID 与部署</h3>
+    <ul>
+      <li>在「微信支付公钥」页面会展示 <strong>公钥 ID</strong>，形如：<code>PUB_KEY_ID_01XXXXXXXXXXXXXXXX</code></li>
+      <li>将公钥文件上传到服务器，建议路径：<code>/www/certs/pub_key.pem</code></li>
+      <li>填入配置：<code>wx.pay.public-key-path</code>、<code>wx.pay.public-key-id</code></li>
+    </ul>
+    <hr>
+    <h2>六、支付回调地址（notify-url）</h2>
+    <ul>
+      <li>由你自行填写，必须是 <strong>HTTPS</strong> 且公网可访问</li>
+      <li>格式示例：<code>https://你的域名/api/pay/wx/notify</code></li>
+      <li>填入配置：<code>wx.pay.notify-url</code></li>
+    </ul>
+    <hr>
+    <h2>七、订阅消息模板（订单状态变更）</h2>
+    <p>用于向用户发送订单支付成功、被接单、已取消等重要状态通知，需在 <strong>微信公众平台</strong> 申请。</p>
+    <h3>7.1 进入模板库</h3>
+    <ol>
+      <li>登录 <a href="https://mp.weixin.qq.com/" target="_blank">微信公众平台</a></li>
+      <li>进入 <strong>功能</strong> → <strong>订阅消息</strong></li>
+      <li>点击「公共模板库」</li>
+    </ol>
+    <h3>7.2 添加订单状态模板</h3>
+    <ol>
+      <li>在公共模板库中搜索「<strong>订单</strong>」「<strong>状态</strong>」或「<strong>通知</strong>」</li>
+      <li>找到合适的订单状态类模板，点击「选用」</li>
+      <li>选用时<strong>必须</strong>选择以下字段（字段名需与系统一致）：
+        <ul>
+          <li><strong>phrase4</strong>：订单状态</li>
+          <li><strong>character_string1</strong>：订单号</li>
+          <li><strong>thing2</strong>：订单类型</li>
+          <li><strong>amount3</strong>：金额</li>
+        </ul>
+      </li>
+      <li>添加成功后，在「我的模板」列表中可看到该模板的 <strong>模板 ID</strong></li>
+      <li>将模板 ID 填入 <code>application-prod.yml</code> 中 <code>subscribe-template.order-status</code></li>
+    </ol>
+    <h3>7.3 配置示例</h3>
+    <pre><code>wx:
+  miniapp:
+    subscribe-template:
+      order-status: __你的订单状态模板ID__</code></pre>
+    <h3>7.4 注意事项</h3>
+    <ul>
+      <li>模板字段名（phrase4、character_string1、thing2、amount3）必须与系统要求一致</li>
+      <li>用户需在小程序内主动订阅后，才能收到该模板消息</li>
+    </ul>
+    <hr>
+    <h2>八、配置汇总表</h2>
+    <table>
+      <tr><th>配置项</th><th>获取位置</th><th>说明</th></tr>
+      <tr><td><code>appid</code></td><td>公众平台 → 开发管理 → 开发设置</td><td>小程序 AppID</td></tr>
+      <tr><td><code>secret</code></td><td>同上</td><td>AppSecret（生成后仅展示一次）</td></tr>
+      <tr><td><code>subscribe-template.order-status</code></td><td>公众平台 → 功能 → 订阅消息</td><td>订单状态变更模板 ID</td></tr>
+      <tr><td><code>mch-id</code></td><td>商户平台 → 账户中心 → 商户信息</td><td>商户号</td></tr>
+      <tr><td><code>api-v3-key</code></td><td>商户平台 → API 安全 → API 密钥</td><td>32 位密钥</td></tr>
+      <tr><td><code>private-key-path</code></td><td>申请 API 证书后</td><td><code>apiclient_key.pem</code> 路径</td></tr>
+      <tr><td><code>cert-serial-no</code></td><td>申请 API 证书后</td><td>证书序列号</td></tr>
+      <tr><td><code>public-key-path</code></td><td>微信支付公钥</td><td>公钥文件路径</td></tr>
+      <tr><td><code>public-key-id</code></td><td>同上</td><td>公钥 ID</td></tr>
+      <tr><td><code>notify-url</code></td><td>自行填写</td><td>支付回调地址</td></tr>
+    </table>
+    <hr>
+    <h2>九、完整配置示例</h2>
+    <pre><code>wx:
+  miniapp:
+    appid: wx1234567890abcdef
+    secret: your_app_secret_here
+    subscribe-template:
+      order-status: __你的订单状态模板ID__
+
+  pay:
+    mch-id: 1234567890
+    api-v3-key: your_32_char_api_v3_key_here
+    private-key-path: /www/certs/apiclient_key.pem
+    cert-serial-no: 5F8A9B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F
+    public-key-path: /www/certs/pub_key.pem
+    public-key-id: PUB_KEY_ID_01XXXXXXXXXXXXXXXX
+    notify-url: https://你的域名.com/api/pay/wx/notify</code></pre>
+    <hr>
+    <h2>十、注意事项</h2>
+    <ol>
+      <li><strong>AppSecret</strong>、<strong>APIv3 密钥</strong> 一旦生成/设置，页面关闭后将无法再次查看，请立即保存到安全位置</li>
+      <li>证书和密钥文件务必妥善保管，不要提交到公开代码仓库</li>
+      <li>商户号需先完成认证，并在「AppID 授权管理」中绑定小程序后方可正常支付</li>
+      <li><strong>order-status</strong> 订阅消息模板用于订单支付、接单、取消等重要状态推送；用户需在小程序内主动订阅后才能收到</li>
+    </ol>
+  </div>
+</body>
+</html>

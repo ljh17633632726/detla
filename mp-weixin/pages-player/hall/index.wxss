@@ -1,0 +1,90 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.filter-bar.data-v-0ea4865c {
+  white-space: nowrap;
+  padding: 16rpx 24rpx;
+  background: #f1f5f9;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.filter-item.data-v-0ea4865c {
+  display: inline-block;
+  padding: 12rpx 24rpx;
+  margin-right: 16rpx;
+  font-size: 26rpx;
+  color: #64748b;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 999rpx;
+}
+.filter-item.active.data-v-0ea4865c {
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+}
+.list.data-v-0ea4865c {
+  height: calc(100vh - 230rpx);
+  padding: 20rpx 24rpx;
+  overflow-x: hidden;
+}
+.order-card-wrap.data-v-0ea4865c {
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  border-radius: 16rpx;
+  background: #e2e8f0;
+  border: 1rpx solid #cbd5e1;
+}
+.accept-bar.data-v-0ea4865c {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: #e2e8f0;
+  border-radius: 0 0 16rpx 16rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+.amount-block.data-v-0ea4865c {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+.order-amount.data-v-0ea4865c {
+  font-size: 28rpx;
+  color: #1e293b;
+  font-weight: 600;
+  display: block;
+}
+.income-line.data-v-0ea4865c {
+  font-size: 28rpx;
+  color: #ee0a24;
+  font-weight: bold;
+  display: block;
+}
+.commission-hint.data-v-0ea4865c {
+  font-size: 22rpx;
+  color: #64748b;
+  display: block;
+}
+.btn-accept.data-v-0ea4865c {
+  padding: 12rpx 32rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+  flex-shrink: 0;
+}
+.loading-tip.data-v-0ea4865c {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}

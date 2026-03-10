@@ -1,0 +1,99 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.earnings-page.data-v-ec6bdfb5 {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.summary-card.data-v-ec6bdfb5 {
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  margin: 24rpx;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
+}
+.summary-card .card-label.data-v-ec6bdfb5 {
+  font-size: 26rpx;
+  opacity: 0.85;
+  display: block;
+}
+.summary-card .total-amount.data-v-ec6bdfb5 {
+  font-size: 56rpx;
+  font-weight: bold;
+  display: block;
+  margin: 16rpx 0 32rpx;
+}
+.summary-card .row.data-v-ec6bdfb5 {
+  display: flex;
+  align-items: center;
+}
+.summary-card .col.data-v-ec6bdfb5 {
+  flex: 1;
+  text-align: center;
+}
+.summary-card .col .num.data-v-ec6bdfb5 {
+  font-size: 30rpx;
+  font-weight: bold;
+  display: block;
+}
+.summary-card .col .desc.data-v-ec6bdfb5 {
+  font-size: 22rpx;
+  opacity: 0.8;
+  display: block;
+  margin-top: 4rpx;
+}
+.summary-card .divider.data-v-ec6bdfb5 {
+  width: 1rpx;
+  height: 48rpx;
+  background: rgba(255, 255, 255, 0.3);
+}
+.stat-grid.data-v-ec6bdfb5 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  padding: 0 24rpx 24rpx;
+}
+.stat-grid .stat-item.data-v-ec6bdfb5 {
+  background: #f1f5f9;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  text-align: center;
+}
+.stat-grid .stat-item .stat-num.data-v-ec6bdfb5 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1e293b;
+  display: block;
+}
+.stat-grid .stat-item .stat-label.data-v-ec6bdfb5 {
+  font-size: 24rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 8rpx;
+}
+.action-list.data-v-ec6bdfb5 {
+  margin: 0 24rpx;
+  background: #f1f5f9;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+.action-row.data-v-ec6bdfb5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 24rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+  font-size: 28rpx;
+}
+.action-row .arrow.data-v-ec6bdfb5 {
+  color: #cbd5e1;
+}

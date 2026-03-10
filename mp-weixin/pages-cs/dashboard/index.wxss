@@ -1,0 +1,131 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.cs-dashboard.data-v-d3a5be35 {
+  background: #ffffff;
+  min-height: 100vh;
+  padding-top: 20rpx;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.section.data-v-d3a5be35 {
+  padding: 0 24rpx;
+  margin-bottom: 24rpx;
+}
+.section-title.data-v-d3a5be35 {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 16rpx;
+}
+.section-header.data-v-d3a5be35 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.section-more.data-v-d3a5be35 {
+  font-size: 24rpx;
+  color: #ff4544;
+}
+.stat-cards.data-v-d3a5be35 {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.stat-cards .card.data-v-d3a5be35 {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 20rpx 12rpx;
+  border-radius: 12rpx;
+  text-align: center;
+}
+.stat-cards .card.alert .num.data-v-d3a5be35 {
+  color: #ee6723;
+}
+.stat-cards .card .num.data-v-d3a5be35 {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.85);
+  display: block;
+  line-height: 1.2;
+}
+.stat-cards .card .num.gold.data-v-d3a5be35 {
+  color: #ff4544;
+  font-size: 32rpx;
+}
+.stat-cards .card .label.data-v-d3a5be35 {
+  display: block;
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+  margin-top: 8rpx;
+}
+.order-list .order-item.data-v-d3a5be35 {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  margin-bottom: 12rpx;
+}
+.order-list .order-top.data-v-d3a5be35 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.order-list .order-name.data-v-d3a5be35 {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.85);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.order-list .order-amount.data-v-d3a5be35 {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff4544;
+  margin-left: 16rpx;
+}
+.order-list .order-bottom.data-v-d3a5be35 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-list .order-no.data-v-d3a5be35 {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+}
+.order-list .order-time.data-v-d3a5be35 {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+}
+.quick-actions.data-v-d3a5be35 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16rpx;
+}
+.quick-actions .action.data-v-d3a5be35 {
+  background: rgba(0, 0, 0, 0.04);
+  padding: 24rpx 0;
+  text-align: center;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+.quick-actions .action .action-icon.data-v-d3a5be35 {
+  width: 48rpx;
+  height: 48rpx;
+}

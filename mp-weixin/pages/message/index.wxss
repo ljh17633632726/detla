@@ -1,0 +1,76 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.message-page.data-v-780fc0ad {
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+.header-row.data-v-780fc0ad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 24rpx 20rpx;
+  background: #f1f5f9;
+  border-bottom: 1rpx solid #e2e8f0;
+}
+.page-title.data-v-780fc0ad {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1e293b;
+}
+.btn-read-all.data-v-780fc0ad {
+  font-size: 28rpx;
+  color: #ff4544;
+}
+.list.data-v-780fc0ad {
+  height: calc(100vh - 120rpx);
+}
+.msg-item.data-v-780fc0ad {
+  padding: 24rpx;
+  background: #ffffff;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.msg-header.data-v-780fc0ad {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.msg-header .msg-title.data-v-780fc0ad {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #1e293b;
+  flex: 1;
+}
+.msg-header .dot.data-v-780fc0ad {
+  width: 14rpx;
+  height: 14rpx;
+  background: #ee0a24;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.msg-content.data-v-780fc0ad {
+  font-size: 26rpx;
+  color: #64748b;
+  margin-top: 8rpx;
+  display: block;
+}
+.msg-time.data-v-780fc0ad {
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-top: 8rpx;
+  display: block;
+}
+.loading-tip.data-v-780fc0ad {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}

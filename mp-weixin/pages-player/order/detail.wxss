@@ -1,0 +1,273 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.detail.data-v-bb34d8c7 {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.status-bar.data-v-bb34d8c7 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+}
+.status-bar .order-no.data-v-bb34d8c7 {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.3);
+}
+.card.data-v-bb34d8c7 {
+  margin-top: 20rpx;
+  padding: 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+}
+.card-title.data-v-bb34d8c7 {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.info-row.data-v-bb34d8c7 {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 0;
+}
+.info-row .label.data-v-bb34d8c7 {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.3);
+  width: 100rpx;
+}
+.info-row .value.data-v-bb34d8c7 {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.85);
+  flex: 1;
+}
+.info-row .value.income-val.data-v-bb34d8c7 {
+  color: #ee0a24;
+  font-weight: bold;
+}
+.info-row .income-hint.data-v-bb34d8c7 {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.45);
+  margin-left: 8rpx;
+}
+.info-row .toggle.data-v-bb34d8c7 {
+  font-size: 24rpx;
+  color: #ff4544;
+}
+.teammate-row.data-v-bb34d8c7 {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+.teammate-row .t-avatar.data-v-bb34d8c7 {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+.teammate-row .t-name.data-v-bb34d8c7 {
+  flex: 1;
+  font-size: 26rpx;
+}
+.progress-item.data-v-bb34d8c7 {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+.progress-item .p-content.data-v-bb34d8c7 {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.85);
+  display: block;
+}
+.progress-item .p-time.data-v-bb34d8c7 {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+  display: block;
+  margin-top: 4rpx;
+}
+.progress-item .p-images.data-v-bb34d8c7 {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 8rpx;
+}
+.progress-item .p-img.data-v-bb34d8c7 {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+}
+.actions.data-v-bb34d8c7 {
+  display: flex;
+  gap: 20rpx;
+  padding: 40rpx 24rpx;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.btn.data-v-bb34d8c7 {
+  padding: 16rpx 40rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 28rpx;
+  border-radius: 999rpx;
+}
+.btn.btn-success.data-v-bb34d8c7 {
+  background: #07c160;
+}
+.btn-ghost.data-v-bb34d8c7 {
+  padding: 16rpx 40rpx;
+  border: 1rpx solid rgba(255, 69, 68, 0.5);
+  color: #ff4544;
+  font-size: 28rpx;
+  border-radius: 999rpx;
+}
+.btn-warn.data-v-bb34d8c7 {
+  padding: 16rpx 40rpx;
+  border: 1rpx solid #ee0a24;
+  color: #ee0a24;
+  font-size: 28rpx;
+  border-radius: 999rpx;
+}
+.user-row.data-v-bb34d8c7 {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.user-row .u-avatar.data-v-bb34d8c7 {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+}
+.user-row .u-name.data-v-bb34d8c7 {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+}
+
+/* 接力/分成弹窗（与 invite/teammate 一致） */
+.modal-mask.data-v-bb34d8c7 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-box.data-v-bb34d8c7 {
+  width: 85%;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
+  border: 1rpx solid #e2e8f0;
+}
+.modal-title.data-v-bb34d8c7 {
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  color: #ff4544;
+}
+.modal-sub.data-v-bb34d8c7 {
+  font-size: 24rpx;
+  color: #94a3b8;
+  display: block;
+  text-align: center;
+  margin-top: 8rpx;
+}
+.split-options.data-v-bb34d8c7 {
+  margin-top: 24rpx;
+}
+.split-opt.data-v-bb34d8c7 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  margin-bottom: 12rpx;
+  background: #f1f5f9;
+  border-radius: 12rpx;
+  border: 2rpx solid transparent;
+}
+.split-opt.active.data-v-bb34d8c7 {
+  border-color: #ff4544;
+  background: rgba(255, 69, 68, 0.1);
+}
+.split-opt .opt-label.data-v-bb34d8c7 {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.split-opt .opt-desc.data-v-bb34d8c7 {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+.custom-input-row.data-v-bb34d8c7 {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+.custom-input-row .custom-label.data-v-bb34d8c7 {
+  font-size: 26rpx;
+  color: #64748b;
+  white-space: nowrap;
+}
+.custom-input-row .custom-input.data-v-bb34d8c7 {
+  flex: 1;
+  background: #e2e8f0;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+.relay-reason-row.data-v-bb34d8c7 {
+  margin-top: 16rpx;
+}
+.relay-reason-row .custom-label.data-v-bb34d8c7 {
+  font-size: 26rpx;
+  color: #64748b;
+  display: block;
+  margin-bottom: 8rpx;
+}
+.relay-reason-row .relay-textarea.data-v-bb34d8c7 {
+  width: 100%;
+  min-height: 120rpx;
+  padding: 16rpx;
+  background: #e2e8f0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+.modal-actions.data-v-bb34d8c7 {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 32rpx;
+}
+.modal-cancel.data-v-bb34d8c7 {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border: 1rpx solid #cbd5e1;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #64748b;
+}
+.modal-confirm.data-v-bb34d8c7 {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}

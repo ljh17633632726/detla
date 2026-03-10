@@ -1,0 +1,1 @@
+<view class="cs-login data-v-6d046369"><text class="title data-v-6d046369">客服登录</text><input placeholder="账号" class="input data-v-6d046369" value="{{a}}" bindinput="{{b}}"/><input type="password" placeholder="密码" class="input data-v-6d046369" value="{{c}}" bindinput="{{d}}"/><view class="btn data-v-6d046369" bindtap="{{e}}">登录</view></view>

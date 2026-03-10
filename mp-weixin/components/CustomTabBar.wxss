@@ -1,0 +1,80 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.custom-tabbar.data-v-6def6a3b {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: 110rpx;
+  box-sizing: content-box;
+  background: rgba(255, 255, 255, 0.98);
+  border-top: 1rpx solid #e2e8f0;
+  -webkit-backdrop-filter: blur(20rpx);
+          backdrop-filter: blur(20rpx);
+  z-index: 999;
+}
+.tabbar-item.data-v-6def6a3b {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.tabbar-item .tabbar-icon.data-v-6def6a3b {
+  position: relative;
+}
+.tabbar-item .tabbar-icon .icon-img.data-v-6def6a3b {
+  width: 48rpx;
+  height: 48rpx;
+}
+.tabbar-item .tabbar-icon .badge.data-v-6def6a3b {
+  position: absolute;
+  top: -10rpx;
+  right: -20rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background: #ee0a24;
+  border-radius: 32rpx;
+  text-align: center;
+}
+.tabbar-item .tabbar-icon .red-dot.data-v-6def6a3b {
+  position: absolute;
+  top: -4rpx;
+  right: -4rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #ee0a24;
+  border-radius: 50%;
+  border: 2rpx solid #fff;
+}
+.tabbar-item .tabbar-text.data-v-6def6a3b {
+  font-size: 20rpx;
+  color: #94a3b8;
+  margin-top: 4rpx;
+}
+.tabbar-item.active .tabbar-icon.data-v-6def6a3b {
+  color: #ff4544;
+}
+.tabbar-item.active .tabbar-icon .icon-img.data-v-6def6a3b {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(101%);
+}
+.tabbar-item.active .tabbar-text.data-v-6def6a3b {
+  color: #ff4544;
+  font-weight: bold;
+}

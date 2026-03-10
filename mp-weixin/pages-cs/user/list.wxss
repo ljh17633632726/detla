@@ -1,0 +1,103 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.user-list.data-v-28326e6b {
+  background: #ffffff;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.search-bar.data-v-28326e6b {
+  padding: 16rpx 24rpx;
+}
+.search-input.data-v-28326e6b {
+  height: 72rpx;
+  line-height: 72rpx;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0 24rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.list.data-v-28326e6b {
+  height: calc(100vh - 100rpx);
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+}
+.user-card.data-v-28326e6b {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.user-card .avatar.data-v-28326e6b {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.user-card .info.data-v-28326e6b {
+  flex: 1;
+  overflow: hidden;
+}
+.user-card .info .name.data-v-28326e6b {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.85);
+}
+.user-card .info .meta.data-v-28326e6b {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+  display: block;
+  margin-top: 4rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.user-card .status-badge.data-v-28326e6b {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  flex-shrink: 0;
+}
+.user-card .status-badge.active.data-v-28326e6b {
+  color: #07c160;
+  background: rgba(7, 193, 96, 0.12);
+}
+.user-card .status-badge.disabled.data-v-28326e6b {
+  color: #ee0a24;
+  background: rgba(238, 10, 36, 0.12);
+}
+.user-card .action-btns.data-v-28326e6b {
+  flex-shrink: 0;
+}
+.user-card .action-btns .action-btn.data-v-28326e6b {
+  font-size: 24rpx;
+  color: #ff4544;
+}
+.user-card .action-btns .action-btn.danger.data-v-28326e6b {
+  color: #ee0a24;
+}
+.loading-tip.data-v-28326e6b {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.3);
+}

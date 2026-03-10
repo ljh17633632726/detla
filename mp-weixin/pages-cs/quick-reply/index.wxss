@@ -1,0 +1,227 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.qr-page.data-v-7c88b6cc {
+  background: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.qr-list.data-v-7c88b6cc {
+  flex: 1;
+  padding: 20rpx 24rpx;
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
+}
+.qr-item.data-v-7c88b6cc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1rpx solid rgba(0, 0, 0, 0.05);
+  border-radius: 12rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.qr-content.data-v-7c88b6cc {
+  flex: 1;
+  overflow: hidden;
+  margin-right: 16rpx;
+}
+.qr-text.data-v-7c88b6cc {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.85);
+  display: block;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.qr-meta.data-v-7c88b6cc {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 8rpx;
+}
+.qr-category.data-v-7c88b6cc {
+  font-size: 22rpx;
+  color: #ff4544;
+  background: rgba(255, 69, 68, 0.1);
+  padding: 2rpx 12rpx;
+  border-radius: 4rpx;
+}
+.qr-disabled.data-v-7c88b6cc {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+}
+.qr-actions.data-v-7c88b6cc {
+  display: flex;
+  gap: 16rpx;
+  flex-shrink: 0;
+}
+.action-btn.data-v-7c88b6cc {
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+}
+.action-btn.edit.data-v-7c88b6cc {
+  color: #ff4544;
+  background: rgba(255, 69, 68, 0.1);
+  border: 1rpx solid rgba(255, 69, 68, 0.15);
+}
+.action-btn.delete.data-v-7c88b6cc {
+  color: #ee0a24;
+  background: rgba(238, 10, 36, 0.08);
+  border: 1rpx solid rgba(238, 10, 36, 0.15);
+}
+.empty-tip.data-v-7c88b6cc {
+  text-align: center;
+  padding: 120rpx 0;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 28rpx;
+}
+.bottom-bar.data-v-7c88b6cc {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1rpx solid rgba(0, 0, 0, 0.06);
+}
+.add-btn.data-v-7c88b6cc {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 30rpx;
+  border-radius: 999rpx;
+}
+
+/* 弹窗 */
+.modal-mask.data-v-7c88b6cc {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-body.data-v-7c88b6cc {
+  width: 85%;
+  background: #ffffff;
+  border: 1rpx solid rgba(255, 69, 68, 0.15);
+  border-radius: 16rpx;
+  padding: 40rpx;
+}
+.modal-body.small.data-v-7c88b6cc {
+  width: 75%;
+}
+.modal-title.data-v-7c88b6cc {
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  color: #ff4544;
+  margin-bottom: 32rpx;
+}
+.form-item.data-v-7c88b6cc {
+  margin-bottom: 24rpx;
+}
+.form-item.row.data-v-7c88b6cc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-label.data-v-7c88b6cc {
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.55);
+  display: block;
+  margin-bottom: 8rpx;
+}
+.form-item.row .form-label.data-v-7c88b6cc {
+  margin-bottom: 0;
+}
+.form-textarea.data-v-7c88b6cc {
+  width: 100%;
+  height: 180rpx;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1rpx solid rgba(0, 0, 0, 0.06);
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.form-input.data-v-7c88b6cc {
+  width: 100%;
+  height: 72rpx;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1rpx solid rgba(0, 0, 0, 0.06);
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.form-input.short.data-v-7c88b6cc {
+  width: 160rpx;
+  text-align: center;
+}
+.modal-btns.data-v-7c88b6cc {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 32rpx;
+}
+.modal-btn.data-v-7c88b6cc {
+  flex: 1;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+}
+.modal-btn.cancel.data-v-7c88b6cc {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.55);
+}
+.modal-btn.confirm.data-v-7c88b6cc {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+}
+.modal-btn.danger.data-v-7c88b6cc {
+  background: #ee0a24;
+  color: #fff;
+  font-weight: bold;
+}
+.delete-msg.data-v-7c88b6cc {
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  display: block;
+}
+.delete-preview.data-v-7c88b6cc {
+  margin: 20rpx 0;
+  padding: 16rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.45);
+  line-height: 1.5;
+  word-break: break-all;
+}

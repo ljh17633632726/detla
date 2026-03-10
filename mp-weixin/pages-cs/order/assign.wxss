@@ -1,0 +1,128 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.assign-page.data-v-53a426cc {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.limit-tip.data-v-53a426cc {
+  padding: 16rpx 24rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+.limit-tip .gold.data-v-53a426cc {
+  color: #ff4544;
+  font-weight: bold;
+}
+.search-bar.data-v-53a426cc {
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 24rpx;
+}
+.search-bar .search-input.data-v-53a426cc {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 16rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.search-bar .search-btn.data-v-53a426cc {
+  padding: 16rpx 32rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+.list.data-v-53a426cc {
+  height: calc(100vh - 260rpx);
+  padding: 20rpx 24rpx;
+}
+.player-card.data-v-53a426cc {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+}
+.player-card.full.data-v-53a426cc {
+  opacity: 0.5;
+}
+.player-card .avatar.data-v-53a426cc {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.player-card .info.data-v-53a426cc {
+  flex: 1;
+  overflow: hidden;
+}
+.player-card .info .name-row.data-v-53a426cc {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.player-card .info .name.data-v-53a426cc {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.9);
+}
+.player-card .info .full-badge.data-v-53a426cc {
+  font-size: 20rpx;
+  color: #ee6723;
+  background: rgba(238, 103, 35, 0.15);
+  padding: 2rpx 10rpx;
+  border-radius: 4rpx;
+}
+.player-card .info .tags.data-v-53a426cc {
+  display: flex;
+  gap: 8rpx;
+  margin-top: 8rpx;
+  flex-wrap: wrap;
+}
+.player-card .info .tag.data-v-53a426cc {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+.player-card .info .tag.done.data-v-53a426cc {
+  color: #07c160;
+}
+.player-card .info .tag.active-tag.data-v-53a426cc {
+  color: #ee6723;
+}
+.player-card .assign-btn.data-v-53a426cc {
+  padding: 12rpx 32rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+  flex-shrink: 0;
+}
+.player-card .assign-btn.disabled.data-v-53a426cc {
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.3);
+}
+.loading-tip.data-v-53a426cc {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.3);
+}

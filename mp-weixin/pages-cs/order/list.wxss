@@ -1,0 +1,121 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.cs-order-list.data-v-1776171a {
+  background: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.search-bar.data-v-1776171a {
+  padding: 16rpx 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+}
+.search-input.data-v-1776171a {
+  height: 72rpx;
+  line-height: 72rpx;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0 24rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.filter-bar.data-v-1776171a {
+  white-space: nowrap;
+  padding: 12rpx 24rpx;
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+.filter-item.data-v-1776171a {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  margin-right: 12rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 999rpx;
+}
+.filter-item.active.data-v-1776171a {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+}
+.list.data-v-1776171a {
+  height: calc(100vh - 200rpx);
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.order-card.data-v-1776171a {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+.order-card .card-top.data-v-1776171a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.order-card .card-top .order-no.data-v-1776171a {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.3);
+}
+.order-card .card-body .product-name.data-v-1776171a {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8rpx;
+  color: rgba(0, 0, 0, 0.85);
+}
+.order-card .card-body .info-row.data-v-1776171a {
+  display: flex;
+  justify-content: space-between;
+}
+.order-card .card-body .info-row .user.data-v-1776171a {
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.55);
+}
+.order-card .card-body .info-row .amount.data-v-1776171a {
+  font-size: 28rpx;
+  color: #ff4544;
+  font-weight: bold;
+}
+.order-card .card-body .time.data-v-1776171a {
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+  display: block;
+  margin-top: 4rpx;
+}
+.order-card .card-actions.data-v-1776171a {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16rpx;
+  margin-top: 12rpx;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.04);
+}
+.order-card .btn-assign.data-v-1776171a {
+  padding: 10rpx 28rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 24rpx;
+  border-radius: 999rpx;
+}
+.loading-tip.data-v-1776171a {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.3);
+}

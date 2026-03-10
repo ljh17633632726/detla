@@ -1,0 +1,144 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.player-mine.data-v-100cf608 {
+  background: #ffffff;
+  min-height: 100vh;
+  padding-bottom: 130rpx;
+}
+.user-header.data-v-100cf608 {
+  display: flex;
+  align-items: center;
+  padding: 48rpx 32rpx;
+  background: #f1f5f9;
+}
+.user-header .avatar.data-v-100cf608 {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+}
+.user-header .name.data-v-100cf608 {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.stat-cards.data-v-100cf608 {
+  display: flex;
+  gap: 20rpx;
+  padding: 24rpx;
+}
+.stat-cards .card.data-v-100cf608 {
+  flex: 1;
+  background: #f1f5f9;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  text-align: center;
+}
+.stat-cards .card .num.data-v-100cf608 {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff4544;
+  display: block;
+}
+.stat-cards .card .label.data-v-100cf608 {
+  font-size: 24rpx;
+  color: #94a3b8;
+  margin-top: 8rpx;
+  display: block;
+}
+.quick-actions.data-v-100cf608 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+  padding: 0 24rpx;
+}
+.quick-actions .action.data-v-100cf608 {
+  background: #f1f5f9;
+  padding: 24rpx 0;
+  text-align: center;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+.quick-actions .action .action-icon.data-v-100cf608 {
+  width: 48rpx;
+  height: 48rpx;
+}
+.menu-list.data-v-100cf608 {
+  margin-top: 20rpx;
+  background: #f1f5f9;
+}
+.menu-item.data-v-100cf608 {
+  display: flex;
+  align-items: center;
+  padding: 32rpx 24rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+  font-size: 28rpx;
+}
+.menu-item .menu-icon.data-v-100cf608 {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+.menu-item text.data-v-100cf608:not(.arrow) {
+  flex: 1;
+}
+.menu-item .badge.data-v-100cf608 {
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background: #ee0a24;
+  border-radius: 32rpx;
+  text-align: center;
+  margin-right: 8rpx;
+  flex-shrink: 0;
+}
+.menu-item .arrow.data-v-100cf608 {
+  color: #cbd5e1;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.section.data-v-100cf608 {
+  padding: 24rpx;
+}
+.section-header.data-v-100cf608 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.section-header .section-title.data-v-100cf608 {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.section-header .more.data-v-100cf608 {
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+.switch-btn.data-v-100cf608 {
+  margin: 40rpx 24rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: #f1f5f9;
+  color: #ff4544;
+  font-size: 30rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(255, 69, 68, 0.5);
+}

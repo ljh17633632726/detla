@@ -1,0 +1,85 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.complaint-list-page.data-v-ec70149e {
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+.scroll.data-v-ec70149e {
+  height: 100vh;
+  padding: 20rpx 24rpx 40rpx;
+  box-sizing: border-box;
+}
+.filter-bar.data-v-ec70149e {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+.status-chip.data-v-ec70149e {
+  padding: 8rpx 20rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+  border: 1rpx solid rgba(99, 102, 241, 0.1);
+}
+.status-chip.active.data-v-ec70149e {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  border-color: transparent;
+}
+.card.data-v-ec70149e {
+  padding: 20rpx 24rpx;
+  margin-bottom: 20rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  border: 1rpx solid #e2e8f0;
+}
+.card-top.data-v-ec70149e {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.type.data-v-ec70149e {
+  font-size: 26rpx;
+  color: #1e293b;
+}
+.card-body .content.data-v-ec70149e {
+  font-size: 26rpx;
+  color: #334155;
+}
+.card-bottom.data-v-ec70149e {
+  margin-top: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.time.data-v-ec70149e {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+.arrow.data-v-ec70149e {
+  font-size: 22rpx;
+  color: #64748b;
+}
+.empty.data-v-ec70149e {
+  margin-top: 80rpx;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 26rpx;
+}
+.load-tip.data-v-ec70149e {
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 24rpx;
+  color: #94a3b8;
+}

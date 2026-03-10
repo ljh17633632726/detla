@@ -1,0 +1,46 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.apply-page.data-v-c2070e8d {
+  padding: 24rpx;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.form-item.data-v-c2070e8d {
+  background: #f1f5f9;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+}
+.form-item .label.data-v-c2070e8d {
+  font-size: 26rpx;
+  color: #64748b;
+  margin-bottom: 12rpx;
+  display: block;
+}
+.form-item input.data-v-c2070e8d {
+  height: 72rpx;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+}
+.btn.data-v-c2070e8d {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 32rpx;
+  border-radius: 999rpx;
+  margin-top: 40rpx;
+}
