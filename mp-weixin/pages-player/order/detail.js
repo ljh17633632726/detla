@@ -14,14 +14,32 @@ const _sfc_main = {
     const order = common_vendor.ref(null);
     const orderId = common_vendor.ref(0);
     const progressList = common_vendor.ref([]);
-    const showRelayModal = common_vendor.ref(false);
-    const relayForm = common_vendor.ref({ splitType: "FIFTY_FIFTY", customAmount: "", reason: "" });
-    const SPLIT_OPTIONS = [
-      { value: "FIFTY_FIFTY", label: "五五开", desc: "你和接力接单员平分收入" },
-      { value: "FORTY_SIXTY", label: "四六开", desc: "你拿40%，接力接单员拿60%" },
-      { value: "THIRTY_SEVENTY", label: "三七开", desc: "你拿30%，接力接单员拿70%" },
-      { value: "CUSTOM", label: "自定义金额", desc: "指定你要拿的金额" }
-    ];
+    const parsedExtra = common_vendor.computed(() => {
+      const o = order.value;
+      if (!o)
+        return [];
+      if (o.extraFields) {
+        try {
+          const obj = typeof o.extraFields === "string" ? JSON.parse(o.extraFields) : o.extraFields;
+          return Object.entries(obj).map(([key, value]) => ({ key, value }));
+        } catch {
+        }
+      }
+      const legacy = [];
+      if (o.gameAccount)
+        legacy.push({ key: "关联账号", value: o.gameAccount });
+      if (o.contact)
+        legacy.push({ key: "联系ID", value: o.contact });
+      if (o.remark)
+        legacy.push({ key: "备注", value: o.remark });
+      return legacy;
+    });
+    const showReplaceModal = common_vendor.ref(false);
+    const hasTeammate = common_vendor.computed(() => {
+      var _a;
+      const t = (_a = order.value) == null ? void 0 : _a.teammates;
+      return t && t.some((m) => m.status === "ACCEPTED" || m.status === "INVITED");
+    });
     const teammateStatusText = { INVITED: "待处理", ACCEPTED: "已接受", REJECTED: "已拒绝", CANCELLED: "已作废", REPLACED: "已更换" };
     const teammateStatusColor = { INVITED: "#e6a23c", ACCEPTED: "#07c160", REJECTED: "#ee0a24", CANCELLED: "#999", REPLACED: "#909399" };
     common_vendor.onLoad((opts) => {
@@ -83,10 +101,6 @@ const _sfc_main = {
         }
       } });
     }
-    function openRelayModal() {
-      relayForm.value = { splitType: "FIFTY_FIFTY", customAmount: "", reason: "" };
-      showRelayModal.value = true;
-    }
     function goProgress() {
       common_vendor.index.navigateTo({ url: "/pages-player/order/progress?orderId=" + orderId.value });
     }
@@ -99,30 +113,38 @@ const _sfc_main = {
     function previewImg(imgs, idx) {
       common_vendor.index.previewImage({ urls: imgs, current: idx });
     }
-    async function submitRelayForm() {
-      var _a;
-      if (!((_a = relayForm.value.reason) == null ? void 0 : _a.trim()))
-        return common_vendor.index.showToast({ title: "请输入申请原因", icon: "none" });
-      const data = { splitType: relayForm.value.splitType, reason: relayForm.value.reason.trim() };
-      if (relayForm.value.splitType === "CUSTOM") {
-        const custom = Number(relayForm.value.customAmount);
-        if (!relayForm.value.customAmount || custom <= 0) {
-          return common_vendor.index.showToast({ title: "请输入有效金额", icon: "none" });
+    async function doReplace(type) {
+      const msgs = {
+        all: "确定两个都换？主接单员和队友都将退出，订单回到接单大厅。",
+        self: "确定换自己？你将退出该订单且不参与分成，订单回到接单大厅。",
+        teammate: "确定换队友？队友将被移除且不参与分成，你可以重新邀请新队友。"
+      };
+      common_vendor.index.showModal({
+        title: "确认换人",
+        content: msgs[type],
+        success: async (r) => {
+          if (!r.confirm)
+            return;
+          try {
+            if (type === "all")
+              await api_player.replaceAll(orderId.value);
+            else if (type === "self")
+              await api_player.replaceSelf(orderId.value);
+            else
+              await api_player.replaceTeammate(orderId.value);
+            showReplaceModal.value = false;
+            if (type === "teammate") {
+              common_vendor.index.showToast({ title: "队友已移除" });
+              loadDetail();
+            } else {
+              common_vendor.index.showToast({ title: "已退出订单" });
+              setTimeout(() => common_vendor.index.navigateBack(), 1500);
+            }
+          } catch (e) {
+            common_vendor.index.showToast({ title: (e == null ? void 0 : e.msg) || "操作失败", icon: "none" });
+          }
         }
-        const maxIncome = order.value ? incomeAmount(order.value) : 0;
-        if (custom > maxIncome) {
-          return common_vendor.index.showToast({ title: "自定义金额不能超过到手金额 ¥" + maxIncome.toFixed(2), icon: "none" });
-        }
-        data.splitAmount = custom;
-      }
-      try {
-        await api_player.submitRelay(orderId.value, data);
-        common_vendor.index.showToast({ title: "已提交接力申请" });
-        showRelayModal.value = false;
-        relayForm.value = { splitType: "FIFTY_FIFTY", customAmount: "", reason: "" };
-        loadDetail();
-      } catch (e) {
-      }
+      });
     }
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -148,20 +170,19 @@ const _sfc_main = {
         k: order.value.userAvatar || "/static/images/default-avatar.png",
         l: common_vendor.t(order.value.userNickname)
       } : {}, {
-        m: order.value.gameAccount
-      }, order.value.gameAccount ? common_vendor.e({
-        n: common_vendor.t(order.value.gameAccount),
-        o: order.value.contact
-      }, order.value.contact ? {
-        p: common_vendor.t(order.value.contact)
+        m: parsedExtra.value.length
+      }, parsedExtra.value.length ? {
+        n: common_vendor.f(parsedExtra.value, (item, k0, i0) => {
+          return {
+            a: common_vendor.t(item.key),
+            b: common_vendor.t(item.value),
+            c: item.key
+          };
+        })
       } : {}, {
-        q: order.value.remark
-      }, order.value.remark ? {
-        r: common_vendor.t(order.value.remark)
-      } : {}) : {}, {
-        s: order.value.teammates && order.value.teammates.length
+        o: order.value.teammates && order.value.teammates.length
       }, order.value.teammates && order.value.teammates.length ? {
-        t: common_vendor.f(order.value.teammates, (t, k0, i0) => {
+        p: common_vendor.f(order.value.teammates, (t, k0, i0) => {
           return {
             a: t.avatar || "/static/images/default-avatar.png",
             b: common_vendor.t(t.nickname),
@@ -175,9 +196,9 @@ const _sfc_main = {
           };
         })
       } : {}, {
-        v: progressList.value.length
+        q: progressList.value.length
       }, progressList.value.length ? {
-        w: common_vendor.f(progressList.value, (p, idx, i0) => {
+        r: common_vendor.f(progressList.value, (p, idx, i0) => {
           return common_vendor.e({
             a: common_vendor.t(p.content),
             b: common_vendor.t(p.createdAt),
@@ -195,61 +216,56 @@ const _sfc_main = {
           });
         })
       } : {}, {
-        x: order.value.status === "ASSIGNED"
+        s: order.value.status === "ASSIGNED"
       }, order.value.status === "ASSIGNED" ? {
-        y: common_vendor.o(doAccept)
+        t: common_vendor.o(doAccept)
       } : {}, {
-        z: order.value.status === "ASSIGNED"
+        v: order.value.status === "ASSIGNED"
       }, order.value.status === "ASSIGNED" ? {
-        A: common_vendor.o(doReject)
+        w: common_vendor.o(doReject)
       } : {}, {
-        B: ["ACCEPTED", "WAITING_TEAMMATE"].includes(order.value.status)
+        x: ["ACCEPTED", "WAITING_TEAMMATE"].includes(order.value.status)
       }, ["ACCEPTED", "WAITING_TEAMMATE"].includes(order.value.status) ? {
-        C: common_vendor.o(doStart)
+        y: common_vendor.o(doStart)
+      } : {}, {
+        z: order.value.status === "IN_PROGRESS"
+      }, order.value.status === "IN_PROGRESS" ? {
+        A: common_vendor.o(goProgress)
+      } : {}, {
+        B: order.value.status === "IN_PROGRESS"
+      }, order.value.status === "IN_PROGRESS" ? {
+        C: common_vendor.o(doComplete)
       } : {}, {
         D: order.value.status === "IN_PROGRESS"
       }, order.value.status === "IN_PROGRESS" ? {
-        E: common_vendor.o(goProgress)
+        E: common_vendor.o(($event) => showReplaceModal.value = true)
       } : {}, {
-        F: order.value.status === "IN_PROGRESS"
-      }, order.value.status === "IN_PROGRESS" ? {
-        G: common_vendor.o(doComplete)
+        F: ["ACCEPTED", "WAITING_TEAMMATE", "IN_PROGRESS"].includes(order.value.status) && order.value.playerId
+      }, ["ACCEPTED", "WAITING_TEAMMATE", "IN_PROGRESS"].includes(order.value.status) && order.value.playerId ? {
+        G: common_vendor.o(goInvite)
       } : {}, {
-        H: order.value.status === "IN_PROGRESS"
-      }, order.value.status === "IN_PROGRESS" ? {
-        I: common_vendor.o(openRelayModal)
-      } : {}, {
-        J: ["ACCEPTED", "WAITING_TEAMMATE"].includes(order.value.status) && order.value.playerId
-      }, ["ACCEPTED", "WAITING_TEAMMATE"].includes(order.value.status) && order.value.playerId ? {
-        K: common_vendor.o(goInvite)
-      } : {}, {
-        L: ["ACCEPTED", "WAITING_TEAMMATE", "IN_PROGRESS", "COMPLETED", "CONFIRMED"].includes(order.value.status)
+        H: ["ACCEPTED", "WAITING_TEAMMATE", "IN_PROGRESS", "COMPLETED", "CONFIRMED"].includes(order.value.status)
       }, ["ACCEPTED", "WAITING_TEAMMATE", "IN_PROGRESS", "COMPLETED", "CONFIRMED"].includes(order.value.status) ? {
-        M: common_vendor.o(goChat)
+        I: common_vendor.o(goChat)
       } : {}, {
-        N: showRelayModal.value
-      }, showRelayModal.value ? common_vendor.e({
-        O: common_vendor.f(SPLIT_OPTIONS, (opt, k0, i0) => {
-          return {
-            a: common_vendor.t(opt.label),
-            b: common_vendor.t(opt.desc),
-            c: opt.value,
-            d: relayForm.value.splitType === opt.value ? 1 : "",
-            e: common_vendor.o(($event) => relayForm.value.splitType = opt.value, opt.value)
-          };
-        }),
-        P: relayForm.value.splitType === "CUSTOM"
-      }, relayForm.value.splitType === "CUSTOM" ? {
-        Q: relayForm.value.customAmount,
-        R: common_vendor.o(($event) => relayForm.value.customAmount = $event.detail.value)
+        J: showReplaceModal.value
+      }, showReplaceModal.value ? common_vendor.e({
+        K: hasTeammate.value
+      }, hasTeammate.value ? {
+        L: common_vendor.o(($event) => doReplace("all"))
       } : {}, {
-        S: relayForm.value.reason,
-        T: common_vendor.o(($event) => relayForm.value.reason = $event.detail.value),
-        U: common_vendor.o(($event) => showRelayModal.value = false),
-        V: common_vendor.o(submitRelayForm),
-        W: common_vendor.o(() => {
+        M: !hasTeammate.value
+      }, !hasTeammate.value ? {
+        N: common_vendor.o(($event) => doReplace("self"))
+      } : {}, {
+        O: hasTeammate.value
+      }, hasTeammate.value ? {
+        P: common_vendor.o(($event) => doReplace("teammate"))
+      } : {}, {
+        Q: common_vendor.o(($event) => showReplaceModal.value = false),
+        R: common_vendor.o(() => {
         }),
-        X: common_vendor.o(($event) => showRelayModal.value = false)
+        S: common_vendor.o(($event) => showReplaceModal.value = false)
       }) : {}) : {});
     };
   }

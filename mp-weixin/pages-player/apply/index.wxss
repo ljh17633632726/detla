@@ -33,6 +33,12 @@
   padding: 0 24rpx;
   font-size: 28rpx;
 }
+.deposit-tip.data-v-c2070e8d {
+  font-size: 24rpx;
+  color: #94a3b8;
+  margin-top: 16rpx;
+  margin-bottom: 8rpx;
+}
 .btn.data-v-c2070e8d {
   height: 88rpx;
   line-height: 88rpx;
@@ -43,4 +49,7 @@
   font-size: 32rpx;
   border-radius: 999rpx;
   margin-top: 40rpx;
+}
+.btn.disabled.data-v-c2070e8d {
+  opacity: 0.7;
 }

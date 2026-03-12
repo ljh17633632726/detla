@@ -26,7 +26,9 @@ const getAccountList = () => api_request.get("/player/account", {}, { role: "pla
 const addAccount = (data) => api_request.post("/player/account", data, { role: "player" });
 const updateAccount = (data) => api_request.put("/player/account", data, { role: "player" });
 const deleteAccount = (id) => api_request.del(`/player/account/${id}`, {}, { role: "player" });
-const submitRelay = (orderId, data) => api_request.post(`/player/order/${orderId}/relay`, data, { role: "player" });
+const replaceSelf = (orderId) => api_request.post(`/player/order/${orderId}/replace-self`, {}, { role: "player" });
+const replaceAll = (orderId) => api_request.post(`/player/order/${orderId}/replace-all`, {}, { role: "player" });
+const replaceTeammate = (orderId) => api_request.post(`/player/order/${orderId}/replace-teammate`, {}, { role: "player" });
 exports.acceptInvite = acceptInvite;
 exports.acceptOrder = acceptOrder;
 exports.addAccount = addAccount;
@@ -50,8 +52,10 @@ exports.getWithdrawList = getWithdrawList;
 exports.inviteTeammate = inviteTeammate;
 exports.rejectAssign = rejectAssign;
 exports.rejectInvite = rejectInvite;
+exports.replaceAll = replaceAll;
+exports.replaceSelf = replaceSelf;
+exports.replaceTeammate = replaceTeammate;
 exports.startOrder = startOrder;
-exports.submitRelay = submitRelay;
 exports.submitWorkProgress = submitWorkProgress;
 exports.updateAccount = updateAccount;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/api/player.js.map

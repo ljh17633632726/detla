@@ -7,6 +7,7 @@ const useSiteStore = common_vendor.defineStore("site", () => {
   const logo = common_vendor.ref("");
   const adminTitle = common_vendor.ref("三角洲管理后台");
   const playerCommissionRate = common_vendor.ref(0);
+  const depositRequired = common_vendor.ref(true);
   const fullName = common_vendor.computed(() => siteName.value + "平台");
   async function fetchSiteConfig() {
     try {
@@ -23,11 +24,14 @@ const useSiteStore = common_vendor.defineStore("site", () => {
       if (data.player_commission_rate !== void 0 && data.player_commission_rate !== null) {
         playerCommissionRate.value = Number(data.player_commission_rate) || 0;
       }
+      if (data.player_deposit_required !== void 0) {
+        depositRequired.value = data.player_deposit_required === "true";
+      }
     } catch (e) {
-      common_vendor.index.__f__("warn", "at store/site.js:28", "[SiteStore] fetch site config failed", e);
+      common_vendor.index.__f__("warn", "at store/site.js:33", "[SiteStore] fetch site config failed", e);
     }
   }
-  return { siteName, subtitle, logo, adminTitle, playerCommissionRate, fullName, fetchSiteConfig };
+  return { siteName, subtitle, logo, adminTitle, playerCommissionRate, depositRequired, fullName, fetchSiteConfig };
 });
 exports.useSiteStore = useSiteStore;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/store/site.js.map

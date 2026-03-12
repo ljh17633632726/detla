@@ -1,6 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const api_order = require("../../api/order.js");
+const api_product = require("../../api/product.js");
 const api_user = require("../../api/user.js");
 const store_user = require("../../store/user.js");
 if (!Math) {
@@ -15,32 +16,60 @@ const _sfc_main = {
     const specInfo = common_vendor.ref("");
     const amount = common_vendor.ref(0);
     const productName = common_vendor.ref("");
-    const form = common_vendor.reactive({
-      gameAccount: "",
-      contact: "",
-      remark: ""
-    });
-    const savedGameList = common_vendor.ref([]);
-    const selectedGameId = common_vendor.ref(null);
-    async function loadSavedGameList() {
+    const formFields = common_vendor.ref([]);
+    const extraFields = common_vendor.reactive({});
+    const currentCategoryId = common_vendor.ref(null);
+    const savedList = common_vendor.ref([]);
+    const activeSavedId = common_vendor.ref(null);
+    function getFieldOptions(field) {
+      if (!field.options)
+        return [];
+      return field.options.split(",").map((s) => s.trim()).filter(Boolean);
+    }
+    async function loadFormFields(pid) {
+      var _a;
       try {
-        const res = await api_user.getGameInfoList();
-        savedGameList.value = res.data || [];
+        const prodRes = await api_product.getProductDetail(pid);
+        const categoryId = (_a = prodRes.data) == null ? void 0 : _a.categoryId;
+        if (!categoryId)
+          return;
+        currentCategoryId.value = categoryId;
+        const res = await api_product.getCategoryFormFields(categoryId);
+        formFields.value = res.data || [];
+        loadSavedList(categoryId);
       } catch (e) {
-        savedGameList.value = [];
+        formFields.value = [];
       }
     }
-    function selectSavedGame(g) {
-      selectedGameId.value = g.id;
-      form.gameAccount = g.gameAccount || "";
-      form.contact = g.contact || "";
-      form.remark = g.remark || "";
+    async function loadSavedList(categoryId) {
+      try {
+        const res = await api_user.getSavedInfoByCategory(categoryId);
+        savedList.value = res.data || [];
+      } catch (e) {
+        savedList.value = [];
+      }
     }
-    function clearSelectedGame() {
-      selectedGameId.value = null;
-      form.gameAccount = "";
-      form.contact = "";
-      form.remark = "";
+    function applySaved(item) {
+      activeSavedId.value = item.id;
+      let fields = {};
+      if (item.savedFields) {
+        try {
+          fields = typeof item.savedFields === "string" ? JSON.parse(item.savedFields) : item.savedFields;
+        } catch (e) {
+        }
+      }
+      Object.keys(extraFields).forEach((k) => {
+        extraFields[k] = "";
+      });
+      Object.entries(fields).forEach(([k, v]) => {
+        extraFields[k] = v;
+      });
+    }
+    function applyManual() {
+      activeSavedId.value = "manual";
+      Object.keys(extraFields).forEach((k) => {
+        extraFields[k] = "";
+      });
     }
     const wantDesignate = common_vendor.ref(false);
     const showPlayerPicker = common_vendor.ref(false);
@@ -86,33 +115,46 @@ const _sfc_main = {
       specInfo.value = decodeURIComponent(opts.specCombination || opts.specInfo || "");
       amount.value = opts.amount || 0;
       productName.value = decodeURIComponent(opts.productName || "服务");
-      loadSavedGameList();
+      loadFormFields(opts.productId);
     });
     async function submitOrder() {
-      var _a;
+      var _a, _b;
       if (!userStore.checkLogin())
         return;
-      if (!form.gameAccount)
-        return common_vendor.index.showToast({ title: "请输入关联账号", icon: "none" });
-      if (!form.contact)
-        return common_vendor.index.showToast({ title: "请输入联系ID", icon: "none" });
+      for (const field of formFields.value) {
+        if (field.required && !((_a = extraFields[field.fieldLabel]) == null ? void 0 : _a.trim())) {
+          return common_vendor.index.showToast({ title: `请填写${field.fieldLabel}`, icon: "none" });
+        }
+      }
       try {
+        const fieldsToSubmit = { ...extraFields };
         const res = await api_order.createOrder({
           productId: productId.value,
           specInfo: specInfo.value,
           amount: amount.value,
-          gameAccount: form.gameAccount,
-          contact: form.contact,
-          remark: form.remark,
-          designatedPlayerId: (_a = selectedPlayer.value) == null ? void 0 : _a.id
+          extraFields: fieldsToSubmit,
+          designatedPlayerId: (_b = selectedPlayer.value) == null ? void 0 : _b.id
         });
-        if (form.gameAccount && form.contact) {
-          api_user.saveGameInfo({ gameAccount: form.gameAccount, contact: form.contact, remark: form.remark }).catch(() => {
-          });
+        if (currentCategoryId.value && formFields.value.length) {
+          const vals = Object.values(fieldsToSubmit).filter((v) => v && v.trim());
+          if (vals.length) {
+            const label = vals.slice(0, 2).join(" / ").substring(0, 30);
+            try {
+              await api_user.saveDynamicInfo({
+                categoryId: currentCategoryId.value,
+                savedFields: fieldsToSubmit,
+                label
+              });
+            } catch (e) {
+              common_vendor.index.__f__("error", "at pages/order/create.vue:255", "保存下单信息失败", e);
+            }
+          }
         }
         common_vendor.index.redirectTo({ url: `/pages/order/pay?orderId=${res.data.id}&amount=${res.data.amount}` });
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/order/create.vue:219", "create order failed", e);
+        common_vendor.index.__f__("error", "at pages/order/create.vue:261", "create order failed", e);
+        const msg = (e == null ? void 0 : e.msg) || (e == null ? void 0 : e.message) || "下单失败，请稍后重试";
+        common_vendor.index.showToast({ title: msg, icon: "none" });
       }
     }
     return (_ctx, _cache) => {
@@ -126,49 +168,71 @@ const _sfc_main = {
           value: amount.value,
           size: 36
         }),
-        e: savedGameList.value.length > 0
-      }, savedGameList.value.length > 0 ? {
-        f: common_vendor.f(savedGameList.value, (g, k0, i0) => {
+        e: savedList.value.length || formFields.value.length
+      }, savedList.value.length || formFields.value.length ? {
+        f: common_vendor.f(savedList.value, (item, k0, i0) => {
           return {
-            a: common_vendor.t(g.gameAccount),
-            b: common_vendor.t(g.contact),
-            c: g.id,
-            d: selectedGameId.value === g.id ? 1 : "",
-            e: common_vendor.o(($event) => selectSavedGame(g), g.id)
+            a: common_vendor.t(item.label || "未命名"),
+            b: item.id,
+            c: activeSavedId.value === item.id ? 1 : "",
+            d: common_vendor.o(($event) => applySaved(item), item.id)
           };
         }),
-        g: common_vendor.o(clearSelectedGame)
+        g: activeSavedId.value === "manual" ? 1 : "",
+        h: common_vendor.o(applyManual)
       } : {}, {
-        h: form.gameAccount,
-        i: common_vendor.o(($event) => form.gameAccount = $event.detail.value),
-        j: form.contact,
-        k: common_vendor.o(($event) => form.contact = $event.detail.value),
-        l: form.remark,
-        m: common_vendor.o(($event) => form.remark = $event.detail.value),
-        n: wantDesignate.value,
-        o: common_vendor.o(($event) => wantDesignate.value = $event.detail.value),
-        p: wantDesignate.value
+        i: formFields.value.length
+      }, formFields.value.length ? {
+        j: common_vendor.f(formFields.value, (field, k0, i0) => {
+          return common_vendor.e({
+            a: common_vendor.t(field.fieldLabel),
+            b: field.required
+          }, field.required ? {} : {}, {
+            c: field.fieldType === "TEXT"
+          }, field.fieldType === "TEXT" ? {
+            d: field.placeholder || "请输入" + field.fieldLabel,
+            e: extraFields[field.fieldLabel],
+            f: common_vendor.o(($event) => extraFields[field.fieldLabel] = $event.detail.value, field.id)
+          } : field.fieldType === "TEXTAREA" ? {
+            h: field.placeholder || "请输入" + field.fieldLabel,
+            i: extraFields[field.fieldLabel],
+            j: common_vendor.o(($event) => extraFields[field.fieldLabel] = $event.detail.value, field.id)
+          } : field.fieldType === "SELECT" ? {
+            l: common_vendor.t(extraFields[field.fieldLabel] || field.placeholder || "请选择" + field.fieldLabel),
+            m: !extraFields[field.fieldLabel] ? 1 : "",
+            n: getFieldOptions(field),
+            o: common_vendor.o(($event) => extraFields[field.fieldLabel] = getFieldOptions(field)[$event.detail.value], field.id)
+          } : {}, {
+            g: field.fieldType === "TEXTAREA",
+            k: field.fieldType === "SELECT",
+            p: field.id
+          });
+        })
+      } : {}, {
+        k: wantDesignate.value,
+        l: common_vendor.o(($event) => wantDesignate.value = $event.detail.value),
+        m: wantDesignate.value
       }, wantDesignate.value ? common_vendor.e({
-        q: selectedPlayer.value
+        n: selectedPlayer.value
       }, selectedPlayer.value ? {
-        r: common_vendor.t(selectedPlayer.value.nickname)
+        o: common_vendor.t(selectedPlayer.value.nickname)
       } : {}, {
-        s: common_vendor.o(($event) => showPlayerPicker.value = true)
+        p: common_vendor.o(($event) => showPlayerPicker.value = true)
       }) : {}, {
-        t: common_vendor.p({
+        q: common_vendor.p({
           value: amount.value,
           size: 36
         }),
-        v: common_vendor.o(submitOrder),
-        w: showPlayerPicker.value
+        r: common_vendor.o(submitOrder),
+        s: showPlayerPicker.value
       }, showPlayerPicker.value ? common_vendor.e({
-        x: common_vendor.o(($event) => showPlayerPicker.value = false),
-        y: common_vendor.t(maxConcurrent.value),
+        t: common_vendor.o(($event) => showPlayerPicker.value = false),
+        v: common_vendor.t(maxConcurrent.value),
+        w: common_vendor.o(searchPlayers),
+        x: playerKeyword.value,
+        y: common_vendor.o(($event) => playerKeyword.value = $event.detail.value),
         z: common_vendor.o(searchPlayers),
-        A: playerKeyword.value,
-        B: common_vendor.o(($event) => playerKeyword.value = $event.detail.value),
-        C: common_vendor.o(searchPlayers),
-        D: common_vendor.f(playerList.value, (p, k0, i0) => {
+        A: common_vendor.f(playerList.value, (p, k0, i0) => {
           return common_vendor.e({
             a: p.avatar || "/static/images/default-avatar.png",
             b: common_vendor.t(p.nickname || "-"),
@@ -189,15 +253,15 @@ const _sfc_main = {
             m: common_vendor.o(($event) => pickPlayer(p), p.id)
           });
         }),
-        E: common_vendor.t(maxConcurrent.value),
-        F: playerList.value.length === 0
+        B: common_vendor.t(maxConcurrent.value),
+        C: playerList.value.length === 0
       }, playerList.value.length === 0 ? {} : {}, {
-        G: common_vendor.o(($event) => showPlayerPicker.value = false),
-        H: common_vendor.o(confirmPickPlayer),
-        I: showPlayerPicker.value ? 1 : "",
-        J: common_vendor.o(() => {
+        D: common_vendor.o(($event) => showPlayerPicker.value = false),
+        E: common_vendor.o(confirmPickPlayer),
+        F: showPlayerPicker.value ? 1 : "",
+        G: common_vendor.o(() => {
         }),
-        K: common_vendor.o(($event) => showPlayerPicker.value = false)
+        H: common_vendor.o(($event) => showPlayerPicker.value = false)
       }) : {});
     };
   }

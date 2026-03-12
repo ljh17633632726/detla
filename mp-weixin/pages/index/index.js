@@ -33,7 +33,7 @@ const _sfc_main = {
     const categories = common_vendor.ref([]);
     const notices = common_vendor.ref([]);
     const recommendProducts = common_vendor.ref([]);
-    const recommendTabs = common_vendor.ref([{ id: "", name: "全部" }]);
+    const recommendTabs = common_vendor.ref([{ id: "", name: "全部热门" }]);
     const currentRecommendCategoryId = common_vendor.ref("");
     const showNoticePopup = common_vendor.ref(false);
     const popupNotices = common_vendor.ref([]);
@@ -77,7 +77,7 @@ const _sfc_main = {
           categories.value = (catRes.data || []).slice(0, 8);
         }
         if (categoriesRes.data && Array.isArray(categoriesRes.data)) {
-          recommendTabs.value = [{ id: "", name: "全部" }, ...categoriesRes.data.map((c) => ({ id: String(c.id), name: c.name }))];
+          recommendTabs.value = [{ id: "", name: "全部热门" }, ...categoriesRes.data.map((c) => ({ id: String(c.id), name: c.name }))];
         }
         if (productRes.data) {
           recommendProducts.value = productRes.data.records || productRes.data || [];

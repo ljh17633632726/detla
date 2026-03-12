@@ -11,7 +11,7 @@
  Target Server Version : 80040 (8.0.40)
  File Encoding         : 65001
 
- Date: 09/03/2026 14:52:39
+ Date: 12/03/2026 22:37:43
 */
 
 SET NAMES utf8mb4;
@@ -44,7 +44,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'admin', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '超级管理员', '', 'admin', '', 1, 0, NULL, '2026-03-07 19:45:43', '', 0, '2026-02-27 11:25:20', '2026-02-27 11:25:20');
+INSERT INTO `admin` VALUES (1, 'admin', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '超级管理员', '', 'admin', '', 1, 0, NULL, '2026-03-10 22:38:39', '', 0, '2026-02-27 11:25:20', '2026-02-27 11:25:20');
 INSERT INTO `admin` VALUES (2, 'kefu', '$2a$10$TOq/iEFL/HA115.09eatzu1lxhkTKlEQs.ChxQ/bnCVW4GyA0M2uS', '客服1', '', 'cs', '', 1, 0, NULL, '2026-03-06 18:43:28', '', 0, '2026-02-27 19:25:55', '2026-02-27 19:25:55');
 
 -- ----------------------------
@@ -98,6 +98,32 @@ INSERT INTO `category` VALUES (2, '三角洲', 'http://localhost:8080/file/2026/
 INSERT INTO `category` VALUES (3, '玩法', '', 0, 1, 2, 0, '2026-03-06 19:00:57', '2026-03-06 19:00:57');
 
 -- ----------------------------
+-- Table structure for category_form_field
+-- ----------------------------
+DROP TABLE IF EXISTS `category_form_field`;
+CREATE TABLE `category_form_field`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `category_id` bigint NOT NULL COMMENT '父分类ID',
+  `field_key` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字段键名(英文,存储用)',
+  `field_label` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字段显示名(中文)',
+  `field_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'TEXT' COMMENT '字段类型: TEXT/SELECT/TEXTAREA',
+  `options` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'SELECT类型的选项,逗号分隔,如: 选项1,选项2,选项3',
+  `placeholder` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '输入提示',
+  `required` tinyint NOT NULL DEFAULT 1 COMMENT '是否必填: 1-是 0-否',
+  `sort_order` int NOT NULL DEFAULT 0 COMMENT '排序(越小越靠前)',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_category_id`(`category_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '分类动态表单字段' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of category_form_field
+-- ----------------------------
+INSERT INTO `category_form_field` VALUES (1, 2, 'key1', '游戏名称', 'TEXT', '', '请输入游戏大区', 1, 0, '2026-03-10 22:39:15');
+INSERT INTO `category_form_field` VALUES (2, 2, 'key2', '联系方式', 'TEXT', '', '输入联系方式', 0, 2, '2026-03-10 22:39:37');
+INSERT INTO `category_form_field` VALUES (3, 2, 'key3', '备注', 'TEXT', '', '如有特殊需求请备注', 0, 3, '2026-03-10 22:39:58');
+
+-- ----------------------------
 -- Table structure for chat_message
 -- ----------------------------
 DROP TABLE IF EXISTS `chat_message`;
@@ -138,11 +164,12 @@ CREATE TABLE `chat_session`  (
   UNIQUE INDEX `uk_id1_id2`(`id1` ASC, `id2` ASC) USING BTREE,
   INDEX `idx_id1`(`id1` ASC) USING BTREE,
   INDEX `idx_id2`(`id2` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '私聊会话(id1<id2)' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '私聊会话(id1<id2)' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of chat_session
 -- ----------------------------
+INSERT INTO `chat_session` VALUES (1, 1000000002, 2000000002, 'ACTIVE', NULL, '2026-03-12 21:57:13', '2026-03-12 21:57:13');
 
 -- ----------------------------
 -- Table structure for complaint
@@ -251,7 +278,7 @@ CREATE TABLE `operation_log`  (
   INDEX `idx_operator`(`operator_type` ASC, `operator_id` ASC) USING BTREE,
   INDEX `idx_module`(`module` ASC) USING BTREE,
   INDEX `idx_created_at`(`created_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of operation_log
@@ -317,6 +344,7 @@ INSERT INTO `operation_log` VALUES (58, 'system', '编辑管理员', 'ADMIN', 1,
 INSERT INTO `operation_log` VALUES (59, 'auth', 'login', 'ADMIN', 1, '超级管理员', 'admin', 1, 'admin 以 ADMIN 角色登录', '0:0:0:0:0:0:0:1', '2026-03-06 19:32:08');
 INSERT INTO `operation_log` VALUES (60, 'user', '调整用户余额', 'ADMIN', 1, '超级管理员', 'user', 4, '调整用户余额', '0:0:0:0:0:0:0:1', '2026-03-06 19:37:53');
 INSERT INTO `operation_log` VALUES (61, 'auth', 'login', 'ADMIN', 1, '超级管理员', 'admin', 1, 'admin 以 ADMIN 角色登录', '0:0:0:0:0:0:0:1', '2026-03-07 19:45:43');
+INSERT INTO `operation_log` VALUES (62, 'auth', 'login', 'ADMIN', 1, '超级管理员', 'admin', 1, 'admin 以 ADMIN 角色登录', '0:0:0:0:0:0:0:1', '2026-03-10 22:38:39');
 
 -- ----------------------------
 -- Table structure for order
@@ -334,6 +362,7 @@ CREATE TABLE `order`  (
   `game_account` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '游戏账号',
   `contact` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '联系方式',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户备注',
+  `extra_fields` json NULL COMMENT '动态表单字段JSON',
   `required_player_count` tinyint NOT NULL DEFAULT 1 COMMENT '需要打手数量(下单快照)',
   `designated_player_id` bigint NULL DEFAULT NULL COMMENT '用户指定打手ID(可为空)',
   `player_id` bigint NULL DEFAULT NULL COMMENT '主接打手ID',
@@ -360,27 +389,30 @@ CREATE TABLE `order`  (
   INDEX `idx_status_auto_confirm`(`status` ASC, `auto_confirm_deadline` ASC) USING BTREE,
   INDEX `idx_status_teammate_deadline`(`status` ASC, `teammate_deadline` ASC) USING BTREE,
   INDEX `idx_created_at`(`created_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
-INSERT INTO `order` VALUES (1, 'O2028041127357190144', 1, 1, '三角洲代打', NULL, 9.99, NULL, '1', '1', '1', 1, NULL, 1, 'REVIEWED', '2026-03-01 18:04:19', '2026-03-01 18:36:00', '2026-03-01 19:15:15', NULL, '2026-03-01 19:15:17', '2026-03-01 19:37:07', '2026-03-01 19:37:32', '2026-03-02 19:37:07', 1, 7.99, '2026-03-01 19:37:32', '2026-03-01 17:34:19', '2026-03-01 19:39:04');
-INSERT INTO `order` VALUES (2, 'O2028075525016260608', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '312', '123321', '12332132', 1, NULL, 1, 'CONFIRMED', '2026-03-01 20:21:00', '2026-03-01 20:03:00', '2026-03-01 20:06:08', NULL, '2026-03-01 20:06:40', '2026-03-01 20:06:42', '2026-03-01 20:07:27', '2026-03-02 20:06:42', 1, 8.00, '2026-03-01 20:07:27', '2026-03-01 19:51:00', '2026-03-01 20:07:27');
-INSERT INTO `order` VALUES (3, 'O2028076876894965760', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '453', '5434', '453354', 1, NULL, NULL, 'CANCELLED', '2026-03-01 20:26:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-01 19:56:22', '2026-03-01 19:59:24');
-INSERT INTO `order` VALUES (4, 'O2028077060517400576', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '11', '1123124', 1, NULL, NULL, 'CANCELLED', '2026-03-01 20:27:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-01 19:57:06', '2026-03-01 19:59:20');
-INSERT INTO `order` VALUES (5, 'O2028079188292014080', 1, 1, '三角洲代打', NULL, 9.99, NULL, '1', '1', '1', 1, NULL, NULL, 'REFUNDED', '2026-03-01 20:35:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-01 20:05:33', '2026-03-01 20:05:40');
-INSERT INTO `order` VALUES (6, 'O2028080687390789632', 1, 1, '三角洲代打', NULL, 9.99, NULL, '21312', '213', '123', 1, NULL, 1, 'CONFIRMED', '2026-03-01 20:41:30', NULL, '2026-03-01 20:12:00', NULL, '2026-03-01 20:15:14', '2026-03-01 20:15:16', '2026-03-01 20:28:26', '2026-03-02 20:15:16', 1, 7.99, '2026-03-01 20:28:26', '2026-03-01 20:11:30', '2026-03-01 20:28:26');
-INSERT INTO `order` VALUES (7, 'O2028094502425726976', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '1', '1', 1, NULL, 1, 'REFUNDED', '2026-03-01 21:36:24', NULL, '2026-03-01 21:09:23', NULL, '2026-03-01 21:09:28', '2026-03-01 21:09:29', '2026-03-01 21:09:42', '2026-03-02 21:09:29', 1, 8.00, '2026-03-01 21:09:42', '2026-03-01 21:06:24', '2026-03-04 17:03:40');
-INSERT INTO `order` VALUES (8, 'O2028105007773126656', 1, 1, '三角洲代打', NULL, 9.99, NULL, '11', '111', '1111', 1, NULL, 1, 'CONFIRMED', '2026-03-01 22:18:09', NULL, '2026-03-01 21:48:29', NULL, '2026-03-01 21:48:33', '2026-03-01 21:48:35', '2026-03-01 21:48:49', '2026-03-03 21:48:35', 1, 8.99, '2026-03-01 21:48:49', '2026-03-01 21:48:09', '2026-03-01 21:48:49');
-INSERT INTO `order` VALUES (9, 'O2029225273395908608', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '11', '1', '111', 1, NULL, 1, 'REFUNDED', '2026-03-05 00:29:41', NULL, '2026-03-05 00:00:20', NULL, '2026-03-05 00:02:34', '2026-03-05 00:02:52', NULL, '2026-03-07 00:02:52', 0, NULL, NULL, '2026-03-04 23:59:41', '2026-03-05 00:16:37');
-INSERT INTO `order` VALUES (10, 'O2029226623437508608', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '123', '333', 1, NULL, 1, 'ACCEPTED', '2026-03-05 00:35:03', NULL, '2026-03-05 00:05:30', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-05 00:05:03', '2026-03-05 00:05:30');
-INSERT INTO `order` VALUES (11, 'O2029228118929182720', 1, 1, '三角洲代打', NULL, 9.99, NULL, '1', '1', '11111', 1, NULL, 2, 'CONFIRMED', '2026-03-05 00:40:59', NULL, '2026-03-05 12:19:24', NULL, '2026-03-05 12:43:00', '2026-03-05 12:47:04', '2026-03-07 16:10:00', '2026-03-07 12:47:04', 1, 8.99, '2026-03-07 16:10:00', '2026-03-05 00:10:59', '2026-03-07 16:10:00');
-INSERT INTO `order` VALUES (12, 'O2029228446206529536', 1, 1, '三角洲代打', NULL, 9.99, NULL, '233', '2323', '23', 1, NULL, 1, 'ASSIGNED', '2026-03-05 00:42:17', '2026-03-05 00:20:55', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-05 00:12:17', '2026-03-05 00:20:55');
-INSERT INTO `order` VALUES (13, 'O2029417498197233664', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '11', '11', '11', 1, NULL, 2, 'REFUNDED', '2026-03-05 13:13:31', NULL, '2026-03-05 12:47:09', '2026-03-05 15:10:04', '2026-03-05 13:26:22', '2026-03-05 13:26:37', NULL, '2026-03-07 13:26:37', 0, NULL, NULL, '2026-03-05 12:43:31', '2026-03-05 13:40:56');
-INSERT INTO `order` VALUES (14, 'O2029442145517178880', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '222', '2', '2222', 1, NULL, 2, 'CONFIRMED', '2026-03-05 14:51:27', '2026-03-05 14:34:21', '2026-03-06 18:47:54', NULL, '2026-03-06 18:47:56', '2026-03-06 18:47:59', '2026-03-06 19:24:54', '2026-03-08 18:47:59', 1, 9.00, '2026-03-06 19:24:54', '2026-03-05 14:21:27', '2026-03-06 19:24:54');
-INSERT INTO `order` VALUES (15, 'O2029868480114855936', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '1', '1', 1, NULL, NULL, 'CANCELLED', '2026-03-06 19:05:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-06 18:35:33', '2026-03-06 18:42:05');
-INSERT INTO `order` VALUES (16, 'O2029870207241162752', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '11', '2121', '221', 1, NULL, NULL, 'CANCELLED', '2026-03-06 19:12:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-06 18:42:25', '2026-03-06 19:15:00');
+INSERT INTO `order` VALUES (1, 'O2028041127357190144', 1, 1, '三角洲代打', NULL, 9.99, NULL, '1', '1', '1', NULL, 1, NULL, 1, 'REVIEWED', '2026-03-01 18:04:19', '2026-03-01 18:36:00', '2026-03-01 19:15:15', NULL, '2026-03-01 19:15:17', '2026-03-01 19:37:07', '2026-03-01 19:37:32', '2026-03-02 19:37:07', 1, 7.99, '2026-03-01 19:37:32', '2026-03-01 17:34:19', '2026-03-01 19:39:04');
+INSERT INTO `order` VALUES (2, 'O2028075525016260608', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '312', '123321', '12332132', NULL, 1, NULL, 1, 'CONFIRMED', '2026-03-01 20:21:00', '2026-03-01 20:03:00', '2026-03-01 20:06:08', NULL, '2026-03-01 20:06:40', '2026-03-01 20:06:42', '2026-03-01 20:07:27', '2026-03-02 20:06:42', 1, 8.00, '2026-03-01 20:07:27', '2026-03-01 19:51:00', '2026-03-01 20:07:27');
+INSERT INTO `order` VALUES (3, 'O2028076876894965760', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '453', '5434', '453354', NULL, 1, NULL, NULL, 'CANCELLED', '2026-03-01 20:26:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-01 19:56:22', '2026-03-01 19:59:24');
+INSERT INTO `order` VALUES (4, 'O2028077060517400576', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '11', '1123124', NULL, 1, NULL, NULL, 'CANCELLED', '2026-03-01 20:27:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-01 19:57:06', '2026-03-01 19:59:20');
+INSERT INTO `order` VALUES (5, 'O2028079188292014080', 1, 1, '三角洲代打', NULL, 9.99, NULL, '1', '1', '1', NULL, 1, NULL, NULL, 'REFUNDED', '2026-03-01 20:35:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-01 20:05:33', '2026-03-01 20:05:40');
+INSERT INTO `order` VALUES (6, 'O2028080687390789632', 1, 1, '三角洲代打', NULL, 9.99, NULL, '21312', '213', '123', NULL, 1, NULL, 1, 'CONFIRMED', '2026-03-01 20:41:30', NULL, '2026-03-01 20:12:00', NULL, '2026-03-01 20:15:14', '2026-03-01 20:15:16', '2026-03-01 20:28:26', '2026-03-02 20:15:16', 1, 7.99, '2026-03-01 20:28:26', '2026-03-01 20:11:30', '2026-03-01 20:28:26');
+INSERT INTO `order` VALUES (7, 'O2028094502425726976', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '1', '1', NULL, 1, NULL, 1, 'REFUNDED', '2026-03-01 21:36:24', NULL, '2026-03-01 21:09:23', NULL, '2026-03-01 21:09:28', '2026-03-01 21:09:29', '2026-03-01 21:09:42', '2026-03-02 21:09:29', 1, 8.00, '2026-03-01 21:09:42', '2026-03-01 21:06:24', '2026-03-04 17:03:40');
+INSERT INTO `order` VALUES (8, 'O2028105007773126656', 1, 1, '三角洲代打', NULL, 9.99, NULL, '11', '111', '1111', NULL, 1, NULL, 1, 'CONFIRMED', '2026-03-01 22:18:09', NULL, '2026-03-01 21:48:29', NULL, '2026-03-01 21:48:33', '2026-03-01 21:48:35', '2026-03-01 21:48:49', '2026-03-03 21:48:35', 1, 8.99, '2026-03-01 21:48:49', '2026-03-01 21:48:09', '2026-03-01 21:48:49');
+INSERT INTO `order` VALUES (9, 'O2029225273395908608', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '11', '1', '111', NULL, 1, NULL, 1, 'REFUNDED', '2026-03-05 00:29:41', NULL, '2026-03-05 00:00:20', NULL, '2026-03-05 00:02:34', '2026-03-05 00:02:52', NULL, '2026-03-07 00:02:52', 0, NULL, NULL, '2026-03-04 23:59:41', '2026-03-05 00:16:37');
+INSERT INTO `order` VALUES (10, 'O2029226623437508608', 1, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '123', '333', NULL, 1, NULL, 1, 'ACCEPTED', '2026-03-05 00:35:03', NULL, '2026-03-05 00:05:30', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-05 00:05:03', '2026-03-05 00:05:30');
+INSERT INTO `order` VALUES (11, 'O2029228118929182720', 1, 1, '三角洲代打', NULL, 9.99, NULL, '1', '1', '11111', NULL, 1, NULL, 2, 'CONFIRMED', '2026-03-05 00:40:59', NULL, '2026-03-05 12:19:24', NULL, '2026-03-05 12:43:00', '2026-03-05 12:47:04', '2026-03-07 16:10:00', '2026-03-07 12:47:04', 1, 8.99, '2026-03-07 16:10:00', '2026-03-05 00:10:59', '2026-03-07 16:10:00');
+INSERT INTO `order` VALUES (12, 'O2029228446206529536', 1, 1, '三角洲代打', NULL, 9.99, NULL, '233', '2323', '23', NULL, 1, NULL, 1, 'ASSIGNED', '2026-03-05 00:42:17', '2026-03-05 00:20:55', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-05 00:12:17', '2026-03-05 00:20:55');
+INSERT INTO `order` VALUES (13, 'O2029417498197233664', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '11', '11', '11', NULL, 1, NULL, 2, 'REFUNDED', '2026-03-05 13:13:31', NULL, '2026-03-05 12:47:09', '2026-03-05 15:10:04', '2026-03-05 13:26:22', '2026-03-05 13:26:37', NULL, '2026-03-07 13:26:37', 0, NULL, NULL, '2026-03-05 12:43:31', '2026-03-05 13:40:56');
+INSERT INTO `order` VALUES (14, 'O2029442145517178880', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '222', '2', '2222', NULL, 1, NULL, 2, 'CONFIRMED', '2026-03-05 14:51:27', '2026-03-05 14:34:21', '2026-03-06 18:47:54', NULL, '2026-03-06 18:47:56', '2026-03-06 18:47:59', '2026-03-06 19:24:54', '2026-03-08 18:47:59', 1, 9.00, '2026-03-06 19:24:54', '2026-03-05 14:21:27', '2026-03-06 19:24:54');
+INSERT INTO `order` VALUES (15, 'O2029868480114855936', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '1', '1', '1', NULL, 1, NULL, NULL, 'CANCELLED', '2026-03-06 19:05:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-06 18:35:33', '2026-03-06 18:42:05');
+INSERT INTO `order` VALUES (16, 'O2029870207241162752', 2, 2, '【CS测试】客服端商品', NULL, 10.00, NULL, '11', '2121', '221', NULL, 1, NULL, NULL, 'CANCELLED', '2026-03-06 19:12:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-06 18:42:25', '2026-03-06 19:15:00');
+INSERT INTO `order` VALUES (17, 'O2031381268645679104', 2, 1, '三角洲代打', NULL, 9.99, 0.3000, '', '', '', '{\"备注\": \"2112122\", \"游戏名称\": \"2121\", \"联系方式\": \"212\"}', 1, NULL, 3, 'ASSIGNED', '2026-03-10 23:16:50', '2026-03-10 22:57:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-10 22:46:50', '2026-03-10 22:57:00');
+INSERT INTO `order` VALUES (18, 'O2031381616647081984', 2, 2, '【CS测试】客服端商品', NULL, 10.00, 0.1000, '', '', '', '{\"备注\": \"2\", \"游戏名称\": \"212121\", \"联系方式\": \"221\"}', 1, NULL, 3, 'ASSIGNED', '2026-03-10 23:18:13', '2026-03-12 21:57:00', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-10 22:48:13', '2026-03-12 21:57:00');
+INSERT INTO `order` VALUES (19, 'O2032093444209512448', 2, 1, '三角洲代打', NULL, 9.99, 0.3000, '', '', '', '{\"备注\": \"32231231\", \"游戏名称\": \"11111\", \"联系方式\": \"3312321\"}', 1, NULL, NULL, 'PAID', '2026-03-12 22:26:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2026-03-12 21:56:46', '2026-03-12 22:04:32');
 
 -- ----------------------------
 -- Table structure for order_player
@@ -408,7 +440,7 @@ CREATE TABLE `order_player`  (
   INDEX `idx_player_id`(`player_id` ASC) USING BTREE,
   INDEX `idx_status_role`(`status` ASC, `role` ASC) USING BTREE,
   INDEX `idx_invite_deadline`(`status` ASC, `invite_deadline` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单参与打手表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单参与打手表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order_player
@@ -425,6 +457,9 @@ INSERT INTO `order_player` VALUES (9, 13, 2, 'PRIMARY', 'ACCEPTED', NULL, NULL, 
 INSERT INTO `order_player` VALUES (10, 13, 1, 'TEAMMATE', 'CANCELLED', 'CUSTOM', NULL, 9.00, 2, '2026-03-05 13:10:04', '2026-03-05 13:40:04', NULL, NULL, NULL, NULL, '2026-03-05 13:10:04');
 INSERT INTO `order_player` VALUES (11, 14, 2, 'PRIMARY', 'REPLACED', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 14:21:55', NULL, NULL, NULL, '2026-03-05 14:21:55');
 INSERT INTO `order_player` VALUES (12, 14, 2, 'PRIMARY', 'ACCEPTED', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-06 18:47:54', NULL, 9.00, '2026-03-06 19:24:54', '2026-03-06 18:47:54');
+INSERT INTO `order_player` VALUES (13, 19, 2, 'PRIMARY', 'REPLACED', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-12 21:57:13', NULL, NULL, NULL, '2026-03-12 21:57:13');
+INSERT INTO `order_player` VALUES (14, 19, 2, 'PRIMARY', 'REPLACED', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-12 22:01:15', NULL, NULL, NULL, '2026-03-12 22:01:15');
+INSERT INTO `order_player` VALUES (15, 19, 3, 'TEAMMATE', 'REPLACED', 'CUSTOM', NULL, 2.00, 2, '2026-03-12 22:01:31', '2026-03-12 22:06:31', NULL, NULL, NULL, NULL, '2026-03-12 22:01:31');
 
 -- ----------------------------
 -- Table structure for order_progress
@@ -445,7 +480,7 @@ CREATE TABLE `order_progress`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_order_id`(`order_id` ASC) USING BTREE,
   INDEX `idx_created_at`(`created_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 99 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单进度记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单进度记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order_progress
@@ -545,6 +580,22 @@ INSERT INTO `order_progress` VALUES (92, 14, 'STATUS_CHANGE', 'PLAYER', 2, 'IN_P
 INSERT INTO `order_progress` VALUES (93, 16, 'STATUS_CHANGE', 'SYSTEM', NULL, 'PENDING_PAYMENT', 'CANCELLED', '超时未支付，系统自动取消', NULL, NULL, '2026-03-06 19:15:00');
 INSERT INTO `order_progress` VALUES (97, 14, 'STATUS_CHANGE', 'USER', 2, 'COMPLETED', 'CONFIRMED', '用户确认完成', NULL, NULL, '2026-03-06 19:24:54');
 INSERT INTO `order_progress` VALUES (98, 11, 'STATUS_CHANGE', 'SYSTEM', NULL, 'COMPLETED', 'CONFIRMED', '系统自动确认', NULL, NULL, '2026-03-07 16:10:00');
+INSERT INTO `order_progress` VALUES (99, 17, 'STATUS_CHANGE', 'USER', 2, NULL, 'PENDING_PAYMENT', '创建订单', NULL, NULL, '2026-03-10 22:46:50');
+INSERT INTO `order_progress` VALUES (100, 17, 'STATUS_CHANGE', 'USER', 2, 'PENDING_PAYMENT', 'PAID', '余额支付成功', NULL, NULL, '2026-03-10 22:46:53');
+INSERT INTO `order_progress` VALUES (101, 18, 'STATUS_CHANGE', 'USER', 2, NULL, 'PENDING_PAYMENT', '创建订单', NULL, NULL, '2026-03-10 22:48:13');
+INSERT INTO `order_progress` VALUES (102, 18, 'STATUS_CHANGE', 'USER', 2, 'PENDING_PAYMENT', 'PAID', '余额支付成功', NULL, NULL, '2026-03-10 22:48:16');
+INSERT INTO `order_progress` VALUES (103, 17, 'STATUS_CHANGE', 'SYSTEM', NULL, 'PAID', 'ASSIGNED', '系统自动指派打手', NULL, NULL, '2026-03-10 22:57:00');
+INSERT INTO `order_progress` VALUES (104, 19, 'STATUS_CHANGE', 'USER', 2, NULL, 'PENDING_PAYMENT', '创建订单', NULL, NULL, '2026-03-12 21:56:46');
+INSERT INTO `order_progress` VALUES (105, 19, 'STATUS_CHANGE', 'USER', 2, 'PENDING_PAYMENT', 'PAID', '余额支付成功', NULL, NULL, '2026-03-12 21:56:50');
+INSERT INTO `order_progress` VALUES (106, 18, 'STATUS_CHANGE', 'SYSTEM', NULL, 'PAID', 'ASSIGNED', '系统自动指派打手', NULL, NULL, '2026-03-12 21:57:00');
+INSERT INTO `order_progress` VALUES (107, 19, 'STATUS_CHANGE', 'PLAYER', 2, 'PAID', 'ACCEPTED', '打手接单', NULL, NULL, '2026-03-12 21:57:13');
+INSERT INTO `order_progress` VALUES (108, 19, 'STATUS_CHANGE', 'PLAYER', 2, 'ACCEPTED', 'IN_PROGRESS', '开始服务', NULL, NULL, '2026-03-12 21:57:19');
+INSERT INTO `order_progress` VALUES (109, 19, 'PLAYER_REPLACED', 'PLAYER', 2, NULL, NULL, '接单员主动退出，订单回到接单大厅', NULL, NULL, '2026-03-12 21:57:21');
+INSERT INTO `order_progress` VALUES (110, 19, 'STATUS_CHANGE', 'PLAYER', 2, 'PAID', 'ACCEPTED', '打手接单', NULL, NULL, '2026-03-12 22:01:15');
+INSERT INTO `order_progress` VALUES (111, 19, 'STATUS_CHANGE', 'PLAYER', 2, 'ACCEPTED', 'IN_PROGRESS', '开始服务', NULL, NULL, '2026-03-12 22:01:19');
+INSERT INTO `order_progress` VALUES (112, 19, 'TEAMMATE_INVITED', 'PLAYER', 2, NULL, NULL, '邀请队友 微信用户1，分成方式: 自定义金额', NULL, NULL, '2026-03-12 22:01:31');
+INSERT INTO `order_progress` VALUES (113, 19, 'TEAMMATE_REPLACED', 'PLAYER', 2, NULL, NULL, '主接单员更换队友，可重新邀请', NULL, NULL, '2026-03-12 22:04:29');
+INSERT INTO `order_progress` VALUES (114, 19, 'PLAYER_REPLACED', 'PLAYER', 2, NULL, NULL, '接单员主动退出，订单回到接单大厅', NULL, NULL, '2026-03-12 22:04:32');
 
 -- ----------------------------
 -- Table structure for order_relay_request
@@ -580,8 +631,9 @@ DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '支付ID',
   `payment_no` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '支付单号',
-  `order_id` bigint NOT NULL COMMENT '订单ID',
+  `order_id` bigint NULL DEFAULT NULL COMMENT '订单ID(押金支付时为空)',
   `user_id` bigint NOT NULL COMMENT '支付用户ID',
+  `biz_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'ORDER' COMMENT '业务类型: ORDER-订单支付 PLAYER_DEPOSIT-打手押金',
   `amount` decimal(10, 2) NOT NULL COMMENT '支付金额',
   `pay_method` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '支付方式: WECHAT-微信 BALANCE-余额',
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'PAYING' COMMENT '状态: PAYING/PAID/FAILED/REFUNDING/REFUNDED',
@@ -599,30 +651,33 @@ CREATE TABLE `payment`  (
   INDEX `idx_order_id`(`order_id` ASC) USING BTREE,
   INDEX `idx_user_id`(`user_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '支付记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '支付记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of payment
 -- ----------------------------
-INSERT INTO `payment` VALUES (1, 'P2028042774829469696', 1, 1, 9.99, 'WECHAT', 'PAYING', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 17:40:51', '2026-03-01 17:40:51');
-INSERT INTO `payment` VALUES (2, 'P2028043237297623040', 1, 1, 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 17:42:42', '2026-03-01 17:42:42', '2026-03-01 17:42:42');
-INSERT INTO `payment` VALUES (3, 'P2028075540908478464', 2, 1, 10.00, 'WECHAT', 'PAYING', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:51:03', '2026-03-01 19:51:03');
-INSERT INTO `payment` VALUES (4, 'P2028075933092679680', 2, 1, 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:52:37', '2026-03-01 19:52:37', '2026-03-01 19:52:37');
-INSERT INTO `payment` VALUES (5, 'P2028076885866582016', 3, 1, 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:56:24', '2026-03-01 19:56:24', '2026-03-01 19:56:24');
-INSERT INTO `payment` VALUES (6, 'P2028077068574658560', 4, 1, 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:57:08', '2026-03-01 19:57:08', '2026-03-01 19:57:08');
-INSERT INTO `payment` VALUES (7, 'P2028079198211543040', 5, 1, 9.99, 'BALANCE', 'REFUNDED', NULL, NULL, 9.99, 'P2028079218365173760', '用户取消订单退款', '2026-03-01 20:05:40', '2026-03-01 20:05:35', '2026-03-01 20:05:35', '2026-03-01 20:05:35');
-INSERT INTO `payment` VALUES (8, 'P2028080698040127488', 6, 1, 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 20:11:33', '2026-03-01 20:11:33', '2026-03-01 20:11:33');
-INSERT INTO `payment` VALUES (9, 'P2028094510428459008', 7, 1, 10.00, 'BALANCE', 'REFUNDED', NULL, NULL, 10.00, 'P2029120577842843648', '仲裁全额退款: 警告', '2026-03-04 17:03:40', '2026-03-01 21:06:26', '2026-03-01 21:06:26', '2026-03-01 21:06:26');
-INSERT INTO `payment` VALUES (10, 'P2028105017717821440', 8, 1, 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 21:48:11', '2026-03-01 21:48:11', '2026-03-01 21:48:11');
-INSERT INTO `payment` VALUES (11, 'P2029225283206385664', 9, 1, 10.00, 'BALANCE', 'REFUNDED', NULL, NULL, 10.00, 'P2029229532887781376', '仲裁全额退款: 11', '2026-03-05 00:16:37', '2026-03-04 23:59:43', '2026-03-04 23:59:43', '2026-03-04 23:59:43');
-INSERT INTO `payment` VALUES (12, 'P2029226634141372416', 10, 1, 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 00:05:05', '2026-03-05 00:05:05', '2026-03-05 00:05:05');
-INSERT INTO `payment` VALUES (13, 'P2029228128605442048', 11, 1, 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 00:11:02', '2026-03-05 00:11:02', '2026-03-05 00:11:02');
-INSERT INTO `payment` VALUES (14, 'P2029228455094259712', 12, 1, 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 00:12:20', '2026-03-05 00:12:20', '2026-03-05 00:12:20');
-INSERT INTO `payment` VALUES (15, 'P2029417515947528192', 13, 2, 10.00, 'WECHAT', 'PAYING', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 12:43:35', '2026-03-05 12:43:35');
-INSERT INTO `payment` VALUES (16, 'P2029418286143377408', 13, 2, 10.00, 'BALANCE', 'REFUNDED', NULL, NULL, 5.00, 'P2029431946119090176', '仲裁部分退款: 已经处理', '2026-03-05 13:40:56', '2026-03-05 12:46:39', '2026-03-05 12:46:39', '2026-03-05 12:46:39');
-INSERT INTO `payment` VALUES (17, 'P2029442154975334400', 14, 2, 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 14:21:30', '2026-03-05 14:21:30', '2026-03-05 14:21:30');
-INSERT INTO `payment` VALUES (18, 'P2029868489107443712', 15, 2, 10.00, 'WECHAT', 'PAYING', NULL, 'wx06183537657790c0e57838508f60f90000', NULL, NULL, NULL, NULL, NULL, '2026-03-06 18:35:36', '2026-03-06 18:35:36');
-INSERT INTO `payment` VALUES (19, 'P2029870217164886016', 16, 2, 10.00, 'WECHAT', 'PAYING', NULL, 'wx0618422951905092357151b7a5d0820000', NULL, NULL, NULL, NULL, NULL, '2026-03-06 18:42:28', '2026-03-06 18:42:28');
+INSERT INTO `payment` VALUES (1, 'P2028042774829469696', 1, 1, 'ORDER', 9.99, 'WECHAT', 'PAYING', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 17:40:51', '2026-03-01 17:40:51');
+INSERT INTO `payment` VALUES (2, 'P2028043237297623040', 1, 1, 'ORDER', 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 17:42:42', '2026-03-01 17:42:42', '2026-03-01 17:42:42');
+INSERT INTO `payment` VALUES (3, 'P2028075540908478464', 2, 1, 'ORDER', 10.00, 'WECHAT', 'PAYING', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:51:03', '2026-03-01 19:51:03');
+INSERT INTO `payment` VALUES (4, 'P2028075933092679680', 2, 1, 'ORDER', 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:52:37', '2026-03-01 19:52:37', '2026-03-01 19:52:37');
+INSERT INTO `payment` VALUES (5, 'P2028076885866582016', 3, 1, 'ORDER', 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:56:24', '2026-03-01 19:56:24', '2026-03-01 19:56:24');
+INSERT INTO `payment` VALUES (6, 'P2028077068574658560', 4, 1, 'ORDER', 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 19:57:08', '2026-03-01 19:57:08', '2026-03-01 19:57:08');
+INSERT INTO `payment` VALUES (7, 'P2028079198211543040', 5, 1, 'ORDER', 9.99, 'BALANCE', 'REFUNDED', NULL, NULL, 9.99, 'P2028079218365173760', '用户取消订单退款', '2026-03-01 20:05:40', '2026-03-01 20:05:35', '2026-03-01 20:05:35', '2026-03-01 20:05:35');
+INSERT INTO `payment` VALUES (8, 'P2028080698040127488', 6, 1, 'ORDER', 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 20:11:33', '2026-03-01 20:11:33', '2026-03-01 20:11:33');
+INSERT INTO `payment` VALUES (9, 'P2028094510428459008', 7, 1, 'ORDER', 10.00, 'BALANCE', 'REFUNDED', NULL, NULL, 10.00, 'P2029120577842843648', '仲裁全额退款: 警告', '2026-03-04 17:03:40', '2026-03-01 21:06:26', '2026-03-01 21:06:26', '2026-03-01 21:06:26');
+INSERT INTO `payment` VALUES (10, 'P2028105017717821440', 8, 1, 'ORDER', 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-01 21:48:11', '2026-03-01 21:48:11', '2026-03-01 21:48:11');
+INSERT INTO `payment` VALUES (11, 'P2029225283206385664', 9, 1, 'ORDER', 10.00, 'BALANCE', 'REFUNDED', NULL, NULL, 10.00, 'P2029229532887781376', '仲裁全额退款: 11', '2026-03-05 00:16:37', '2026-03-04 23:59:43', '2026-03-04 23:59:43', '2026-03-04 23:59:43');
+INSERT INTO `payment` VALUES (12, 'P2029226634141372416', 10, 1, 'ORDER', 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 00:05:05', '2026-03-05 00:05:05', '2026-03-05 00:05:05');
+INSERT INTO `payment` VALUES (13, 'P2029228128605442048', 11, 1, 'ORDER', 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 00:11:02', '2026-03-05 00:11:02', '2026-03-05 00:11:02');
+INSERT INTO `payment` VALUES (14, 'P2029228455094259712', 12, 1, 'ORDER', 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 00:12:20', '2026-03-05 00:12:20', '2026-03-05 00:12:20');
+INSERT INTO `payment` VALUES (15, 'P2029417515947528192', 13, 2, 'ORDER', 10.00, 'WECHAT', 'PAYING', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 12:43:35', '2026-03-05 12:43:35');
+INSERT INTO `payment` VALUES (16, 'P2029418286143377408', 13, 2, 'ORDER', 10.00, 'BALANCE', 'REFUNDED', NULL, NULL, 5.00, 'P2029431946119090176', '仲裁部分退款: 已经处理', '2026-03-05 13:40:56', '2026-03-05 12:46:39', '2026-03-05 12:46:39', '2026-03-05 12:46:39');
+INSERT INTO `payment` VALUES (17, 'P2029442154975334400', 14, 2, 'ORDER', 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-05 14:21:30', '2026-03-05 14:21:30', '2026-03-05 14:21:30');
+INSERT INTO `payment` VALUES (18, 'P2029868489107443712', 15, 2, 'ORDER', 10.00, 'WECHAT', 'PAYING', NULL, 'wx06183537657790c0e57838508f60f90000', NULL, NULL, NULL, NULL, NULL, '2026-03-06 18:35:36', '2026-03-06 18:35:36');
+INSERT INTO `payment` VALUES (19, 'P2029870217164886016', 16, 2, 'ORDER', 10.00, 'WECHAT', 'PAYING', NULL, 'wx0618422951905092357151b7a5d0820000', NULL, NULL, NULL, NULL, NULL, '2026-03-06 18:42:28', '2026-03-06 18:42:28');
+INSERT INTO `payment` VALUES (20, 'P2031381281555746816', 17, 2, 'ORDER', 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-10 22:46:53', '2026-03-10 22:46:53', '2026-03-10 22:46:53');
+INSERT INTO `payment` VALUES (21, 'P2031381627128647680', 18, 2, 'ORDER', 10.00, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-10 22:48:16', '2026-03-10 22:48:16', '2026-03-10 22:48:16');
+INSERT INTO `payment` VALUES (22, 'P2032093458944102400', 19, 2, 'ORDER', 9.99, 'BALANCE', 'PAID', NULL, NULL, NULL, NULL, NULL, NULL, '2026-03-12 21:56:50', '2026-03-12 21:56:50', '2026-03-12 21:56:50');
 
 -- ----------------------------
 -- Table structure for player
@@ -635,16 +690,17 @@ CREATE TABLE `player`  (
   `avatar` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '头像URL',
   `real_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '真实姓名',
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '联系方式',
-  `skill_tags` json NULL COMMENT '技能标签JSON数组',
+  `skill_tags` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `game_level` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '游戏段位/等级',
   `proof_images` json NULL COMMENT '技能证明截图JSON数组',
-  `service_types` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '擅长服务类型',
+  `service_types` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `avg_rating` decimal(3, 2) NOT NULL DEFAULT 5.00 COMMENT '平均评分(1.00~5.00)',
   `order_count` int NOT NULL DEFAULT 0 COMMENT '累计接单数',
   `complete_rate` decimal(5, 2) NOT NULL DEFAULT 100.00 COMMENT '完成率(%)',
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'PENDING' COMMENT '状态: PENDING-待审核 ACTIVE-正常 REJECTED-已驳回 FROZEN-已冻结',
   `frozen_until` datetime NULL DEFAULT NULL COMMENT '冻结截止时间',
   `reject_reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '驳回原因',
+  `deposit_payment_no` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '打手入驻押金支付单号(100元)',
   `last_online_at` datetime NULL DEFAULT NULL COMMENT '最后在线时间',
   `deleted` tinyint NOT NULL DEFAULT 0 COMMENT '逻辑删除',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -657,9 +713,9 @@ CREATE TABLE `player`  (
 -- ----------------------------
 -- Records of player
 -- ----------------------------
-INSERT INTO `player` VALUES (1, 'oNSQb62h87DFpGNnN5Sbxn5FY7kI', 'lly', '', '11', '1', '11', '1', '[\"http://localhost:8080/file/2026/03/01/aae86694ecc7491282b3c0ce90d1db01.png\"]', '1', 5.00, 0, 0.00, 'ACTIVE', NULL, '', NULL, 0, '2026-03-01 18:32:02', '2026-03-01 19:39:04');
-INSERT INTO `player` VALUES (2, 'o839C3VE8erN2DX6AxxxDbHYedcw', '微信用户', '', '俩3', '17663362212', '2222', '22', '[]', '22', 0.00, 0, 0.00, 'ACTIVE', NULL, '', NULL, 0, '2026-03-05 12:19:05', '2026-03-05 12:19:12');
-INSERT INTO `player` VALUES (3, '1222222', '微信用户1', '', '11', '111112', NULL, '', NULL, '', 5.00, 0, 100.00, 'ACTIVE', NULL, '', NULL, 0, '2026-03-05 13:02:24', '2026-03-05 14:34:34');
+INSERT INTO `player` VALUES (1, 'oNSQb62h87DFpGNnN5Sbxn5FY7kI', 'lly', '', '11', '1', '11', '1', '[\"http://localhost:8080/file/2026/03/01/aae86694ecc7491282b3c0ce90d1db01.png\"]', '1', 5.00, 0, 0.00, 'ACTIVE', NULL, '', NULL, NULL, 0, '2026-03-01 18:32:02', '2026-03-01 19:39:04');
+INSERT INTO `player` VALUES (2, 'o839C3VE8erN2DX6AxxxDbHYedcw', '微信用户', '', '俩3', '17663362212', '2222', '22', '[]', '22', 0.00, 0, 0.00, 'ACTIVE', NULL, '', NULL, NULL, 0, '2026-03-05 12:19:05', '2026-03-05 12:19:12');
+INSERT INTO `player` VALUES (3, '1222222', '微信用户1', '', '11', '111112', NULL, '', NULL, '', 5.00, 0, 100.00, 'ACTIVE', NULL, '', NULL, NULL, 0, '2026-03-05 13:02:24', '2026-03-05 14:34:34');
 
 -- ----------------------------
 -- Table structure for player_account
@@ -768,6 +824,7 @@ CREATE TABLE `product`  (
   `sort_order` int NOT NULL DEFAULT 0 COMMENT '排序',
   `sales_count` int NOT NULL DEFAULT 0 COMMENT '销量',
   `avg_rating` decimal(3, 2) NOT NULL DEFAULT 5.00 COMMENT '平均评分',
+  `commission_rate` decimal(5, 4) NULL DEFAULT NULL COMMENT '商品级抽佣比例(0~1),为NULL则使用系统默认',
   `review_count` int NOT NULL DEFAULT 0 COMMENT '评价数',
   `is_recommend` tinyint NOT NULL DEFAULT 0 COMMENT '是否推荐: 1-是 0-否',
   `recommend_category_id` bigint NULL DEFAULT NULL COMMENT '所属热门推荐分类',
@@ -775,6 +832,8 @@ CREATE TABLE `product`  (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '商品价格',
+  `per_user_limit_enabled` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否开启每人限购（0关 1开）',
+  `per_user_limit_count` int NULL DEFAULT NULL COMMENT '每个用户最多可购买次数',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_category_status`(`category_id` ASC, `status` ASC) USING BTREE,
   INDEX `idx_status_sort`(`status` ASC, `sort_order` ASC) USING BTREE,
@@ -785,8 +844,8 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, 3, '三角洲代打', '测试测试测是', '', 'http://localhost:8080/file/2026/03/01/63cbbf922ff049e8a967fde939a4004e.png', '[\"http://localhost:8080/file/2026/03/01/1365647b6b1d4c73a3b9e6811a866632.png\"]', 1, 1, 0, 5, 5.00, 1, 1, 2, 0, '2026-02-27 19:26:40', '2026-03-07 19:46:01', 9.99);
-INSERT INTO `product` VALUES (2, 3, '【CS测试】客服端商品', '', '客服端保存测试', 'http://localhost:8080/file/2026/03/01/1aff090cb87440ce961862471751f443.webp', '[\"http://localhost:8080/file/2026/03/01/74d7b0ad5ec340b4b47a1468c3abce84.webp\"]', 1, 1, 1000, 6, 5.00, 0, 1, 1, 0, '2026-03-01 14:32:06', '2026-03-07 19:57:36', 10.00);
+INSERT INTO `product` VALUES (1, 3, '三角洲代打', '测试测试测是', '', 'http://localhost:8080/file/2026/03/01/63cbbf922ff049e8a967fde939a4004e.png', '[\"http://localhost:8080/file/2026/03/01/1365647b6b1d4c73a3b9e6811a866632.png\"]', 1, 1, 0, 7, 5.00, 0.3000, 1, 1, 2, 0, '2026-02-27 19:26:40', '2026-03-10 22:40:12', 9.99, 0, NULL);
+INSERT INTO `product` VALUES (2, 3, '【CS测试】客服端商品', '', '客服端保存测试', 'http://localhost:8080/file/2026/03/01/1aff090cb87440ce961862471751f443.webp', '[\"http://localhost:8080/file/2026/03/01/74d7b0ad5ec340b4b47a1468c3abce84.webp\"]', 1, 1, 1000, 7, 5.00, NULL, 0, 1, 1, 0, '2026-03-01 14:32:06', '2026-03-07 19:57:36', 10.00, 0, NULL);
 
 -- ----------------------------
 -- Table structure for product_spec
@@ -937,11 +996,13 @@ CREATE TABLE `subscribe_message_log`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_user`(`user_type` ASC, `user_id` ASC) USING BTREE,
   INDEX `idx_created_at`(`created_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '微信订阅消息发送日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '微信订阅消息发送日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subscribe_message_log
 -- ----------------------------
+INSERT INTO `subscribe_message_log` VALUES (1, 'USER', 2, 'sUrc4cGcXvz5Mi59q3b0Jp8jmNt9CGWd2_-pc0jiwGs', '{\"thing2\": \"三角洲代打\", \"amount3\": \"9.99元\", \"phrase4\": \"已被接单\", \"character_string1\": \"O2032093444209512448\"}', 'SUCCESS', NULL, '2026-03-12 21:57:13');
+INSERT INTO `subscribe_message_log` VALUES (2, 'USER', 2, 'sUrc4cGcXvz5Mi59q3b0Jp8jmNt9CGWd2_-pc0jiwGs', '{\"thing2\": \"三角洲代打\", \"amount3\": \"9.99元\", \"phrase4\": \"已被接单\", \"character_string1\": \"O2032093444209512448\"}', 'FAIL', '错误代码：43101, 错误信息：用户拒绝接受消息，如果用户之前曾经订阅过，则表示用户取消了订阅关系，微信原始报文：{\"errcode\":43101,\"errmsg\":\"user refuse to accept the msg rid: 69b2c72e-1223c316-5aaab7f9\"}', '2026-03-12 22:01:15');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -959,7 +1020,7 @@ CREATE TABLE `sys_config`  (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_config_key`(`config_key` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -974,6 +1035,7 @@ INSERT INTO `sys_config` VALUES (19, 'site_name', '平台名称', '三角洲护�
 INSERT INTO `sys_config` VALUES (20, 'site_subtitle', '平台副标题', '专业游戏护航平台', 'text', '站点配置', '显示在登录页名称下方', '2026-03-03 16:50:14', '2026-03-03 16:50:14');
 INSERT INTO `sys_config` VALUES (21, 'site_logo', '平台Logo', '', 'image', '站点配置', 'Logo 图片URL，为空则使用默认', '2026-03-03 16:50:14', '2026-03-03 16:55:29');
 INSERT INTO `sys_config` VALUES (22, 'site_admin_title', '后台标题', '三角洲管理后台', 'text', '站点配置', 'PC管理后台侧栏和登录页显示的标题', '2026-03-03 16:50:14', '2026-03-03 16:50:14');
+INSERT INTO `sys_config` VALUES (23, 'player.deposit_required', '打手入驻押金', 'true', 'boolean', '打手配置', '开启后打手申请入驻需支付押金，关闭后无需押金即可申请', '2026-03-11 14:06:14', '2026-03-11 14:06:14');
 
 -- ----------------------------
 -- Table structure for system_notification
@@ -993,11 +1055,22 @@ CREATE TABLE `system_notification`  (
   INDEX `idx_receiver`(`receiver_type` ASC, `receiver_id` ASC) USING BTREE,
   INDEX `idx_receiver_unread`(`receiver_type` ASC, `receiver_id` ASC, `is_read` ASC) USING BTREE,
   INDEX `idx_created`(`created_at` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统通知' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统通知' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of system_notification
 -- ----------------------------
+INSERT INTO `system_notification` VALUES (1, 'USER', 2, 'ORDER_PAID', '订单支付成功，等待打手接单', 'ORDER_PAID', 17, 0, '2026-03-10 22:46:54');
+INSERT INTO `system_notification` VALUES (2, 'USER', 2, 'ORDER_PAID', '订单支付成功，等待打手接单', 'ORDER_PAID', 18, 0, '2026-03-10 22:48:16');
+INSERT INTO `system_notification` VALUES (3, 'PLAYER', 3, '新指派订单', '您有一笔新的指派订单，请确认', 'ORDER', 17, 0, '2026-03-10 22:57:00');
+INSERT INTO `system_notification` VALUES (4, 'USER', 2, 'ORDER_PAID', '订单支付成功，等待打手接单', 'ORDER_PAID', 19, 0, '2026-03-12 21:56:50');
+INSERT INTO `system_notification` VALUES (5, 'PLAYER', 3, '新指派订单', '您有一笔新的指派订单，请确认', 'ORDER', 18, 0, '2026-03-12 21:57:00');
+INSERT INTO `system_notification` VALUES (6, 'USER', 2, 'ORDER_ACCEPTED', '您的订单已被打手接单', 'ORDER_ACCEPTED', 19, 0, '2026-03-12 21:57:13');
+INSERT INTO `system_notification` VALUES (7, 'USER', 2, 'ORDER_BACK_TO_HALL', '接单员已退出，您的订单已重新回到接单大厅等待新的接单员', 'ORDER_BACK_TO_HALL', 19, 0, '2026-03-12 21:57:21');
+INSERT INTO `system_notification` VALUES (8, 'USER', 2, 'ORDER_ACCEPTED', '您的订单已被打手接单', 'ORDER_ACCEPTED', 19, 0, '2026-03-12 22:01:15');
+INSERT INTO `system_notification` VALUES (9, 'PLAYER', 3, 'TEAMMATE_INVITED', '您收到一份组队邀请，请尽快确认', 'TEAMMATE_INVITED', 19, 0, '2026-03-12 22:01:31');
+INSERT INTO `system_notification` VALUES (10, 'PLAYER', 3, 'TEAMMATE_REMOVED', '您已被主接单员从订单中移除', 'TEAMMATE_REMOVED', 19, 0, '2026-03-12 22:04:29');
+INSERT INTO `system_notification` VALUES (11, 'USER', 2, 'ORDER_BACK_TO_HALL', '接单员已退出，您的订单已重新回到接单大厅等待新的接单员', 'ORDER_BACK_TO_HALL', 19, 0, '2026-03-12 22:04:32');
 
 -- ----------------------------
 -- Table structure for transaction
@@ -1021,7 +1094,7 @@ CREATE TABLE `transaction`  (
   INDEX `idx_type`(`type` ASC) USING BTREE,
   INDEX `idx_related_order`(`related_order_id` ASC) USING BTREE,
   INDEX `idx_created_at`(`created_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '交易流水表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '交易流水表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of transaction
@@ -1057,6 +1130,9 @@ INSERT INTO `transaction` VALUES (28, 'CONSUMPTION', 'USER', 2, -10.00, 9995.00,
 INSERT INTO `transaction` VALUES (32, 'INCOME', 'PLAYER', 2, 9.00, 0.00, 9.00, 14, NULL, NULL, '订单金额:¥10.00, 抽成:10%, 抽成¥1.00, 打手总收入¥9.00, 队友分成后实得¥9.00', '2026-03-06 19:24:54');
 INSERT INTO `transaction` VALUES (33, 'ADMIN_RECHARGE', 'USER', 4, 10000.00, 0.00, 10000.00, NULL, NULL, NULL, '管理员调整: 充值', '2026-03-06 19:37:53');
 INSERT INTO `transaction` VALUES (34, 'INCOME', 'PLAYER', 2, 8.99, 9.00, 17.99, 11, NULL, NULL, '订单金额:¥9.99, 抽成:10%, 抽成¥1.00, 打手总收入¥8.99, 队友分成后实得¥8.99', '2026-03-07 16:10:00');
+INSERT INTO `transaction` VALUES (35, 'CONSUMPTION', 'USER', 2, -9.99, 9985.00, 9975.01, 17, 20, NULL, '余额支付', '2026-03-10 22:46:53');
+INSERT INTO `transaction` VALUES (36, 'CONSUMPTION', 'USER', 2, -10.00, 9975.01, 9965.01, 18, 21, NULL, '余额支付', '2026-03-10 22:48:16');
+INSERT INTO `transaction` VALUES (37, 'CONSUMPTION', 'USER', 2, -9.99, 9965.01, 9955.02, 19, 22, NULL, '余额支付', '2026-03-12 21:56:50');
 
 -- ----------------------------
 -- Table structure for user
@@ -1090,17 +1166,22 @@ DROP TABLE IF EXISTS `user_game_info`;
 CREATE TABLE `user_game_info`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL COMMENT '用户ID',
-  `game_account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '游戏账号',
-  `contact` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '数字ID',
+  `category_id` bigint NULL DEFAULT NULL COMMENT '分类ID',
+  `game_account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `contact` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+  `saved_fields` json NULL COMMENT '动态表单字段JSON',
+  `label` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '保存标签',
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `idx_user_id`(`user_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户保存的游戏信息' ROW_FORMAT = Dynamic;
+  INDEX `idx_user_id`(`user_id` ASC) USING BTREE,
+  INDEX `idx_user_category`(`user_id` ASC, `category_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户保存的游戏信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_game_info
 -- ----------------------------
+INSERT INTO `user_game_info` VALUES (1, 2, 3, NULL, NULL, NULL, '{\"备注\": \"32231231\", \"游戏名称\": \"11111\", \"联系方式\": \"3312321\"}', '3312321 / 32231231', '2026-03-12 21:56:46');
 
 -- ----------------------------
 -- Table structure for user_subscribe
@@ -1140,7 +1221,7 @@ CREATE TABLE `wallet`  (
 -- Records of wallet
 -- ----------------------------
 INSERT INTO `wallet` VALUES (1, 1, 9910.05, 0.00, '2026-02-28 13:08:54', '2026-03-01 17:42:36');
-INSERT INTO `wallet` VALUES (2, 2, 9985.00, 0.00, '2026-03-05 12:04:04', '2026-03-05 12:46:25');
+INSERT INTO `wallet` VALUES (2, 2, 9955.02, 0.00, '2026-03-05 12:04:04', '2026-03-05 12:46:25');
 INSERT INTO `wallet` VALUES (3, 4, 10000.00, 0.00, '2026-03-05 13:02:06', '2026-03-05 13:02:06');
 
 -- ----------------------------

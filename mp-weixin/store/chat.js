@@ -13,8 +13,13 @@ const useChatStore = common_vendor.defineStore("chat", () => {
   const newMessage = common_vendor.ref(null);
   let lastSystemUnread = null;
   async function fetchMessageUnreadCount() {
+    const role = common_vendor.index.getStorageSync("app_role") || "user";
+    const token = utils_auth.getTokenByRole(role);
+    if (!token) {
+      stopPoll();
+      return;
+    }
     try {
-      const role = common_vendor.index.getStorageSync("app_role") || "user";
       const type = role === "cs" ? "CS" : role === "player" ? "PLAYER" : "USER";
       const res = await api_message.getUnreadCount(type, { loading: false });
       const newCount = res.data ?? 0;
@@ -24,7 +29,16 @@ const useChatStore = common_vendor.defineStore("chat", () => {
       }
       lastSystemUnread = newCount;
       messageUnreadCount.value = newCount;
-    } catch (_) {
+    } catch (e) {
+      if ((e == null ? void 0 : e.code) === 401 || (e == null ? void 0 : e.statusCode) === 401) {
+        stopPoll();
+      }
+    }
+  }
+  function stopPoll() {
+    if (systemUnreadPollTimer) {
+      clearInterval(systemUnreadPollTimer);
+      systemUnreadPollTimer = null;
     }
   }
   const totalUnreadCount = common_vendor.computed(() => unreadCount.value);
@@ -58,10 +72,7 @@ const useChatStore = common_vendor.defineStore("chat", () => {
     });
   }
   function disconnect() {
-    if (systemUnreadPollTimer) {
-      clearInterval(systemUnreadPollTimer);
-      systemUnreadPollTimer = null;
-    }
+    stopPoll();
     utils_websocket.closeWebSocket();
     connected.value = false;
   }

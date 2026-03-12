@@ -40,36 +40,10 @@
   display: block;
   margin-bottom: 12rpx;
 }
-.saved-game-row.data-v-8837ac90 {
-  margin-bottom: 24rpx;
-}
-.saved-game-row .label.data-v-8837ac90 {
-  font-size: 26rpx;
-  color: #64748b;
-  margin-bottom: 12rpx;
-  display: block;
-}
-.saved-game-scroll.data-v-8837ac90 {
-  white-space: nowrap;
-  padding: 8rpx 0;
-}
-.saved-game-chip.data-v-8837ac90 {
-  display: inline-block;
-  margin-right: 16rpx;
-  padding: 16rpx 24rpx;
-  font-size: 24rpx;
-  color: #64748b;
-  background: #f1f5f9;
-  border: 1rpx solid #e2e8f0;
-  border-radius: 12rpx;
-}
-.saved-game-chip.active.data-v-8837ac90 {
+.required.data-v-8837ac90 {
   color: #ff4544;
-  background: rgba(255, 69, 68, 0.08);
-  border-color: #ff4544;
-}
-.saved-game-chip.plain.data-v-8837ac90 {
-  color: #1e293b;
+  margin-left: 4rpx;
+  font-size: 24rpx;
 }
 .form-item.data-v-8837ac90 {
   margin-bottom: 24rpx;
@@ -99,6 +73,25 @@
   font-size: 28rpx;
   color: #1e293b;
   box-sizing: border-box;
+}
+.picker-value.data-v-8837ac90 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72rpx;
+  background: #f1f5f9;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 8rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #1e293b;
+}
+.picker-value .placeholder.data-v-8837ac90 {
+  color: #94a3b8;
+}
+.picker-value .arrow.data-v-8837ac90 {
+  color: #94a3b8;
+  font-size: 24rpx;
 }
 .designate-toggle.data-v-8837ac90 {
   display: flex;
@@ -324,6 +317,37 @@ to {
   background: linear-gradient(135deg, #ff4544, #e63939);
   color: #ffffff;
   font-weight: bold;
+}
+
+/* 已保存的下单信息标签 */
+.saved-section.data-v-8837ac90 {
+  padding: 24rpx 24rpx 20rpx !important;
+}
+.saved-tags.data-v-8837ac90 {
+  display: flex;
+  gap: 16rpx;
+  flex-wrap: wrap;
+}
+.saved-tag.data-v-8837ac90 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 28rpx;
+  background: #ffffff;
+  border: 2rpx solid #e2e8f0;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #1e293b;
+}
+.saved-tag.active.data-v-8837ac90 {
+  border-color: #ff4544;
+  color: #ff4544;
+}
+.saved-label.data-v-8837ac90 {
+  max-width: 280rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .bottom-bar.data-v-8837ac90 {
   position: fixed;

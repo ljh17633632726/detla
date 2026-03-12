@@ -10,43 +10,56 @@
 /* ==================== 订单状态颜色 ==================== */
 /* ==================== tabBar高度 ==================== */
 .order-detail.data-v-6b23c96c {
-  background: #f1f5f9;
+  background: #f5f7fa;
   min-height: 100vh;
+  padding-bottom: 40rpx;
 }
 .status-header.data-v-6b23c96c {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx;
-  background: #f1f5f9;
-  border-bottom: 1rpx solid #f1f5f9;
+  padding: 28rpx 32rpx;
+  background: #fff;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 .status-header .order-no.data-v-6b23c96c {
   font-size: 24rpx;
   color: #94a3b8;
 }
 .card.data-v-6b23c96c {
-  margin-top: 20rpx;
-  padding: 24rpx;
-  background: #ffffff;
-  border: 1rpx solid #f1f5f9;
+  margin: 20rpx 24rpx 0;
+  padding: 28rpx 28rpx 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+.card-header.data-v-6b23c96c {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.title-bar.data-v-6b23c96c {
+  width: 6rpx;
+  height: 28rpx;
+  border-radius: 3rpx;
+  background: linear-gradient(180deg, #ff4544, #e63939);
+  margin-right: 12rpx;
 }
 .card-title.data-v-6b23c96c {
   font-size: 28rpx;
   font-weight: bold;
-  color: #ff4544;
-  display: block;
-  margin-bottom: 16rpx;
+  color: #1e293b;
 }
 .info-row.data-v-6b23c96c {
   display: flex;
   align-items: center;
-  padding: 8rpx 0;
+  padding: 12rpx 0;
 }
 .info-row .label.data-v-6b23c96c {
   font-size: 26rpx;
   color: #94a3b8;
-  width: 120rpx;
+  width: 140rpx;
+  flex-shrink: 0;
 }
 .info-row .value.data-v-6b23c96c {
   font-size: 26rpx;
@@ -59,7 +72,7 @@
 .timeline-item.data-v-6b23c96c {
   display: flex;
   position: relative;
-  padding-bottom: 24rpx;
+  padding-bottom: 28rpx;
 }
 .timeline-dot.data-v-6b23c96c {
   width: 16rpx;
@@ -71,6 +84,7 @@
 }
 .timeline-dot.active.data-v-6b23c96c {
   background: #ff4544;
+  box-shadow: 0 0 0 4rpx rgba(255, 69, 68, 0.2);
 }
 .timeline-line.data-v-6b23c96c {
   position: absolute;
@@ -93,7 +107,7 @@
   font-size: 22rpx;
   color: #94a3b8;
   display: block;
-  margin-top: 4rpx;
+  margin-top: 6rpx;
 }
 .progress-images.data-v-6b23c96c {
   display: flex;
@@ -103,7 +117,7 @@
 .progress-img.data-v-6b23c96c {
   width: 120rpx;
   height: 120rpx;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
 }
 .actions.data-v-6b23c96c {
   display: flex;
@@ -122,20 +136,20 @@
 }
 .btn-ghost.data-v-6b23c96c {
   padding: 16rpx 40rpx;
-  border: 1rpx solid rgba(255, 69, 68, 0.5);
+  border: 1rpx solid rgba(255, 69, 68, 0.4);
   color: #ff4544;
   font-size: 28rpx;
   border-radius: 999rpx;
 }
 .btn-warn.data-v-6b23c96c {
   padding: 16rpx 40rpx;
-  border: 1rpx solid rgba(238, 10, 36, 0.5);
-  color: #ee5555;
+  border: 1rpx solid rgba(238, 10, 36, 0.4);
+  color: #ee0a24;
   font-size: 28rpx;
   border-radius: 999rpx;
 }
 .time-card.data-v-6b23c96c {
-  margin-bottom: 40rpx;
+  margin-bottom: 0;
 }
 .modal-mask.data-v-6b23c96c {
   position: fixed;
@@ -144,10 +158,10 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 .replace-modal.data-v-6b23c96c {
   width: 560rpx;
@@ -197,20 +211,43 @@
   font-weight: bold;
 }
 
-/* 接单员选择弹窗 */
+/* 接单员选择弹窗（底部滑出，同下单页样式） */
 .player-picker.data-v-6b23c96c {
-  width: 560rpx;
-  max-height: 70vh;
+  width: 100%;
+  max-height: 80vh;
   background: #ffffff;
-  border-radius: 20rpx;
-  padding: 24rpx;
-  border: 1rpx solid #e2e8f0;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 0 24rpx 24rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  animation: slideUp-6b23c96c 0.3s ease-out;
+}
+.player-picker.slide-up.data-v-6b23c96c {
+  animation: slideUp-6b23c96c 0.3s ease-out;
+}
+@keyframes slideUp-6b23c96c {
+from {
+    transform: translateY(100%);
+}
+to {
+    transform: translateY(0);
+}
+}
+.picker-handle.data-v-6b23c96c {
+  display: flex;
+  justify-content: center;
+  padding: 16rpx 0;
+}
+.picker-handle .handle-bar.data-v-6b23c96c {
+  width: 64rpx;
+  height: 8rpx;
+  background: #e2e8f0;
+  border-radius: 4rpx;
 }
 .picker-header.data-v-6b23c96c {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20rpx;
+  margin-bottom: 16rpx;
 }
 .picker-title.data-v-6b23c96c {
   font-size: 32rpx;
@@ -222,28 +259,58 @@
   color: #94a3b8;
   padding: 0 8rpx;
 }
+.limit-tip.data-v-6b23c96c {
+  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+  color: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.04);
+  text-align: center;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+}
+.limit-tip .gold.data-v-6b23c96c {
+  color: #ff4544;
+  font-weight: bold;
+}
 .picker-search.data-v-6b23c96c {
+  display: flex;
+  gap: 16rpx;
   margin-bottom: 16rpx;
 }
 .picker-search input.data-v-6b23c96c {
-  width: 100%;
+  flex: 1;
   height: 72rpx;
   background: #f1f5f9;
-  border: 1rpx solid #e2e8f0;
-  border-radius: 8rpx;
   padding: 0 24rpx;
-  font-size: 28rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
   color: #1e293b;
   box-sizing: border-box;
 }
+.picker-search .search-btn.data-v-6b23c96c {
+  padding: 0 32rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  flex-shrink: 0;
+}
 .picker-list.data-v-6b23c96c {
-  max-height: 400rpx;
+  max-height: 480rpx;
 }
 .picker-item.data-v-6b23c96c {
   display: flex;
   align-items: center;
   padding: 20rpx 0;
-  border-bottom: 1rpx solid #f1f5f9;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12rpx;
+  margin-bottom: 12rpx;
+}
+.picker-item.full.data-v-6b23c96c {
+  opacity: 0.5;
 }
 .picker-avatar.data-v-6b23c96c {
   width: 80rpx;
@@ -278,4 +345,27 @@
   padding: 40rpx;
   font-size: 26rpx;
   color: #94a3b8;
+}
+.picker-footer.data-v-6b23c96c {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 24rpx;
+}
+.picker-btn.data-v-6b23c96c {
+  flex: 1;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+}
+.picker-btn.cancel.data-v-6b23c96c {
+  border: 1rpx solid #cbd5e1;
+  color: #64748b;
+  background: #ffffff;
+}
+.picker-btn.confirm.data-v-6b23c96c {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
 }

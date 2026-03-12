@@ -49,7 +49,7 @@
 
 为方便部署，这里提供的是**整个项目的打包压缩包**（包含 `delta-admin.jar`、`dist/`、`mp-weixin/`、文档等交付物），请从下面地址下载：
 
-**👉 [点击下载打包项目压缩包](https://wwatd.lanzouu.com/iCDqc3k6rqud)**
+**👉 [点击下载打包项目压缩包](https://wwatd.lanzouu.com/iVse93kgounc)**
 
 #### 部署说明
 

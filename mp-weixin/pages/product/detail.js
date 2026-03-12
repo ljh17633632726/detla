@@ -116,26 +116,30 @@ const _sfc_main = {
         i: common_vendor.t(priceInt.value),
         j: common_vendor.t(priceDec.value),
         k: common_vendor.t(product.value.salesCount || 0),
-        l: common_vendor.t(product.value.name),
-        m: product.value.subtitle
+        l: product.value.perUserLimitEnabled === 1 && product.value.perUserLimitCount
+      }, product.value.perUserLimitEnabled === 1 && product.value.perUserLimitCount ? {
+        m: common_vendor.t(product.value.perUserLimitCount)
+      } : {}, {
+        n: common_vendor.t(product.value.name),
+        o: product.value.subtitle
       }, product.value.subtitle ? {
-        n: common_vendor.t(product.value.subtitle)
+        p: common_vendor.t(product.value.subtitle)
       } : {}, {
-        o: product.value.categoryName
+        q: product.value.categoryName
       }, product.value.categoryName ? {
-        p: common_vendor.t(product.value.categoryName)
+        r: common_vendor.t(product.value.categoryName)
       } : {}, {
-        q: product.value.description
+        s: product.value.description
       }, product.value.description ? {
-        r: common_vendor.t(product.value.description)
+        t: common_vendor.t(product.value.description)
       } : {}, {
-        s: product.value.detail
+        v: product.value.detail
       }, product.value.detail ? {
-        t: product.value.detail
+        w: product.value.detail
       } : {}, {
-        v: common_assets._imports_0,
-        w: common_vendor.o(goChat),
-        x: common_vendor.o(goBuy)
+        x: common_assets._imports_0,
+        y: common_vendor.o(goChat),
+        z: common_vendor.o(goBuy)
       }) : {});
     };
   }

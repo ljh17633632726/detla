@@ -10,45 +10,64 @@
 /* ==================== 订单状态颜色 ==================== */
 /* ==================== tabBar高度 ==================== */
 .cs-order-detail.data-v-32640858 {
-  background: #ffffff;
+  background: #f5f7fa;
   min-height: 100vh;
+  padding-bottom: 40rpx;
 }
 .status-bar.data-v-32640858 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx;
-  background: rgba(0, 0, 0, 0.04);
+  padding: 28rpx 32rpx;
+  background: #fff;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 .status-bar .order-no.data-v-32640858 {
   font-size: 24rpx;
-  color: rgba(0, 0, 0, 0.3);
+  color: #94a3b8;
 }
 .card.data-v-32640858 {
-  margin-top: 20rpx;
-  padding: 24rpx;
-  background: rgba(0, 0, 0, 0.04);
+  margin: 20rpx 24rpx 0;
+  padding: 28rpx 28rpx 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+.card-header.data-v-32640858 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.title-bar.data-v-32640858 {
+  width: 6rpx;
+  height: 28rpx;
+  border-radius: 3rpx;
+  background: linear-gradient(180deg, #ff4544, #e63939);
+  margin-right: 12rpx;
 }
 .card-title.data-v-32640858 {
   font-size: 28rpx;
   font-weight: bold;
-  display: block;
-  margin-bottom: 16rpx;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1e293b;
 }
 .info-row.data-v-32640858 {
   display: flex;
-  padding: 8rpx 0;
+  align-items: center;
+  padding: 12rpx 0;
 }
 .info-row .label.data-v-32640858 {
   font-size: 26rpx;
-  color: rgba(0, 0, 0, 0.3);
+  color: #94a3b8;
   width: 140rpx;
+  flex-shrink: 0;
 }
 .info-row .value.data-v-32640858 {
   font-size: 26rpx;
-  color: rgba(0, 0, 0, 0.85);
+  color: #1e293b;
   flex: 1;
+}
+.info-row .value.bold.data-v-32640858 {
+  font-weight: 600;
 }
 .info-row .value.price.data-v-32640858 {
   color: #ee0a24;
@@ -70,7 +89,7 @@
 }
 .btn-ghost.data-v-32640858 {
   padding: 16rpx 40rpx;
-  border: 1rpx solid rgba(255, 69, 68, 0.5);
+  border: 1rpx solid rgba(255, 69, 68, 0.4);
   color: #ff4544;
   font-size: 28rpx;
   border-radius: 999rpx;
