@@ -25,9 +25,8 @@ const _sfc_main = {
         e: common_vendor.t(__props.product.subtitle)
       } : {}, {
         f: common_vendor.t(displayPrice.value),
-        g: common_vendor.t(__props.product.salesCount || 0),
-        h: __props.dense ? 1 : "",
-        i: common_vendor.o(goDetail)
+        g: __props.dense ? 1 : "",
+        h: common_vendor.o(goDetail)
       });
     };
   }

@@ -9,6 +9,7 @@ const api_file = require("../../api/file.js");
 const utils_websocket = require("../../utils/websocket.js");
 const utils_format = require("../../utils/format.js");
 const utils_constants = require("../../utils/constants.js");
+const utils_chatSmsReminder = require("../../utils/chatSmsReminder.js");
 if (!Math) {
   ChatBubble();
 }
@@ -43,6 +44,8 @@ const _sfc_main = {
     });
     const otherAvatar = common_vendor.ref("");
     const otherName = common_vendor.ref("");
+    const targetType = common_vendor.ref("");
+    const canSendSmsReminder = common_vendor.computed(() => targetType.value === "USER");
     function isSelf(m) {
       if (!m)
         return false;
@@ -81,7 +84,6 @@ const _sfc_main = {
     const PLAYER_CHAT_OPTS = { chatRole: "PLAYER" };
     common_vendor.onLoad(async (opts) => {
       var _a;
-      chatStore.connect({ chatRole: "PLAYER" });
       let sid = opts.sessionId;
       let sessionData = null;
       if (!sid && opts.orderId) {
@@ -108,6 +110,7 @@ const _sfc_main = {
       if (sessionData) {
         otherAvatar.value = sessionData.avatar || "";
         otherName.value = sessionData.targetName || "";
+        targetType.value = resolveEncodedType(sessionData.targetId);
         if (sessionData.targetName)
           common_vendor.index.setNavigationBarTitle({ title: sessionData.targetName });
       } else if (opts.name) {
@@ -122,10 +125,10 @@ const _sfc_main = {
       await loadMessages();
       api_chat.markMessageRead(sid, PLAYER_CHAT_OPTS).catch(() => {
       });
+      chatStore.connect(PLAYER_CHAT_OPTS);
     });
     common_vendor.onUnload(() => {
       chatStore.clearCurrentSession();
-      chatStore.disconnect();
     });
     common_vendor.watch(() => chatStore.newMessage, (msg) => {
       if (!msg || String(msg.sessionId) !== String(sessionId.value))
@@ -181,6 +184,23 @@ const _sfc_main = {
       inputText.value = "";
       sendViaWs("TEXT", content);
     }
+    async function sendSmsReminder() {
+      var _a;
+      if (!sessionReady.value)
+        return;
+      showToolbar.value = false;
+      try {
+        const selected = await utils_chatSmsReminder.chooseChatSmsReminder(utils_chatSmsReminder.PLAYER_CHAT_SMS_REMINDERS);
+        await api_chat.sendChatSmsReminder(
+          { sessionId: sessionId.value, reminderCode: selected.code },
+          PLAYER_CHAT_OPTS
+        );
+        common_vendor.index.showToast({ title: `已发送${selected.label}`, icon: "none" });
+      } catch (e) {
+        if ((_a = e == null ? void 0 : e.errMsg) == null ? void 0 : _a.includes("cancel"))
+          return;
+      }
+    }
     async function sendImage() {
       if (!sessionReady.value)
         return;
@@ -223,6 +243,15 @@ const _sfc_main = {
       showOrderPopup.value = false;
       sendViaWs("ORDER", JSON.stringify({ id: o.id, orderNo: o.orderNo, productName: o.productName, amount: o.amount, status: o.status }));
     }
+    function resolveEncodedType(encodedId) {
+      const numeric = Number(encodedId || 0);
+      const type = Math.floor(numeric / 1e9);
+      if (type === 2)
+        return "PLAYER";
+      if (type === 3)
+        return "CS";
+      return "USER";
+    }
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.f(messages.value, (m, idx, i0) => {
@@ -250,21 +279,24 @@ const _sfc_main = {
         e: common_vendor.o(scrollToBottom)
       } : {}, {
         f: showToolbar.value
-      }, showToolbar.value ? {
+      }, showToolbar.value ? common_vendor.e({
         g: common_vendor.o(sendImage),
         h: common_vendor.o(openProductPicker),
-        i: common_vendor.o(openOrderPicker)
-      } : {}, {
-        j: common_vendor.o(($event) => showToolbar.value = !showToolbar.value),
-        k: common_vendor.o(send),
-        l: common_vendor.o(($event) => showToolbar.value = false),
-        m: inputText.value,
-        n: common_vendor.o(($event) => inputText.value = $event.detail.value),
-        o: common_vendor.o(send),
-        p: showProductPopup.value
+        i: common_vendor.o(openOrderPicker),
+        j: canSendSmsReminder.value
+      }, canSendSmsReminder.value ? {
+        k: common_vendor.o(sendSmsReminder)
+      } : {}) : {}, {
+        l: common_vendor.o(($event) => showToolbar.value = !showToolbar.value),
+        m: common_vendor.o(send),
+        n: common_vendor.o(($event) => showToolbar.value = false),
+        o: inputText.value,
+        p: common_vendor.o(($event) => inputText.value = $event.detail.value),
+        q: common_vendor.o(send),
+        r: showProductPopup.value
       }, showProductPopup.value ? common_vendor.e({
-        q: common_vendor.o(($event) => showProductPopup.value = false),
-        r: common_vendor.f(productList.value, (p, k0, i0) => {
+        s: common_vendor.o(($event) => showProductPopup.value = false),
+        t: common_vendor.f(productList.value, (p, k0, i0) => {
           return {
             a: p.coverImage || p.image,
             b: common_vendor.t(p.name),
@@ -273,16 +305,16 @@ const _sfc_main = {
             e: common_vendor.o(($event) => doSendProduct(p), p.id)
           };
         }),
-        s: productList.value.length === 0
+        v: productList.value.length === 0
       }, productList.value.length === 0 ? {} : {}, {
-        t: common_vendor.o(() => {
+        w: common_vendor.o(() => {
         }),
-        v: common_vendor.o(($event) => showProductPopup.value = false)
+        x: common_vendor.o(($event) => showProductPopup.value = false)
       }) : {}, {
-        w: showOrderPopup.value
+        y: showOrderPopup.value
       }, showOrderPopup.value ? common_vendor.e({
-        x: common_vendor.o(($event) => showOrderPopup.value = false),
-        y: common_vendor.f(orderList.value, (o, k0, i0) => {
+        z: common_vendor.o(($event) => showOrderPopup.value = false),
+        A: common_vendor.f(orderList.value, (o, k0, i0) => {
           return {
             a: common_vendor.t(o.productName),
             b: common_vendor.t(Number(o.amount || 0).toFixed(2)),
@@ -292,11 +324,11 @@ const _sfc_main = {
             f: common_vendor.o(($event) => doSendOrder(o), o.id)
           };
         }),
-        z: orderList.value.length === 0
+        B: orderList.value.length === 0
       }, orderList.value.length === 0 ? {} : {}, {
-        A: common_vendor.o(() => {
+        C: common_vendor.o(() => {
         }),
-        B: common_vendor.o(($event) => showOrderPopup.value = false)
+        D: common_vendor.o(($event) => showOrderPopup.value = false)
       }) : {});
     };
   }

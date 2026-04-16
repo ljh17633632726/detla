@@ -35,6 +35,16 @@ const _sfc_main = {
         return remindStore.complaintUnread;
       return 0;
     }
+    function tabBadgeCount(tab) {
+      return badgeCount(tab);
+    }
+    function tabRedDot(tab) {
+      if (tab.text === "我的")
+        return mineRedDot.value;
+      if (appStore.role === "cs" && tab.text === "工作台")
+        return (remindStore.relayUnread || 0) > 0;
+      return false;
+    }
     common_vendor.onMounted(() => {
       var _a;
       const windowInfo = common_vendor.index.getWindowInfo();
@@ -61,12 +71,11 @@ const _sfc_main = {
         a: common_vendor.f(currentTabs.value, (tab, index, i0) => {
           return common_vendor.e({
             a: currentIndex.value === index ? tab.iconActive : tab.icon,
-            b: tab.text !== "我的" && badgeCount(tab) > 0
-          }, tab.text !== "我的" && badgeCount(tab) > 0 ? {
-            c: common_vendor.t(badgeCount(tab) > 99 ? "99+" : badgeCount(tab))
-          } : {}, {
-            d: tab.text === "我的" && mineRedDot.value
-          }, tab.text === "我的" && mineRedDot.value ? {} : {}, {
+            b: tabBadgeCount(tab) > 0
+          }, tabBadgeCount(tab) > 0 ? {
+            c: common_vendor.t(tabBadgeCount(tab) > 99 ? "99+" : tabBadgeCount(tab))
+          } : tabRedDot(tab) ? {} : {}, {
+            d: tabRedDot(tab),
             e: common_vendor.t(tab.text),
             f: tab.pagePath,
             g: currentIndex.value === index ? 1 : "",

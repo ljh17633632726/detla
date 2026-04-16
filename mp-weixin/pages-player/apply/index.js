@@ -26,7 +26,7 @@ const _sfc_main = {
         } else {
           await api_player.applyPlayer({
             ...form,
-            proofImages: JSON.stringify(proofImages.value)
+            proofImages: proofImages.value.join(",")
           });
           common_vendor.index.showToast({ title: "已提交，等待审核" });
           setTimeout(() => common_vendor.index.navigateBack(), 1500);
@@ -57,7 +57,7 @@ const _sfc_main = {
       });
       const doApply = () => api_player.applyPlayer({
         ...form,
-        proofImages: JSON.stringify(proofImages.value),
+        proofImages: proofImages.value.join(","),
         depositPaymentNo: paymentNo
       });
       try {

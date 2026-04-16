@@ -19,6 +19,10 @@ const markMessageRead = (sessionId, opts = {}) => {
   return api_request.post(`/common/chat/message/read?sessionId=${sessionId}${q}`, {});
 };
 const createCsSession = () => api_request.post("/common/chat/session/cs");
+const sendChatSmsReminder = (data, opts = {}) => {
+  const q = opts.chatRole ? `?chatRole=${encodeURIComponent(opts.chatRole)}` : "";
+  return api_request.post(`/common/chat/sms-reminder${q}`, data);
+};
 exports.createCsSession = createCsSession;
 exports.getChatMessageList = getChatMessageList;
 exports.getSessionByOrderId = getSessionByOrderId;
@@ -26,4 +30,5 @@ exports.getSessionDetail = getSessionDetail;
 exports.getSessionList = getSessionList;
 exports.markMessageRead = markMessageRead;
 exports.sendChatMessage = sendChatMessage;
+exports.sendChatSmsReminder = sendChatSmsReminder;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/api/chat.js.map

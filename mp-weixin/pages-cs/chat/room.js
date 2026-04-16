@@ -1,10 +1,14 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 const pagesCs_api_cs = require("../api/cs.js");
+const api_chat = require("../../api/chat.js");
 const utils_auth = require("../../utils/auth.js");
 const api_file = require("../../api/file.js");
 const utils_websocket = require("../../utils/websocket.js");
+const store_chat = require("../../store/chat.js");
 const utils_format = require("../../utils/format.js");
+const utils_chatSmsReminder = require("../../utils/chatSmsReminder.js");
 if (!Math) {
   ChatBubble();
 }
@@ -12,6 +16,7 @@ const ChatBubble = () => "../../components/ChatBubble.js";
 const _sfc_main = {
   __name: "room",
   setup(__props) {
+    const chatStore = store_chat.useChatStore();
     const csInfo = utils_auth.getCsInfo() || {};
     const csId = csInfo.adminId;
     const userAvatar = common_vendor.ref("");
@@ -21,11 +26,12 @@ const _sfc_main = {
     const inputText = common_vendor.ref("");
     const scrollAnchor = common_vendor.ref("");
     const showBottomBtn = common_vendor.ref(false);
-    const showToolbar = common_vendor.ref(false);
     const showProductPopup = common_vendor.ref(false);
     const productList = common_vendor.ref([]);
     const showQuickReplyPopup = common_vendor.ref(false);
     const quickReplies = common_vendor.ref([]);
+    const targetType = common_vendor.ref("");
+    const canSendSmsReminder = common_vendor.computed(() => targetType.value === "USER" || targetType.value === "PLAYER");
     let _isNearBottom = true;
     function isSelf(m) {
       return m.senderType === "CS" || m.senderType === "ADMIN";
@@ -63,25 +69,6 @@ const _sfc_main = {
       const str = typeof t === "string" && t.includes(" ") ? t.replace(" ", "T") : t;
       return utils_format.formatDateTime(str);
     }
-    function initWs() {
-      const token = utils_auth.getTokenByRole("cs");
-      if (!token)
-        return;
-      utils_websocket.onWsConnect(() => {
-      });
-      utils_websocket.onWsMessage((data) => {
-        if (data && String(data.sessionId) === String(sessionId.value)) {
-          const exists = messages.value.some(
-            (m) => String(m.id) === String(data.id) || m.type === data.type && m.content === data.content && Math.abs(new Date(m.createdAt || 0).getTime() - new Date(data.createdAt || 0).getTime()) < 5e3
-          );
-          if (!exists) {
-            messages.value.push(data);
-            scrollToBottom();
-          }
-        }
-      });
-      utils_websocket.connectWebSocket(token);
-    }
     common_vendor.onLoad(async (opts) => {
       var _a;
       if (!opts.sessionId) {
@@ -89,12 +76,26 @@ const _sfc_main = {
         return;
       }
       sessionId.value = opts.sessionId;
+      chatStore.setCurrentSession(opts.sessionId);
       if (opts.name) {
         otherName.value = decodeURIComponent(opts.name);
         common_vendor.index.setNavigationBarTitle({ title: otherName.value });
       }
       if (opts.avatar)
         userAvatar.value = decodeURIComponent(opts.avatar);
+      try {
+        const res = await api_chat.getSessionDetail(sessionId.value, { chatRole: "CS" });
+        const detail = res.data || {};
+        targetType.value = resolveEncodedType(detail.targetId);
+        if (!otherName.value && detail.targetName) {
+          otherName.value = detail.targetName;
+          common_vendor.index.setNavigationBarTitle({ title: otherName.value });
+        }
+        if (!userAvatar.value && detail.avatar) {
+          userAvatar.value = detail.avatar;
+        }
+      } catch (_) {
+      }
       try {
         const res = await pagesCs_api_cs.getCsChatMessages({ sessionId: sessionId.value, pageNum: 1, pageSize: 50 });
         messages.value = (((_a = res.data) == null ? void 0 : _a.records) || []).reverse();
@@ -103,10 +104,21 @@ const _sfc_main = {
       }
       pagesCs_api_cs.csChatMarkRead(sessionId.value).catch(() => {
       });
-      initWs();
+      chatStore.connect({ chatRole: "CS" });
     });
     common_vendor.onUnload(() => {
-      utils_websocket.closeWebSocket();
+      chatStore.clearCurrentSession();
+    });
+    common_vendor.watch(() => chatStore.newMessage, (data) => {
+      if (data && String(data.sessionId) === String(sessionId.value)) {
+        const exists = messages.value.some(
+          (m) => String(m.id) === String(data.id) || m.type === data.type && m.content === data.content && Math.abs(new Date(m.createdAt || 0).getTime() - new Date(data.createdAt || 0).getTime()) < 5e3
+        );
+        if (!exists) {
+          messages.value.push(data);
+          scrollToBottom();
+        }
+      }
     });
     function sendViaWs(type, content) {
       const data = {
@@ -142,8 +154,23 @@ const _sfc_main = {
       inputText.value = "";
       sendViaWs("TEXT", content);
     }
+    async function sendSmsReminder() {
+      var _a;
+      if (!sessionId.value)
+        return;
+      try {
+        const selected = await utils_chatSmsReminder.chooseChatSmsReminder(utils_chatSmsReminder.CS_CHAT_SMS_REMINDERS);
+        await api_chat.sendChatSmsReminder(
+          { sessionId: sessionId.value, reminderCode: selected.code },
+          { chatRole: "CS" }
+        );
+        common_vendor.index.showToast({ title: `已发送${selected.label}`, icon: "none" });
+      } catch (e) {
+        if ((_a = e == null ? void 0 : e.errMsg) == null ? void 0 : _a.includes("cancel"))
+          return;
+      }
+    }
     async function sendImage() {
-      showToolbar.value = false;
       try {
         const urls = await api_file.chooseAndUpload(1);
         if (urls.length)
@@ -153,7 +180,6 @@ const _sfc_main = {
     }
     async function openProductPicker() {
       var _a;
-      showToolbar.value = false;
       showProductPopup.value = true;
       try {
         const res = await pagesCs_api_cs.getCsProductList({ pageNum: 1, pageSize: 20, status: 1 });
@@ -168,7 +194,6 @@ const _sfc_main = {
       sendViaWs("PRODUCT", content);
     }
     async function openQuickReply() {
-      showToolbar.value = false;
       showQuickReplyPopup.value = true;
       if (quickReplies.value.length === 0) {
         try {
@@ -182,6 +207,15 @@ const _sfc_main = {
     function useQuickReply(qr) {
       showQuickReplyPopup.value = false;
       inputText.value = qr.content;
+    }
+    function resolveEncodedType(encodedId) {
+      const numeric = Number(encodedId || 0);
+      const type = Math.floor(numeric / 1e9);
+      if (type === 2)
+        return "PLAYER";
+      if (type === 3)
+        return "CS";
+      return "USER";
     }
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -209,16 +243,21 @@ const _sfc_main = {
       }, showBottomBtn.value ? {
         e: common_vendor.o(scrollToBottom)
       } : {}, {
-        f: showToolbar.value
-      }, showToolbar.value ? {
+        f: common_assets._imports_0$2,
         g: common_vendor.o(sendImage),
-        h: common_vendor.o(openProductPicker),
-        i: common_vendor.o(openQuickReply)
+        h: common_assets._imports_1$1,
+        i: common_vendor.o(openProductPicker),
+        j: common_assets._imports_2$3,
+        k: common_vendor.o(openQuickReply),
+        l: canSendSmsReminder.value
+      }, canSendSmsReminder.value ? {
+        m: common_assets._imports_3$2,
+        n: common_vendor.o(sendSmsReminder)
       } : {}, {
-        j: showQuickReplyPopup.value
+        o: showQuickReplyPopup.value
       }, showQuickReplyPopup.value ? common_vendor.e({
-        k: common_vendor.o(($event) => showQuickReplyPopup.value = false),
-        l: common_vendor.f(quickReplies.value, (qr, k0, i0) => {
+        p: common_vendor.o(($event) => showQuickReplyPopup.value = false),
+        q: common_vendor.f(quickReplies.value, (qr, k0, i0) => {
           return common_vendor.e({
             a: common_vendor.t(qr.content),
             b: qr.category
@@ -229,22 +268,20 @@ const _sfc_main = {
             e: common_vendor.o(($event) => useQuickReply(qr), qr.id)
           });
         }),
-        m: quickReplies.value.length === 0
+        r: quickReplies.value.length === 0
       }, quickReplies.value.length === 0 ? {} : {}, {
-        n: common_vendor.o(() => {
+        s: common_vendor.o(() => {
         }),
-        o: common_vendor.o(($event) => showQuickReplyPopup.value = false)
+        t: common_vendor.o(($event) => showQuickReplyPopup.value = false)
       }) : {}, {
-        p: common_vendor.o(($event) => showToolbar.value = !showToolbar.value),
-        q: common_vendor.o(send),
-        r: common_vendor.o(($event) => showToolbar.value = false),
-        s: inputText.value,
-        t: common_vendor.o(($event) => inputText.value = $event.detail.value),
         v: common_vendor.o(send),
-        w: showProductPopup.value
+        w: inputText.value,
+        x: common_vendor.o(($event) => inputText.value = $event.detail.value),
+        y: common_vendor.o(send),
+        z: showProductPopup.value
       }, showProductPopup.value ? common_vendor.e({
-        x: common_vendor.o(($event) => showProductPopup.value = false),
-        y: common_vendor.f(productList.value, (p, k0, i0) => {
+        A: common_vendor.o(($event) => showProductPopup.value = false),
+        B: common_vendor.f(productList.value, (p, k0, i0) => {
           return {
             a: p.coverImage || p.image,
             b: common_vendor.t(p.name),
@@ -253,11 +290,11 @@ const _sfc_main = {
             e: common_vendor.o(($event) => doSendProduct(p), p.id)
           };
         }),
-        z: productList.value.length === 0
+        C: productList.value.length === 0
       }, productList.value.length === 0 ? {} : {}, {
-        A: common_vendor.o(() => {
+        D: common_vendor.o(() => {
         }),
-        B: common_vendor.o(($event) => showProductPopup.value = false)
+        E: common_vendor.o(($event) => showProductPopup.value = false)
       }) : {});
     };
   }

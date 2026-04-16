@@ -21,6 +21,12 @@ const _sfc_main = {
     function isFull(p) {
       return (p.activeOrders || 0) >= maxConcurrent.value;
     }
+    function isPlayerOnline(p) {
+      return p.isOnline === 1;
+    }
+    function isDisabled(p) {
+      return isFull(p) || !isPlayerOnline(p);
+    }
     function searchPlayers() {
       pageNum.value = 1;
       players.value = [];
@@ -51,6 +57,10 @@ const _sfc_main = {
       }
     }
     function doAssign(p) {
+      if (!isPlayerOnline(p)) {
+        common_vendor.index.showModal({ title: "无法指派", content: `${p.nickname} 当前处于离线状态，无法指派订单`, showCancel: false });
+        return;
+      }
       if (isFull(p)) {
         common_vendor.index.showModal({
           title: "无法指派",
@@ -90,19 +100,22 @@ const _sfc_main = {
           return common_vendor.e({
             a: p.avatar || "/static/images/default-avatar.png",
             b: common_vendor.t(p.nickname),
-            c: isFull(p)
+            c: isPlayerOnline(p)
+          }, isPlayerOnline(p) ? {} : {}, {
+            d: isFull(p)
           }, isFull(p) ? {} : {}, {
-            d: p.avgRating
+            e: p.avgRating
           }, p.avgRating ? {
-            e: common_vendor.t(Number(p.avgRating).toFixed(1))
+            f: common_vendor.t(Number(p.avgRating).toFixed(1))
           } : {}, {
-            f: common_vendor.t(p.completedOrders || 0),
-            g: common_vendor.t(p.activeOrders || 0),
-            h: common_vendor.n((p.activeOrders || 0) > 0 ? "active-tag" : ""),
-            i: isFull(p) ? 1 : "",
-            j: common_vendor.o(($event) => doAssign(p), p.id),
-            k: p.id,
-            l: isFull(p) ? 1 : ""
+            g: common_vendor.t(p.completedOrders || 0),
+            h: common_vendor.t(p.activeOrders || 0),
+            i: common_vendor.n((p.activeOrders || 0) > 0 ? "active-tag" : ""),
+            j: isDisabled(p) ? 1 : "",
+            k: common_vendor.o(($event) => doAssign(p), p.id),
+            l: p.id,
+            m: isFull(p) ? 1 : "",
+            n: !isPlayerOnline(p) ? 1 : ""
           });
         }),
         g: common_vendor.t(maxConcurrent.value),

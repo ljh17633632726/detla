@@ -115,31 +115,30 @@ const _sfc_main = {
         h: common_vendor.t(images.value.length),
         i: common_vendor.t(priceInt.value),
         j: common_vendor.t(priceDec.value),
-        k: common_vendor.t(product.value.salesCount || 0),
-        l: product.value.perUserLimitEnabled === 1 && product.value.perUserLimitCount
+        k: product.value.perUserLimitEnabled === 1 && product.value.perUserLimitCount
       }, product.value.perUserLimitEnabled === 1 && product.value.perUserLimitCount ? {
-        m: common_vendor.t(product.value.perUserLimitCount)
+        l: common_vendor.t(product.value.perUserLimitCount)
       } : {}, {
-        n: common_vendor.t(product.value.name),
-        o: product.value.subtitle
+        m: common_vendor.t(product.value.name),
+        n: product.value.subtitle
       }, product.value.subtitle ? {
-        p: common_vendor.t(product.value.subtitle)
+        o: common_vendor.t(product.value.subtitle)
       } : {}, {
-        q: product.value.categoryName
+        p: product.value.categoryName
       }, product.value.categoryName ? {
-        r: common_vendor.t(product.value.categoryName)
+        q: common_vendor.t(product.value.categoryName)
       } : {}, {
-        s: product.value.description
+        r: product.value.description
       }, product.value.description ? {
-        t: common_vendor.t(product.value.description)
+        s: common_vendor.t(product.value.description)
       } : {}, {
-        v: product.value.detail
+        t: product.value.detail
       }, product.value.detail ? {
-        w: product.value.detail
+        v: product.value.detail
       } : {}, {
-        x: common_assets._imports_0,
-        y: common_vendor.o(goChat),
-        z: common_vendor.o(goBuy)
+        w: common_assets._imports_3,
+        x: common_vendor.o(goChat),
+        y: common_vendor.o(goBuy)
       }) : {});
     };
   }

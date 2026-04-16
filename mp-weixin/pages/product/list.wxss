@@ -53,11 +53,12 @@
 .list.data-v-e958a167 {
   height: calc(100vh - 240rpx);
   padding: 20rpx 24rpx;
+  box-sizing: border-box;
 }
 .product-grid.data-v-e958a167 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20rpx;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20rpx;
 }
 .loading-tip.data-v-e958a167 {
   text-align: center;

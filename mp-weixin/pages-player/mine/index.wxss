@@ -14,6 +14,34 @@
   min-height: 100vh;
   padding-bottom: 130rpx;
 }
+.online-bar.data-v-100cf608 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  margin: 0 24rpx;
+  background: #f8fafc;
+  border-radius: 12rpx;
+}
+.online-bar .online-label.data-v-100cf608 {
+  font-size: 28rpx;
+  color: #334155;
+  font-weight: 500;
+}
+.online-bar .online-right.data-v-100cf608 {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.online-bar .online-status-text.data-v-100cf608 {
+  font-size: 26rpx;
+}
+.online-bar .online-status-text.on.data-v-100cf608 {
+  color: #22c55e;
+}
+.online-bar .online-status-text.off.data-v-100cf608 {
+  color: #94a3b8;
+}
 .user-header.data-v-100cf608 {
   display: flex;
   align-items: center;

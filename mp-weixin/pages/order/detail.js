@@ -131,8 +131,14 @@ const _sfc_main = {
         playerList.value = [];
       }
     }
+    function isOnline(p) {
+      return p.isOnline === 1;
+    }
     async function pickPlayer(p) {
       var _a;
+      if (!isOnline(p)) {
+        return common_vendor.index.showToast({ title: "该接单员当前离线，无法指定", icon: "none" });
+      }
       if (isFull(p)) {
         return common_vendor.index.showToast({
           title: `该接单员当前进行中 ${p.activeOrders || 0} 单，已达上限 ${maxConcurrent.value}`,
@@ -218,8 +224,8 @@ const _sfc_main = {
       }, order.value.status === "PENDING_PAYMENT" ? {
         s: common_vendor.o(doCancel)
       } : {}, {
-        t: order.value.status === "PAID"
-      }, order.value.status === "PAID" ? {
+        t: ["PAID", "ASSIGNED"].includes(order.value.status)
+      }, ["PAID", "ASSIGNED"].includes(order.value.status) ? {
         v: common_vendor.o(doRefund)
       } : {}, {
         w: order.value.status === "PAID" && !order.value.playerId
@@ -267,15 +273,18 @@ const _sfc_main = {
           return common_vendor.e({
             a: p.avatar || "/static/images/default-avatar.png",
             b: common_vendor.t(p.nickname || "-"),
-            c: common_vendor.t(p.completedOrders || 0),
-            d: common_vendor.t(p.activeOrders || 0),
-            e: isFull(p)
+            c: isOnline(p)
+          }, isOnline(p) ? {} : {}, {
+            d: common_vendor.t(p.completedOrders || 0),
+            e: common_vendor.t(p.activeOrders || 0),
+            f: isFull(p)
           }, isFull(p) ? {} : {}, {
-            f: designateSelectedPlayer.value && designateSelectedPlayer.value.id === p.id
-          }, designateSelectedPlayer.value && designateSelectedPlayer.value.id === p.id ? {} : {}, {
-            g: p.id,
-            h: isFull(p) ? 1 : "",
-            i: common_vendor.o(($event) => pickPlayer(p), p.id)
+            g: isOnline(p) && designateSelectedPlayer.value && designateSelectedPlayer.value.id === p.id
+          }, isOnline(p) && designateSelectedPlayer.value && designateSelectedPlayer.value.id === p.id ? {} : {}, {
+            h: p.id,
+            i: isFull(p) ? 1 : "",
+            j: !isOnline(p) ? 1 : "",
+            k: common_vendor.o(($event) => pickPlayer(p), p.id)
           });
         }),
         V: common_vendor.t(maxConcurrent.value),

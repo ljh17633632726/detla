@@ -108,6 +108,13 @@
   background: linear-gradient(135deg, #ff4544, #e63939);
   color: #ffffff;
 }
+.login-area .wechat-tip.data-v-d08ef7d4 {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #94a3b8;
+  text-align: center;
+}
 .login-area .account-btn.data-v-d08ef7d4 {
   background: linear-gradient(135deg, #ff4544, #e63939);
   margin-top: 8rpx;

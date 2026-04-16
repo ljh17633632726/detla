@@ -1,13 +1,14 @@
 "use strict";
 const api_request = require("./request.js");
 const getPlayerProfile = (opts = {}) => api_request.get("/player/profile", {}, { role: opts.role || "player", ...opts });
+const toggleOnlineStatus = (online) => api_request.post(`/player/online-status?online=${online}`, {}, { role: "player" });
 const applyPlayer = (data) => api_request.post("/player/apply", data);
 const getPlayerHome = () => api_request.get("/player/home", {}, { role: "player" });
 const getPlayerRemind = (opts = {}) => api_request.get("/player/remind", {}, { role: "player", ...opts });
 const getOrderHall = (params) => api_request.get("/player/order/hall", params, { role: "player" });
 const acceptOrder = (id) => api_request.post(`/player/order/${id}/accept`, {}, { role: "player" });
 const startOrder = (id) => api_request.post(`/player/order/${id}/start`, {}, { role: "player" });
-const completeOrder = (id) => api_request.post(`/player/order/${id}/complete`, {}, { role: "player" });
+const completeOrder = (id, data = {}) => api_request.post(`/player/order/${id}/complete`, data, { role: "player" });
 const getPlayerOrderProgress = (id) => api_request.get(`/player/order/${id}/progress`, {}, { role: "player" });
 const rejectAssign = (id) => api_request.post(`/player/order/${id}/reject-assign`, {}, { role: "player" });
 const inviteTeammate = (id, data) => api_request.post(`/player/order/${id}/invite-teammate`, data, { role: "player" });
@@ -57,5 +58,6 @@ exports.replaceSelf = replaceSelf;
 exports.replaceTeammate = replaceTeammate;
 exports.startOrder = startOrder;
 exports.submitWorkProgress = submitWorkProgress;
+exports.toggleOnlineStatus = toggleOnlineStatus;
 exports.updateAccount = updateAccount;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/api/player.js.map

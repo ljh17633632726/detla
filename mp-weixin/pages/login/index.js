@@ -17,19 +17,31 @@ const _sfc_main = {
     const username = common_vendor.ref("");
     const password = common_vendor.ref("");
     const agreed = common_vendor.ref(false);
-    async function handleWechatLogin(e) {
+    const needPhoneAuth = common_vendor.ref(false);
+    async function handleWechatLogin() {
+      if (!agreed.value) {
+        return common_vendor.index.showToast({ title: "请先阅读并勾选同意协议", icon: "none" });
+      }
+      const result = await userStore.login();
+      if (result.success) {
+        completeWechatLogin();
+        return;
+      }
+      if (result.code === 1006) {
+        needPhoneAuth.value = true;
+      }
+    }
+    async function handlePhoneAuthorize(e) {
       if (!agreed.value) {
         return common_vendor.index.showToast({ title: "请先阅读并勾选同意协议", icon: "none" });
       }
       if (e.detail.errMsg && e.detail.errMsg.indexOf("deny") > -1) {
-        return common_vendor.index.showToast({ title: "请使用手机号快捷登录", icon: "none" });
+        return common_vendor.index.showToast({ title: "首次登录需授权手机号", icon: "none" });
       }
       const phoneCode = e.detail.code || "";
-      const success = await userStore.login(phoneCode);
-      if (success) {
-        chatStore.connect();
-        common_vendor.index.reLaunch({ url: "/pages/index/index" });
-      }
+      const result = await userStore.login(phoneCode);
+      if (result.success)
+        completeWechatLogin();
     }
     async function handleAccountLogin() {
       if (!agreed.value) {
@@ -41,13 +53,24 @@ const _sfc_main = {
       try {
         const res = await api_auth.csLogin({ username: username.value, password: password.value, role: "cs" });
         utils_auth.setCsToken(res.data.token);
+        utils_auth.setCsInfo({ adminId: res.data.adminId, nickname: res.data.nickname, avatar: res.data.avatar, role: res.data.role });
         appStore.switchToCs();
+        chatStore.connect();
+        chatStore.fetchMessageUnreadCount();
       } catch (e) {
         common_vendor.index.showToast({ title: "登录失败，请检查账号密码", icon: "none" });
       }
     }
     function goPage(url) {
       common_vendor.index.navigateTo({ url });
+    }
+    function switchWechatMode() {
+      loginMode.value = "wechat";
+    }
+    function completeWechatLogin() {
+      needPhoneAuth.value = false;
+      chatStore.connect();
+      common_vendor.index.reLaunch({ url: "/pages/index/index" });
     }
     function toggleAgree() {
       agreed.value = !agreed.value;
@@ -58,25 +81,31 @@ const _sfc_main = {
         b: common_vendor.t(common_vendor.unref(siteStore).siteName),
         c: common_vendor.t(common_vendor.unref(siteStore).subtitle),
         d: loginMode.value === "wechat" ? 1 : "",
-        e: common_vendor.o(($event) => loginMode.value = "wechat"),
+        e: common_vendor.o(switchWechatMode),
         f: loginMode.value === "account" ? 1 : "",
         g: common_vendor.o(($event) => loginMode.value = "account"),
         h: loginMode.value === "wechat"
-      }, loginMode.value === "wechat" ? {
-        i: common_vendor.o(handleWechatLogin)
+      }, loginMode.value === "wechat" ? common_vendor.e({
+        i: !needPhoneAuth.value
+      }, !needPhoneAuth.value ? {
+        j: common_vendor.o(handleWechatLogin)
       } : {
-        j: username.value,
-        k: common_vendor.o(($event) => username.value = $event.detail.value),
-        l: password.value,
-        m: common_vendor.o(($event) => password.value = $event.detail.value),
-        n: common_vendor.o(handleAccountLogin)
+        k: common_vendor.o(handlePhoneAuthorize)
       }, {
-        o: agreed.value
+        l: needPhoneAuth.value
+      }, needPhoneAuth.value ? {} : {}) : {
+        m: username.value,
+        n: common_vendor.o(($event) => username.value = $event.detail.value),
+        o: password.value,
+        p: common_vendor.o(($event) => password.value = $event.detail.value),
+        q: common_vendor.o(handleAccountLogin)
+      }, {
+        r: agreed.value
       }, agreed.value ? {} : {}, {
-        p: agreed.value ? 1 : "",
-        q: common_vendor.o(toggleAgree),
-        r: common_vendor.o(($event) => goPage("/pages/agreement/user")),
-        s: common_vendor.o(($event) => goPage("/pages/agreement/privacy"))
+        s: agreed.value ? 1 : "",
+        t: common_vendor.o(toggleAgree),
+        v: common_vendor.o(($event) => goPage("/pages/agreement/user")),
+        w: common_vendor.o(($event) => goPage("/pages/agreement/privacy"))
       });
     };
   }

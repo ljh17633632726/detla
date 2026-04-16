@@ -66,15 +66,25 @@ const _sfc_main = {
           };
         })
       } : {}, {
-        q: common_assets._imports_0$2,
+        q: common_assets._imports_0$1,
         r: common_vendor.o(($event) => go("/pages-cs/order/list")),
-        s: common_assets._imports_1$1,
+        s: common_assets._imports_1$2,
         t: common_vendor.o(($event) => go("/pages-cs/complaint/list")),
         v: common_assets._imports_2$1,
         w: common_vendor.o(($event) => go("/pages-cs/player/list")),
         x: common_assets._imports_2$1,
-        y: common_vendor.o(($event) => go("/pages-cs/relay/list")),
-        z: common_vendor.p({
+        y: common_vendor.unref(remindStore).relayUnread > 0
+      }, common_vendor.unref(remindStore).relayUnread > 0 ? {
+        z: common_vendor.t(common_vendor.unref(remindStore).relayUnread > 99 ? "99+" : common_vendor.unref(remindStore).relayUnread)
+      } : {}, {
+        A: common_vendor.o(($event) => go("/pages-cs/relay/list")),
+        B: common_assets._imports_2$1,
+        C: common_vendor.unref(remindStore).replaceUnread > 0
+      }, common_vendor.unref(remindStore).replaceUnread > 0 ? {
+        D: common_vendor.t(common_vendor.unref(remindStore).replaceUnread > 99 ? "99+" : common_vendor.unref(remindStore).replaceUnread)
+      } : {}, {
+        E: common_vendor.o(($event) => go("/pages-cs/replace/list")),
+        F: common_vendor.p({
           current: 0
         })
       });

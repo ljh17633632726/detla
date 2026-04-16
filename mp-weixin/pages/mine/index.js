@@ -7,6 +7,7 @@ const store_app = require("../../store/app.js");
 const store_player = require("../../store/player.js");
 const utils_auth = require("../../utils/auth.js");
 const api_auth = require("../../api/auth.js");
+const api_chat = require("../../api/chat.js");
 const composables_useGoldDust = require("../../composables/useGoldDust.js");
 if (!Math) {
   CustomTabBar();
@@ -76,6 +77,17 @@ const _sfc_main = {
           common_vendor.index.navigateTo({ url: "/pages-player/apply/index" });
       }
     }
+    async function goCustomerService() {
+      if (!userStore.checkLogin())
+        return;
+      try {
+        const res = await api_chat.createCsSession();
+        const session = res.data;
+        common_vendor.index.navigateTo({ url: "/pages/chat/room?sessionId=" + session.id + "&name=" + encodeURIComponent("在线客服") });
+      } catch (e) {
+        common_vendor.index.showToast({ title: (e == null ? void 0 : e.msg) || "连接客服失败", icon: "none" });
+      }
+    }
     function onLongPress() {
       longPressCount.value++;
       if (longPressCount.value >= 3) {
@@ -95,7 +107,7 @@ const _sfc_main = {
       } : {}) : {}, {
         f: common_vendor.o(($event) => common_vendor.unref(userStore).isLoggedIn ? go("/pages/mine/profile") : goLogin()),
         g: common_vendor.o(onLongPress),
-        h: common_assets._imports_0$2,
+        h: common_assets._imports_0$1,
         i: common_vendor.o(($event) => go("/pages/order/list")),
         j: common_assets._imports_1,
         k: common_vendor.o(($event) => go("/pages/complaint/list")),
@@ -107,17 +119,19 @@ const _sfc_main = {
         p: common_vendor.t(systemUnread.value > 99 ? "99+" : systemUnread.value)
       } : {}, {
         q: common_vendor.o(($event) => go("/pages/message/index")),
-        r: common_assets._imports_3$1,
-        s: common_vendor.o(goPlayer),
+        r: common_assets._imports_3,
+        s: common_vendor.o(goCustomerService),
         t: common_assets._imports_4,
-        v: common_vendor.o(($event) => go("/pages/agreement/user")),
+        v: common_vendor.o(goPlayer),
         w: common_assets._imports_5,
-        x: common_vendor.o(($event) => go("/pages/agreement/privacy")),
-        y: common_vendor.unref(userStore).isLoggedIn
+        x: common_vendor.o(($event) => go("/pages/agreement/user")),
+        y: common_assets._imports_6,
+        z: common_vendor.o(($event) => go("/pages/agreement/privacy")),
+        A: common_vendor.unref(userStore).isLoggedIn
       }, common_vendor.unref(userStore).isLoggedIn ? {
-        z: common_vendor.o(($event) => common_vendor.unref(userStore).logout())
+        B: common_vendor.o(($event) => common_vendor.unref(userStore).logout())
       } : {}, {
-        A: common_vendor.p({
+        C: common_vendor.p({
           current: 4
         })
       });

@@ -138,7 +138,7 @@ const _sfc_main = {
         f: payType.value === "WECHAT" ? 1 : "",
         g: payType.value === "WECHAT" ? 1 : "",
         h: common_vendor.o(($event) => payType.value = "WECHAT"),
-        i: common_assets._imports_3,
+        i: common_assets._imports_3$1,
         j: common_vendor.t(walletBalance.value),
         k: payType.value === "BALANCE" ? 1 : "",
         l: payType.value === "BALANCE" ? 1 : "",

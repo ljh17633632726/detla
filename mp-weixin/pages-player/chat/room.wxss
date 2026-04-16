@@ -53,7 +53,8 @@
 }
 .toolbar.data-v-f972a68c {
   display: flex;
-  gap: 40rpx;
+  justify-content: space-around;
+  gap: 24rpx;
   padding: 24rpx 48rpx;
   background: rgba(255, 255, 255, 0.95);
   border-top: 1rpx solid #e2e8f0;
@@ -63,6 +64,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8rpx;
+  min-width: 96rpx;
 }
 .toolbar-icon.data-v-f972a68c {
   font-size: 48rpx;

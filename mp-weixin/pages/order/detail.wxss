@@ -312,6 +312,9 @@ to {
 .picker-item.full.data-v-6b23c96c {
   opacity: 0.5;
 }
+.picker-item.offline.data-v-6b23c96c {
+  opacity: 0.5;
+}
 .picker-avatar.data-v-6b23c96c {
   width: 80rpx;
   height: 80rpx;
@@ -323,11 +326,29 @@ to {
   flex: 1;
   overflow: hidden;
 }
+.picker-name-row.data-v-6b23c96c {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
 .picker-name.data-v-6b23c96c {
   font-size: 28rpx;
   color: #1e293b;
   font-weight: 500;
-  display: block;
+}
+.online-badge.data-v-6b23c96c {
+  font-size: 20rpx;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  padding: 2rpx 10rpx;
+  border-radius: 4rpx;
+}
+.offline-badge.data-v-6b23c96c {
+  font-size: 20rpx;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.15);
+  padding: 2rpx 10rpx;
+  border-radius: 4rpx;
 }
 .picker-stats.data-v-6b23c96c {
   font-size: 22rpx;

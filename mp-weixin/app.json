@@ -49,13 +49,13 @@
     {
       "root": "pages-cs",
       "pages": [
-        "login/index",
         "dashboard/index",
         "order/list",
         "order/detail",
         "order/assign",
         "complaint/list",
         "relay/list",
+        "replace/list",
         "complaint/handle",
         "user/list",
         "player/list",

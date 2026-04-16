@@ -53,22 +53,25 @@
 }
 .toolbar.data-v-9348d54c {
   display: flex;
-  gap: 40rpx;
-  padding: 24rpx 48rpx;
-  background: rgba(255, 255, 255, 0.95);
+  justify-content: space-around;
+  gap: 12rpx;
+  padding: 8rpx 32rpx;
+  background: #f5f5f5;
   border-top: 1rpx solid rgba(0, 0, 0, 0.06);
 }
 .toolbar-item.data-v-9348d54c {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rpx;
+  gap: 4rpx;
+  min-width: 80rpx;
 }
-.toolbar-icon.data-v-9348d54c {
-  font-size: 48rpx;
+.toolbar-icon-img.data-v-9348d54c {
+  width: 36rpx;
+  height: 36rpx;
 }
 .toolbar-label.data-v-9348d54c {
-  font-size: 22rpx;
+  font-size: 18rpx;
   color: rgba(0, 0, 0, 0.55);
 }
 .input-bar.data-v-9348d54c {
@@ -78,18 +81,6 @@
   background: rgba(255, 255, 255, 0.95);
   border-top: 1rpx solid rgba(0, 0, 0, 0.06);
   padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
-}
-.input-bar .plus-btn.data-v-9348d54c {
-  width: 64rpx;
-  height: 64rpx;
-  line-height: 60rpx;
-  text-align: center;
-  font-size: 40rpx;
-  color: #ff4544;
-  border: 1rpx solid rgba(255, 69, 68, 0.15);
-  border-radius: 50%;
-  margin-right: 16rpx;
-  flex-shrink: 0;
 }
 .input-bar input.data-v-9348d54c {
   flex: 1;
@@ -125,7 +116,7 @@
 }
 .picker-popup.data-v-9348d54c {
   width: 100%;
-  max-height: 70vh;
+  max-height: 45vh;
   background: #ffffff;
   border-top-left-radius: 24rpx;
   border-top-right-radius: 24rpx;
@@ -152,7 +143,7 @@
 }
 .picker-list.data-v-9348d54c {
   flex: 1;
-  max-height: 60vh;
+  max-height: 38vh;
 }
 .picker-item.data-v-9348d54c {
   display: flex;

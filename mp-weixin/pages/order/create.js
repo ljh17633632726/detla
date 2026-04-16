@@ -84,6 +84,9 @@ const _sfc_main = {
     function isFull(p) {
       return (p.activeOrders || 0) >= maxConcurrent.value;
     }
+    function isOnline(p) {
+      return p.isOnline === 1;
+    }
     async function searchPlayers() {
       try {
         const res = await api_order.getAvailablePlayers({ pageNum: 1, pageSize: 50, keyword: playerKeyword.value });
@@ -97,6 +100,10 @@ const _sfc_main = {
       }
     }
     function pickPlayer(p) {
+      if (!isOnline(p)) {
+        common_vendor.index.showModal({ title: "无法选择", content: `${p.nickname} 当前处于离线状态，无法指定`, showCancel: false });
+        return;
+      }
       if (isFull(p)) {
         common_vendor.index.showModal({
           title: "无法选择",
@@ -146,13 +153,13 @@ const _sfc_main = {
                 label
               });
             } catch (e) {
-              common_vendor.index.__f__("error", "at pages/order/create.vue:255", "保存下单信息失败", e);
+              common_vendor.index.__f__("error", "at pages/order/create.vue:264", "保存下单信息失败", e);
             }
           }
         }
         common_vendor.index.redirectTo({ url: `/pages/order/pay?orderId=${res.data.id}&amount=${res.data.amount}` });
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/order/create.vue:261", "create order failed", e);
+        common_vendor.index.__f__("error", "at pages/order/create.vue:270", "create order failed", e);
         const msg = (e == null ? void 0 : e.msg) || (e == null ? void 0 : e.message) || "下单失败，请稍后重试";
         common_vendor.index.showToast({ title: msg, icon: "none" });
       }
@@ -236,21 +243,24 @@ const _sfc_main = {
           return common_vendor.e({
             a: p.avatar || "/static/images/default-avatar.png",
             b: common_vendor.t(p.nickname || "-"),
-            c: isFull(p)
+            c: isOnline(p)
+          }, isOnline(p) ? {} : {}, {
+            d: isFull(p)
           }, isFull(p) ? {} : {}, {
-            d: p.avgRating
+            e: p.avgRating
           }, p.avgRating ? {
-            e: common_vendor.t(Number(p.avgRating).toFixed(1))
+            f: common_vendor.t(Number(p.avgRating).toFixed(1))
           } : {}, {
-            f: common_vendor.t(p.completedOrders || 0),
-            g: common_vendor.t(p.activeOrders || 0),
-            h: common_vendor.n((p.activeOrders || 0) > 0 ? "active-tag" : ""),
-            i: selectedPlayer.value && selectedPlayer.value.id === p.id
-          }, selectedPlayer.value && selectedPlayer.value.id === p.id ? {} : {}, {
-            j: p.id,
-            k: selectedPlayer.value && selectedPlayer.value.id === p.id ? 1 : "",
-            l: isFull(p) ? 1 : "",
-            m: common_vendor.o(($event) => pickPlayer(p), p.id)
+            g: common_vendor.t(p.completedOrders || 0),
+            h: common_vendor.t(p.activeOrders || 0),
+            i: common_vendor.n((p.activeOrders || 0) > 0 ? "active-tag" : ""),
+            j: isOnline(p) && selectedPlayer.value && selectedPlayer.value.id === p.id
+          }, isOnline(p) && selectedPlayer.value && selectedPlayer.value.id === p.id ? {} : {}, {
+            k: p.id,
+            l: selectedPlayer.value && selectedPlayer.value.id === p.id ? 1 : "",
+            m: isFull(p) ? 1 : "",
+            n: !isOnline(p) ? 1 : "",
+            o: common_vendor.o(($event) => pickPlayer(p), p.id)
           });
         }),
         B: common_vendor.t(maxConcurrent.value),

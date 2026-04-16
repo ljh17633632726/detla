@@ -33,7 +33,7 @@ const _sfc_main = {
     const categories = common_vendor.ref([]);
     const notices = common_vendor.ref([]);
     const recommendProducts = common_vendor.ref([]);
-    const recommendTabs = common_vendor.ref([{ id: "", name: "全部热门" }]);
+    const recommendTabs = common_vendor.ref([]);
     const currentRecommendCategoryId = common_vendor.ref("");
     const showNoticePopup = common_vendor.ref(false);
     const popupNotices = common_vendor.ref([]);
@@ -49,12 +49,11 @@ const _sfc_main = {
       const _t = Date.now();
       try {
         const opts = { loading: false };
-        const [bannerRes, noticeRes, catRes, categoriesRes, productRes] = await Promise.all([
+        const [bannerRes, noticeRes, catRes, categoriesRes] = await Promise.all([
           api_banner.getActiveBanners(opts),
           api_notice.getActiveNotices(opts),
           api_category.getCategoryTree(opts),
-          api_product.getRecommendCategories(opts),
-          api_product.getRecommendProducts(currentRecommendCategoryId.value ? { categoryId: currentRecommendCategoryId.value } : {}, opts)
+          api_product.getRecommendCategories(opts)
         ]);
         if (bannerRes.data) {
           banners.value = bannerRes.data.records || bannerRes.data || [];
@@ -77,15 +76,20 @@ const _sfc_main = {
           categories.value = (catRes.data || []).slice(0, 8);
         }
         if (categoriesRes.data && Array.isArray(categoriesRes.data)) {
-          recommendTabs.value = [{ id: "", name: "全部热门" }, ...categoriesRes.data.map((c) => ({ id: String(c.id), name: c.name }))];
+          recommendTabs.value = categoriesRes.data.map((c) => ({ id: String(c.id), name: c.name }));
+          if (recommendTabs.value.length > 0 && !currentRecommendCategoryId.value) {
+            currentRecommendCategoryId.value = recommendTabs.value[0].id;
+          }
         }
+        const productParams = currentRecommendCategoryId.value ? { categoryId: currentRecommendCategoryId.value } : {};
+        const productRes = await api_product.getRecommendProducts(productParams, opts);
         if (productRes.data) {
           recommendProducts.value = productRes.data.records || productRes.data || [];
         }
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/index/index.vue:223", "load home data error", e);
+        common_vendor.index.__f__("error", "at pages/index/index.vue:227", "load home data error", e);
       }
-      common_vendor.index.__f__("log", "at pages/index/index.vue:225", `[HOME] loadData done ${Date.now() - _t}ms`);
+      common_vendor.index.__f__("log", "at pages/index/index.vue:229", `[HOME] loadData done ${Date.now() - _t}ms`);
     }
     common_vendor.onShow(() => {
       loadData();
@@ -166,7 +170,7 @@ const _sfc_main = {
         }),
         c: notices.value.length
       }, notices.value.length ? {
-        d: common_assets._imports_0$1,
+        d: common_assets._imports_0,
         e: common_vendor.f(notices.value, (item, k0, i0) => {
           return {
             a: common_vendor.t(item.title),
@@ -222,7 +226,7 @@ const _sfc_main = {
         p: common_vendor.p({
           current: 0
         }),
-        q: common_assets._imports_0,
+        q: common_assets._imports_3,
         r: common_vendor.o(goCustomerService),
         s: showNoticePopup.value
       }, showNoticePopup.value ? common_vendor.e({

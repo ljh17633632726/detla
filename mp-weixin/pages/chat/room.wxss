@@ -55,22 +55,25 @@
 /* 工具栏 */
 .toolbar.data-v-bc4afd2d {
   display: flex;
-  gap: 40rpx;
-  padding: 24rpx 48rpx;
-  background: rgba(255, 255, 255, 0.95);
+  justify-content: space-around;
+  gap: 12rpx;
+  padding: 8rpx 32rpx;
+  background: #f1f5f9;
   border-top: 1rpx solid #e2e8f0;
 }
 .toolbar-item.data-v-bc4afd2d {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rpx;
+  gap: 4rpx;
+  min-width: 80rpx;
 }
-.toolbar-icon.data-v-bc4afd2d {
-  font-size: 48rpx;
+.toolbar-icon-img.data-v-bc4afd2d {
+  width: 36rpx;
+  height: 36rpx;
 }
 .toolbar-label.data-v-bc4afd2d {
-  font-size: 22rpx;
+  font-size: 18rpx;
   color: #64748b;
 }
 .input-bar.data-v-bc4afd2d {
@@ -80,18 +83,6 @@
   background: rgba(255, 255, 255, 0.95);
   border-top: 1rpx solid #e2e8f0;
   padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
-}
-.input-bar .plus-btn.data-v-bc4afd2d {
-  width: 64rpx;
-  height: 64rpx;
-  line-height: 60rpx;
-  text-align: center;
-  font-size: 40rpx;
-  color: #ff4544;
-  border: 1rpx solid rgba(99, 102, 241, 0.15);
-  border-radius: 50%;
-  margin-right: 16rpx;
-  flex-shrink: 0;
 }
 .input-bar input.data-v-bc4afd2d {
   flex: 1;
@@ -129,7 +120,7 @@
 }
 .picker-popup.data-v-bc4afd2d {
   width: 100%;
-  max-height: 70vh;
+  max-height: 45vh;
   background: #ffffff;
   border-top-left-radius: 24rpx;
   border-top-right-radius: 24rpx;
@@ -155,7 +146,7 @@
 }
 .picker-list.data-v-bc4afd2d {
   flex: 1;
-  max-height: 60vh;
+  max-height: 38vh;
 }
 .picker-item.data-v-bc4afd2d {
   display: flex;

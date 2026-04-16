@@ -265,8 +265,9 @@
 }
 .product-grid.data-v-1cf27b2a {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20rpx;
+  overflow: hidden;
 }
 .notice-popup.data-v-1cf27b2a {
   position: fixed;

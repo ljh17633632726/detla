@@ -13,6 +13,7 @@
   background: #ffffff;
   border-radius: 16rpx;
   overflow: hidden;
+  min-width: 0;
   box-shadow: 0 4rpx 20rpx rgba(99, 102, 241, 0.08);
 }
 .product-card .cover.data-v-fe52aa40 {
@@ -21,6 +22,8 @@
 }
 .product-card .info.data-v-fe52aa40 {
   padding: 16rpx 20rpx 20rpx;
+  overflow: hidden;
+  min-width: 0;
 }
 .product-card .info .name.data-v-fe52aa40 {
   font-size: 26rpx;
@@ -28,11 +31,20 @@
   color: #1e293b;
   line-height: 1.4;
 }
+.product-card .info .subtitle-wrap.data-v-fe52aa40 {
+  min-width: 0;
+  overflow: hidden;
+  margin-top: 4rpx;
+}
 .product-card .info .subtitle.data-v-fe52aa40 {
   font-size: 22rpx;
   color: #94a3b8;
   display: block;
-  margin-top: 4rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 100%;
 }
 .product-card .info .bottom.data-v-fe52aa40 {
   display: flex;

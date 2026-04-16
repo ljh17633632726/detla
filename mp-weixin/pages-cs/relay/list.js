@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const store_remind = require("../../store/remind.js");
 const pagesCs_api_cs = require("../api/cs.js");
 if (!Math) {
   (StatusTag + EmptyState + CustomTabBar)();
@@ -33,7 +34,9 @@ const _sfc_main = {
     const approveFinished = common_vendor.ref(false);
     const maxConcurrent = common_vendor.ref(5);
     const rejectReason = common_vendor.ref("");
+    const remindStore = store_remind.useRemindStore();
     common_vendor.onShow(() => {
+      remindStore.fetchCsRemind();
       refresh();
     });
     function filterStatus(s) {
@@ -124,6 +127,7 @@ const _sfc_main = {
         common_vendor.index.showToast({ title: "审核通过" });
         showApproveModal.value = false;
         currentRelay.value = null;
+        remindStore.fetchCsRemind();
         refresh();
       } catch (e) {
         const msg = ((_a = e == null ? void 0 : e.data) == null ? void 0 : _a.msg) || (e == null ? void 0 : e.msg) || "操作失败";
@@ -147,6 +151,7 @@ const _sfc_main = {
         common_vendor.index.showToast({ title: "已拒绝" });
         showRejectModal.value = false;
         currentRelay.value = null;
+        remindStore.fetchCsRemind();
         refresh();
       } catch (e) {
         const msg = ((_b = e == null ? void 0 : e.data) == null ? void 0 : _b.msg) || (e == null ? void 0 : e.msg) || "操作失败";

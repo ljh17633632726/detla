@@ -5,6 +5,7 @@ const store_app = require("./store/app.js");
 const store_user = require("./store/user.js");
 const store_chat = require("./store/chat.js");
 const store_player = require("./store/player.js");
+const store_remind = require("./store/remind.js");
 const store_site = require("./store/site.js");
 const utils_auth = require("./utils/auth.js");
 if (!Math) {
@@ -47,13 +48,13 @@ if (!Math) {
   "./pages-player/account/edit.js";
   "./pages-player/review/list.js";
   "./pages-player/mine/index.js";
-  "./pages-cs/login/index.js";
   "./pages-cs/dashboard/index.js";
   "./pages-cs/order/list.js";
   "./pages-cs/order/detail.js";
   "./pages-cs/order/assign.js";
   "./pages-cs/complaint/list.js";
   "./pages-cs/relay/list.js";
+  "./pages-cs/replace/list.js";
   "./pages-cs/complaint/handle.js";
   "./pages-cs/user/list.js";
   "./pages-cs/player/list.js";
@@ -77,12 +78,26 @@ const _sfc_main = {
       const token = utils_auth.getTokenByRole(role);
       return !!token;
     }
+    function syncRemindPolling() {
+      const appStore = store_app.useAppStore();
+      const remindStore = store_remind.useRemindStore();
+      if (!shouldConnectChat()) {
+        remindStore.clear();
+        return;
+      }
+      if (appStore.role === "cs" || appStore.role === "player") {
+        remindStore.startPolling(appStore.role);
+        return;
+      }
+      remindStore.stopPolling();
+    }
     common_vendor.onLaunch(() => {
       const appStore = store_app.useAppStore();
       const userStore = store_user.useUserStore();
       const playerStore = store_player.usePlayerStore();
       const siteStore = store_site.useSiteStore();
       const chatStore = store_chat.useChatStore();
+      store_remind.useRemindStore();
       siteStore.fetchSiteConfig();
       appStore.restoreRole();
       if (userStore.token) {
@@ -96,6 +111,7 @@ const _sfc_main = {
           chatStore.connect();
         }, 300);
       }
+      syncRemindPolling();
     });
     common_vendor.onShow(() => {
       const chatStore = store_chat.useChatStore();
@@ -104,6 +120,7 @@ const _sfc_main = {
           chatStore.connect();
         chatStore.fetchMessageUnreadCount();
       }
+      syncRemindPolling();
     });
     return () => {
     };

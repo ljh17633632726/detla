@@ -124,8 +124,23 @@
   flex-direction: column;
   align-items: center;
   gap: 8rpx;
+  position: relative;
 }
 .quick-actions .action .action-icon.data-v-d3a5be35 {
   width: 48rpx;
   height: 48rpx;
+}
+.quick-actions .action .action-badge.data-v-d3a5be35 {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  color: #ffffff;
+  background: #ee0a24;
+  border-radius: 32rpx;
+  text-align: center;
 }

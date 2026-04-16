@@ -1,8 +1,9 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
 const utils_auth = require("../utils/auth.js");
-const BASE_URL = "https://furandianjing.cn/api";
+const BASE_URL = "https://anheiboshen.com/api";
 let loadingCount = 0;
+let _handlingUnauthorized = false;
 function showLoading() {
   if (loadingCount === 0) {
     common_vendor.index.showLoading({ title: "加载中...", mask: true });
@@ -33,6 +34,13 @@ function request(options) {
     header = {}
   } = options;
   return new Promise((resolve, reject) => {
+    let loadingHandled = false;
+    const finishLoading = () => {
+      if (loading && !loadingHandled) {
+        loadingHandled = true;
+        hideLoading();
+      }
+    };
     if (loading)
       showLoading();
     const currentRole = role || getCurrentRole();
@@ -51,7 +59,7 @@ function request(options) {
         finalUrl += (url.includes("?") ? "&" : "?") + qs;
       bodyData = {};
     }
-    common_vendor.index.__f__("log", "at api/request.js:81", `[REQ] >>> ${method} ${finalUrl}`);
+    common_vendor.index.__f__("log", "at api/request.js:90", `[REQ] >>> ${method} ${finalUrl}`);
     common_vendor.index.request({
       url: finalUrl,
       method,
@@ -61,39 +69,45 @@ function request(options) {
         ...header
       },
       success(res) {
-        common_vendor.index.__f__("log", "at api/request.js:91", `[REQ] <<< ${method} ${url} ${Date.now() - _startTime}ms`);
+        common_vendor.index.__f__("log", "at api/request.js:100", `[REQ] <<< ${method} ${url} ${Date.now() - _startTime}ms`);
         const { statusCode, data: resData } = res;
         if (statusCode === 200) {
           if (resData.code === 0 || resData.code === 200) {
             resolve(resData);
           } else if (resData.code === 401) {
+            finishLoading();
             handleUnauthorized(currentRole);
             reject(resData);
           } else {
+            finishLoading();
             common_vendor.index.showToast({ title: resData.msg || "请求失败", icon: "none" });
             reject(resData);
           }
         } else if (statusCode === 401) {
+          finishLoading();
           handleUnauthorized(currentRole);
           reject(resData);
         } else {
+          finishLoading();
           common_vendor.index.showToast({ title: `网络错误(${statusCode})`, icon: "none" });
           reject(resData);
         }
       },
       fail(err) {
+        finishLoading();
         common_vendor.index.showToast({ title: "网络连接失败", icon: "none" });
         reject(err);
       },
       complete() {
-        if (loading)
-          hideLoading();
+        finishLoading();
       }
     });
   });
 }
 function handleUnauthorized(role) {
-  common_vendor.index.showToast({ title: "登录已过期，请重新登录", icon: "none" });
+  if (_handlingUnauthorized)
+    return;
+  _handlingUnauthorized = true;
   if (role === "cs") {
     common_vendor.index.removeStorageSync("cs_token");
   } else if (role === "player") {
@@ -101,9 +115,11 @@ function handleUnauthorized(role) {
   } else {
     common_vendor.index.removeStorageSync("user_token");
   }
+  common_vendor.index.showToast({ title: "登录已过期，请重新登录", icon: "none" });
   setTimeout(() => {
+    _handlingUnauthorized = false;
     if (role === "cs") {
-      common_vendor.index.reLaunch({ url: "/pages-cs/login/index" });
+      common_vendor.index.reLaunch({ url: "/pages/login/index" });
     } else if (role === "player") {
       common_vendor.index.setStorageSync("app_role", "user");
       common_vendor.index.reLaunch({ url: "/pages/mine/index" });

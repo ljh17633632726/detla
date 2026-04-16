@@ -1,67 +1,137 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
-const WS_BASE_URL = "wss://furandianjing.cn/ws/chat";
+const WS_BASE_URL = "wss://anheiboshen.com/ws/chat";
 const HEARTBEAT_INTERVAL = 3e4;
 const MAX_RECONNECT = 5;
+let state = "DISCONNECTED";
 let socketTask = null;
 let heartbeatTimer = null;
 let reconnectCount = 0;
+let reconnectTimer = null;
 let currentToken = null;
-let onMessageCallback = null;
-let onConnectCallback = null;
-let onCloseCallback = null;
+let currentChatRole = "";
+const callbacks = { onMessage: null, onConnect: null, onClose: null };
+let sendQueue = [];
+let _pendingConnect = null;
 function connectWebSocket(token, options = {}) {
-  if (socketTask) {
-    common_vendor.index.__f__("log", "at utils/websocket.js:25", "[WS] already connecting/connected, skip new connect");
+  const chatRole = options.chatRole || "";
+  if (state === "CONNECTED" || state === "CONNECTING") {
+    if (currentToken === token && currentChatRole === chatRole) {
+      common_vendor.index.__f__("log", "at utils/websocket.js:35", "[WS] already connected/connecting, reuse");
+      return;
+    }
+    _pendingConnect = { token, chatRole };
+    closeWebSocket();
+    return;
+  }
+  if (state === "CLOSING") {
+    _pendingConnect = { token, chatRole };
     return;
   }
   currentToken = token;
-  currentChatRole = options.chatRole || "";
+  currentChatRole = chatRole;
   reconnectCount = 0;
+  _clearReconnectTimer();
   _doConnect();
 }
-let currentChatRole = "";
+function closeWebSocket() {
+  reconnectCount = MAX_RECONNECT;
+  _clearReconnectTimer();
+  _stopHeartbeat();
+  sendQueue.length = 0;
+  if (socketTask) {
+    state = "CLOSING";
+    try {
+      socketTask.close();
+    } catch (_) {
+    }
+  } else {
+    state = "DISCONNECTED";
+  }
+}
+function sendMessage(data) {
+  if (state === "CONNECTED" && socketTask) {
+    socketTask.send({ data: JSON.stringify(data) });
+    return true;
+  }
+  if (state === "CONNECTING") {
+    sendQueue.push(data);
+    return true;
+  }
+  common_vendor.index.__f__("warn", "at utils/websocket.js:84", `[WS] send failed, state=${state}`);
+  return false;
+}
+function onWsMessage(cb) {
+  callbacks.onMessage = cb;
+}
+function onWsConnect(cb) {
+  callbacks.onConnect = cb;
+}
+function onWsClose(cb) {
+  callbacks.onClose = cb;
+}
 function _doConnect() {
+  state = "CONNECTING";
   let url = `${WS_BASE_URL}?token=${currentToken}`;
   if (currentChatRole)
     url += `&chatRole=${encodeURIComponent(currentChatRole)}`;
-  socketTask = common_vendor.index.connectSocket({
-    url,
-    success() {
-      common_vendor.index.__f__("log", "at utils/websocket.js:43", "[WS] connecting...");
-    }
-  });
+  common_vendor.index.__f__("log", "at utils/websocket.js:100", `[WS] connecting → ${url}`);
+  socketTask = common_vendor.index.connectSocket({ url, success() {
+  } });
   socketTask.onOpen(() => {
-    common_vendor.index.__f__("log", "at utils/websocket.js:48", "[WS] connected");
+    common_vendor.index.__f__("log", "at utils/websocket.js:104", "[WS] connected");
+    state = "CONNECTED";
     reconnectCount = 0;
     _startHeartbeat();
-    onConnectCallback && onConnectCallback();
+    callbacks.onConnect && callbacks.onConnect();
+    _flushQueue();
   });
   socketTask.onMessage((res) => {
-    const data = JSON.parse(res.data);
-    if (data.type !== "pong") {
-      onMessageCallback && onMessageCallback(data);
+    try {
+      const data = JSON.parse(res.data);
+      if (data.type !== "pong") {
+        callbacks.onMessage && callbacks.onMessage(data);
+      }
+    } catch (_) {
     }
   });
   socketTask.onError((err) => {
-    common_vendor.index.__f__("error", "at utils/websocket.js:62", "[WS] error:", err);
+    common_vendor.index.__f__("error", "at utils/websocket.js:122", "[WS] error:", err);
   });
   socketTask.onClose(() => {
-    common_vendor.index.__f__("log", "at utils/websocket.js:66", "[WS] closed");
+    common_vendor.index.__f__("log", "at utils/websocket.js:126", "[WS] closed");
+    const wasIntentional = state === "CLOSING";
     _stopHeartbeat();
     socketTask = null;
-    onCloseCallback && onCloseCallback();
-    if (reconnectCount < MAX_RECONNECT) {
+    state = "DISCONNECTED";
+    callbacks.onClose && callbacks.onClose();
+    if (_pendingConnect) {
+      const { token, chatRole } = _pendingConnect;
+      _pendingConnect = null;
+      currentToken = token;
+      currentChatRole = chatRole;
+      reconnectCount = 0;
+      setTimeout(() => _doConnect(), 100);
+      return;
+    }
+    if (!wasIntentional && reconnectCount < MAX_RECONNECT) {
       reconnectCount++;
-      common_vendor.index.__f__("log", "at utils/websocket.js:73", `[WS] reconnecting (${reconnectCount}/${MAX_RECONNECT})...`);
-      setTimeout(() => _doConnect(), 3e3 * reconnectCount);
+      common_vendor.index.__f__("log", "at utils/websocket.js:147", `[WS] reconnecting (${reconnectCount}/${MAX_RECONNECT})...`);
+      reconnectTimer = setTimeout(() => _doConnect(), 3e3 * reconnectCount);
     }
   });
+}
+function _flushQueue() {
+  while (sendQueue.length > 0) {
+    const d = sendQueue.shift();
+    if (socketTask)
+      socketTask.send({ data: JSON.stringify(d) });
+  }
 }
 function _startHeartbeat() {
   _stopHeartbeat();
   heartbeatTimer = setInterval(() => {
-    if (socketTask) {
+    if (state === "CONNECTED" && socketTask) {
       socketTask.send({ data: JSON.stringify({ type: "ping" }) });
     }
   }, HEARTBEAT_INTERVAL);
@@ -72,37 +142,14 @@ function _stopHeartbeat() {
     heartbeatTimer = null;
   }
 }
-function sendMessage(data) {
-  if (!socketTask) {
-    common_vendor.index.__f__("warn", "at utils/websocket.js:100", "[WS] not connected");
-    return false;
+function _clearReconnectTimer() {
+  if (reconnectTimer) {
+    clearTimeout(reconnectTimer);
+    reconnectTimer = null;
   }
-  socketTask.send({ data: JSON.stringify(data) });
-  return true;
-}
-function closeWebSocket() {
-  reconnectCount = MAX_RECONNECT;
-  _stopHeartbeat();
-  if (socketTask) {
-    socketTask.close();
-    socketTask = null;
-  }
-}
-function onWsMessage(callback) {
-  onMessageCallback = callback;
-}
-function onWsConnect(callback) {
-  onConnectCallback = callback;
-}
-function onWsClose(callback) {
-  onCloseCallback = callback;
-}
-function isWsConnected() {
-  return socketTask !== null;
 }
 exports.closeWebSocket = closeWebSocket;
 exports.connectWebSocket = connectWebSocket;
-exports.isWsConnected = isWsConnected;
 exports.onWsClose = onWsClose;
 exports.onWsConnect = onWsConnect;
 exports.onWsMessage = onWsMessage;

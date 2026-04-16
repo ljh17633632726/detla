@@ -12,6 +12,7 @@ const useChatStore = common_vendor.defineStore("chat", () => {
   const currentSessionId = common_vendor.ref(null);
   const newMessage = common_vendor.ref(null);
   let lastSystemUnread = null;
+  let _callbacksBound = false;
   async function fetchMessageUnreadCount() {
     const role = common_vendor.index.getStorageSync("app_role") || "user";
     const token = utils_auth.getTokenByRole(role);
@@ -43,38 +44,40 @@ const useChatStore = common_vendor.defineStore("chat", () => {
   }
   const totalUnreadCount = common_vendor.computed(() => unreadCount.value);
   function connect(opts = {}) {
-    if (utils_websocket.isWsConnected())
-      return;
     const role = common_vendor.index.getStorageSync("app_role") || "user";
     const token = utils_auth.getTokenByRole(role);
     if (!token)
       return;
     const chatRole = opts.chatRole ?? (role === "player" ? "PLAYER" : role === "cs" ? "CS" : "USER");
-    utils_websocket.connectWebSocket(token, chatRole ? { chatRole } : {});
-    utils_websocket.onWsConnect(() => {
-      connected.value = true;
-      fetchMessageUnreadCount();
-      if (systemUnreadPollTimer)
-        clearInterval(systemUnreadPollTimer);
-      systemUnreadPollTimer = setInterval(fetchMessageUnreadCount, 25e3);
-    });
-    utils_websocket.onWsMessage((data) => {
-      newMessage.value = data;
-      if (data.sessionId !== currentSessionId.value) {
-        unreadCount.value++;
+    if (!_callbacksBound) {
+      _callbacksBound = true;
+      utils_websocket.onWsConnect(() => {
+        connected.value = true;
         fetchMessageUnreadCount();
-        utils_notificationFeedback.playMessageNotification();
-        common_vendor.index.showToast({ title: "收到新消息", icon: "none" });
-      }
-    });
-    utils_websocket.onWsClose(() => {
-      connected.value = false;
-    });
+        if (systemUnreadPollTimer)
+          clearInterval(systemUnreadPollTimer);
+        systemUnreadPollTimer = setInterval(fetchMessageUnreadCount, 25e3);
+      });
+      utils_websocket.onWsMessage((data) => {
+        newMessage.value = data;
+        if (String(data.sessionId) !== String(currentSessionId.value)) {
+          unreadCount.value++;
+          fetchMessageUnreadCount();
+          utils_notificationFeedback.playMessageNotification();
+          common_vendor.index.showToast({ title: "收到新消息", icon: "none" });
+        }
+      });
+      utils_websocket.onWsClose(() => {
+        connected.value = false;
+      });
+    }
+    utils_websocket.connectWebSocket(token, chatRole ? { chatRole } : {});
   }
   function disconnect() {
     stopPoll();
     utils_websocket.closeWebSocket();
     connected.value = false;
+    _callbacksBound = false;
   }
   function setCurrentSession(sessionId) {
     currentSessionId.value = sessionId;

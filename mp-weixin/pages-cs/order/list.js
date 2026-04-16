@@ -63,6 +63,12 @@ const _sfc_main = {
         loadData();
       }
     }
+    function displayUserName(o) {
+      const name = o.userNickname ?? o.user_nickname;
+      if (name != null && String(name).trim() !== "")
+        return name;
+      return "ID: " + (o.userId ?? "");
+    }
     function goDetail(id) {
       common_vendor.index.navigateTo({ url: "/pages-cs/order/detail?id=" + id });
     }
@@ -92,7 +98,7 @@ const _sfc_main = {
               status: o.status
             }),
             d: common_vendor.t(o.productName),
-            e: common_vendor.t(o.userNickname || o.userId),
+            e: common_vendor.t(displayUserName(o)),
             f: common_vendor.t(Number(o.amount).toFixed(2)),
             g: common_vendor.t(o.createdAt),
             h: o.status === "PAID" || o.status === "ASSIGNED"

@@ -42,7 +42,7 @@ const _sfc_main = {
         a: csInfo.value.avatar || "/static/images/default-avatar.png",
         b: common_vendor.t(csInfo.value.nickname || "客服工作台"),
         c: common_vendor.o(goProfileEdit),
-        d: common_assets._imports_0$2,
+        d: common_assets._imports_0$1,
         e: common_vendor.o(($event) => go("/pages-cs/order/list")),
         f: common_assets._imports_1,
         g: common_vendor.o(($event) => go("/pages-cs/complaint/list")),

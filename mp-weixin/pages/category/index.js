@@ -152,9 +152,8 @@ const _sfc_main = {
             d: common_vendor.t(p.subtitle)
           } : {}, {
             e: common_vendor.t(Number(p.price || 0).toFixed(2)),
-            f: common_vendor.t(p.salesCount || 0),
-            g: p.id,
-            h: common_vendor.o(($event) => goProductDetail(p.id), p.id)
+            f: p.id,
+            g: common_vendor.o(($event) => goProductDetail(p.id), p.id)
           });
         }),
         f: productLoading.value

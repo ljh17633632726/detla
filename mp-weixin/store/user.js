@@ -20,7 +20,7 @@ const useUserStore = common_vendor.defineStore("user", () => {
     var _a;
     return ((_a = userInfo.value) == null ? void 0 : _a.phone) || "";
   });
-  async function login(phoneCode) {
+  async function login(phoneCode = "") {
     try {
       const loginRes = await common_vendor.index.login({ provider: "weixin" });
       const { data } = await api_auth.userLogin(loginRes.code, phoneCode);
@@ -29,10 +29,13 @@ const useUserStore = common_vendor.defineStore("user", () => {
       userInfo.value = data;
       const chatStore = store_chat.useChatStore();
       chatStore.fetchMessageUnreadCount();
-      return true;
+      return { success: true, code: 200, data };
     } catch (e) {
-      common_vendor.index.showToast({ title: "登录失败", icon: "none" });
-      return false;
+      return {
+        success: false,
+        code: (e == null ? void 0 : e.code) || 500,
+        msg: (e == null ? void 0 : e.msg) || (e == null ? void 0 : e.message) || "登录失败"
+      };
     }
   }
   async function fetchProfile(silent = false) {
