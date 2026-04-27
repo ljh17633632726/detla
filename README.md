@@ -8,16 +8,28 @@
 
 > **说明**：本仓库仅提供打包后的代码，完整源码为收费交付内容。需要源码请先到 [卡密购买页面](https://pay.ldxp.cn/item/a4ou7u) 购买卡密，再到 [卡密校验页面](http://lenglengyou.top:82/) 完成校验后获取源码。如有问题请联系 QQ：2104924410。
 
-#### 演示地址
+#### 演示与测试账号
 
-| 端 | 演示地址 |
-|----|----------|
-| 小程序演示视频 | [点击观看](https://furandianjing.cn/file/1.mp4) |
-| 小程序 H5 示例 | [点击体验](http://lenglengyou.top:81/)（普通用户随便输入手机号即可登录；客服请切换到账号密码登录） |
-| PC 端演示视频 | [点击观看](https://furandianjing.cn/file/2.mp4) |
-| PC 端演示 | [点击跳转](https://lenglengyou.top) |
-| 管理员 | admin - UIUIUIUI |
-| 客服 | kefu - UIUIUIUI |
+**在线体验**
+
+| 入口 | 地址 | 登录说明 |
+|------|------|----------|
+| 小程序 H5 示例 | [http://lenglengyou.top:81/](http://lenglengyou.top:81/) | 普通用户随便输入手机号即可登录；客服请切换到账号密码登录 |
+| PC 管理后台 | [https://lenglengyou.top](https://lenglengyou.top) | 使用下方管理员或客服测试账号登录 |
+
+**演示视频**
+
+| 内容 | 地址 |
+|------|------|
+| 小程序演示视频 | [https://furandianjing.cn/file/1.mp4](https://furandianjing.cn/file/1.mp4) |
+| PC 端演示视频 | [https://furandianjing.cn/file/2.mp4](https://furandianjing.cn/file/2.mp4) |
+
+**测试账号**
+
+| 端 | 账号 | 密码 | 说明 |
+|----|------|------|------|
+| 管理员 | admin | UIUIUIUI | PC 管理后台登录 |
+| 客服 | kefu | UIUIUIUI | PC 管理后台可登录；小程序客服端需切换到账号密码登录 |
 
 > 提示：如果访问演示网站加载不出来，请开启 VPN，服务器位于新加坡。
 
