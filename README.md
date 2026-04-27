@@ -14,6 +14,7 @@
 |----|----------|
 | 小程序演示视频 | [点击观看](https://furandianjing.cn/file/1.mp4) |
 | 小程序 H5 示例 | [点击体验](http://lenglengyou.top:81/)（普通用户随便输入手机号即可登录；客服请切换到账号密码登录） |
+| PC 端演示视频 | [点击观看](https://furandianjing.cn/file/2.mp4) |
 | PC 端演示 | [点击跳转](https://lenglengyou.top) |
 | 管理员 | admin - UIUIUIUI |
 | 客服 | kefu - UIUIUIUI |
