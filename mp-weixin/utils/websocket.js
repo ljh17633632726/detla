@@ -1,6 +1,6 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
-const WS_BASE_URL = "wss://anheiboshen.com/ws/chat";
+const WS_BASE_URL = "wss://furandianjing.cn/ws/chat";
 const HEARTBEAT_INTERVAL = 3e4;
 const MAX_RECONNECT = 5;
 let state = "DISCONNECTED";

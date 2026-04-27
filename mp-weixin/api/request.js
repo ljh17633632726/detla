@@ -1,7 +1,7 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
 const utils_auth = require("../utils/auth.js");
-const BASE_URL = "https://anheiboshen.com/api";
+const BASE_URL = "https://furandianjing.cn/api";
 let loadingCount = 0;
 let _handlingUnauthorized = false;
 function showLoading() {
