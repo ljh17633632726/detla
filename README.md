@@ -6,13 +6,13 @@
 
 技术栈：**Spring Boot**、**Vue 3**、**UniApp**、**微信小程序**、**微信支付**。
 
-> **说明**：因闲鱼等平台有人倒卖源码，本仓库仅提供打包后的代码，完整源码为收费交付内容。需要源码请先到 [卡密购买页面](https://pay.ldxp.cn/item/a4ou7u) 购买卡密，再到 [卡密校验页面](http://lenglengyou.top:82/) 完成校验后获取源码。
+> **说明**：本仓库仅提供打包后的代码，完整源码为收费交付内容。需要源码请先到 [卡密购买页面](https://pay.ldxp.cn/item/a4ou7u) 购买卡密，再到 [卡密校验页面](http://lenglengyou.top:82/) 完成校验后获取源码。
 
-#### 演示视频
+#### 演示地址
 
 | 端 | 演示地址 |
 |----|----------|
-| 小程序演示只有演示视频 或微信搜索 “复燃电竞” | [点击观看](https://furandianjing.cn/file/1.mp4) |
+| 小程序演示视频 | [点击观看](https://furandianjing.cn/file/1.mp4) |
 | 小程序 H5 示例 | [点击体验](http://lenglengyou.top:81/)（普通用户随便输入手机号即可登录；客服请切换到账号密码登录） |
 | PC 端演示 | [点击跳转](https://lenglengyou.top) |
 | 管理员 | admin - UIUIUIUI |
