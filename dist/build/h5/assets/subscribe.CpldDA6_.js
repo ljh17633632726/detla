@@ -1,1 +1,0 @@
-const r="sUrc4cGcXvz5Mi59q3b0Jp8jmNt9CGWd2_-pc0jiwGs",t="YOUR_TEMPLATE_ID_INCOME",e="YOUR_TEMPLATE_ID_ORDER_CONFIRM";function n(r){return 0===r.filter(r=>r&&!r.startsWith("YOUR_TEMPLATE_ID")).length?(console.log("[Subscribe] 无有效模板ID，跳过订阅请求"),Promise.resolve({})):new Promise(r=>{r({})})}function s(){return n([r,e])}function o(){return n([r,t,e])}export{o as a,s as r};

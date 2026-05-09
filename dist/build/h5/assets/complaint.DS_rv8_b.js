@@ -1,1 +1,0 @@
-import{g as a,a3 as o}from"./index-CNJaWnnU.js";const r=a=>o("/order/complaint",a),p=o=>a(`/order/complaint/${o}`),s=(a,r)=>o(`/order/complaint/${a}/appeal`,r),e=o=>a("/order/complaint/my",o);export{s as a,e as b,r as c,p as g};

@@ -1,1 +1,0 @@
-.star-rating.data-v-7d795eff{display:flex;align-items:center;gap:4rpx}.star-rating .star.data-v-7d795eff{font-size:36rpx;color:#ddd;transition:color .15s}.star-rating .star.active.data-v-7d795eff{color:#f90}.star-rating:not(.readonly) .star.data-v-7d795eff{cursor:pointer}.star-rating .rating-text.data-v-7d795eff{margin-left:8rpx;font-size:26rpx;color:#f90;font-weight:500}
