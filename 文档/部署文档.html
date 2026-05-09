@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>三角洲平台 - 部署文档</title>
+  <title>平台 - 部署文档</title>
   <style>
     body{font-family:"Microsoft YaHei",sans-serif;line-height:1.7;max-width:900px;margin:0 auto;padding:32px;color:#333;}
     h1{color:#222;border-bottom:2px solid #ff4544;padding-bottom:12px;}
@@ -23,7 +23,7 @@
   </style>
 </head>
 <body>
-<h1>三角洲平台 - 部署文档</h1>
+<h1>平台 - 部署文档</h1>
 <p>本系统交付物为三部分：<strong>打包后的微信小程序</strong>、<strong>Java 后端 jar</strong>、<strong>PC 管理后台静态包</strong>。本文档说明如何在服务器上部署这些内容。</p>
 <table><thead><tr><th>交付物</th><th>说明</th><th>部署方式</th></tr></thead><tbody><tr><td>微信小程序</td><td>已打包的小程序代码目录</td><td>用微信开发者工具上传，不部署在服务器</td></tr><tr><td>Java 后端</td><td><code>delta-admin.jar</code></td><td>服务器上运行 jar</td></tr><tr><td>PC 管理后台</td><td><code>admin-ui</code> 的 <code>dist</code> 目录</td><td>服务器上由 Nginx 提供静态资源</td></tr></tbody></table>
 ---
@@ -38,6 +38,7 @@
 <p><span style="color:red"><strong>服务器请安装宝塔面板，系统选择 Ubuntu 20.04.4（20 版本即可）</strong></span></p>
 <p>建议在服务器上建一个统一目录（如 <code>/www/wwwroot/</code>），按下面方式放置。</p>
 <p><span style="color:red"><strong>重要：jar 包先不要上传，需在下面第四步配置完成后再上传！</strong></span></p>
+<p>Java 后端 jar 下载链接：<a href="https://lenglengyou.top/file/delta-admin.jar" target="_blank">https://lenglengyou.top/file/delta-admin.jar</a></p>
 <pre><code>/www/wwwroot                      # 根目录
 ├── delta-admin.jar  # 放置提供的 Java 后端 jar
 │
@@ -158,3 +159,4 @@ wx:
 
 </body>
 </html>
+

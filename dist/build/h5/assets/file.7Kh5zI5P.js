@@ -1,0 +1,1 @@
+import{aR as s,aS as e}from"./index-CNJaWnnU.js";function a(a=1){return new Promise((c,o)=>{s({count:a,sizeType:["compressed"],sourceType:["album","camera"],success:async s=>{try{const a=[];for(const c of s.tempFilePaths){const s=await e(c);a.push(s)}c(a)}catch(a){o(a)}},fail:o})})}export{a as c};

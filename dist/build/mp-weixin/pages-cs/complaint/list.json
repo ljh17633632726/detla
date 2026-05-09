@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "投诉管理",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f1f5f9",
+  "backgroundColorTop": "#f1f5f9",
+  "backgroundColorBottom": "#f1f5f9",
+  "initialRenderingCache": "static",
+  "usingComponents": {
+    "status-tag": "../../components/StatusTag",
+    "empty-state": "../../components/EmptyState",
+    "custom-tab-bar": "../../components/CustomTabBar"
+  }
+}

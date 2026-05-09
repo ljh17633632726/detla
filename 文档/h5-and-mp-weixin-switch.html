@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>H5 与微信小程序切换说明</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --page: #ffffff;
+      --text: #1f2937;
+      --muted: #64748b;
+      --border: #d8dee7;
+      --code-bg: #111827;
+      --code-text: #e5e7eb;
+      --inline-code-bg: #eef2f7;
+      --accent: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.72;
+    }
+
+    main {
+      width: min(960px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: 40px;
+      background: var(--page);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.35;
+      color: #111827;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: 32px;
+    }
+
+    h2 {
+      margin: 34px 0 14px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+      font-size: 24px;
+    }
+
+    h3 {
+      margin: 24px 0 12px;
+      font-size: 19px;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul {
+      margin: 8px 0 18px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    table {
+      width: 100%;
+      margin: 16px 0 22px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--inline-code-bg);
+      color: #0f172a;
+      font-family: Consolas, "SFMono-Regular", "Liberation Mono", Menlo, monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 14px 0 20px;
+      padding: 16px;
+      overflow-x: auto;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-text);
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 14px;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: 100%;
+        margin: 0;
+        padding: 24px 18px;
+        border-width: 0;
+        border-radius: 0;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>H5 与微信小程序切换说明</h1>
+    <p class="lead">本文说明前端在 H5、微信小程序之间的构建切换，以及后端微信小程序、微信支付能力的启停配置。</p>
+
+    <h2>1. 当前支持范围</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>能力</th>
+          <th>H5</th>
+          <th>微信小程序</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>用户登录</td>
+          <td>手机号 + 验证码登录</td>
+          <td>微信 <code>uni.login</code> + 首次手机号授权</td>
+        </tr>
+        <tr>
+          <td>客服登录</td>
+          <td>账号密码登录</td>
+          <td>账号密码登录</td>
+        </tr>
+        <tr>
+          <td>余额支付</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>微信支付</td>
+          <td>暂未接入 H5 在线支付</td>
+          <td>支持微信 JSAPI 支付</td>
+        </tr>
+        <tr>
+          <td>微信订阅消息</td>
+          <td>自动跳过</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>后端启动是否依赖微信配置</td>
+          <td>不依赖</td>
+          <td>启用微信能力时依赖</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>2. 前端构建切换</h2>
+    <p>前端项目目录：</p>
+    <pre><code>cd delta-mp</code></pre>
+
+    <p>H5 开发运行：</p>
+    <pre><code>npm run dev:h5</code></pre>
+
+    <p>H5 打包：</p>
+    <pre><code>npm run build:h5</code></pre>
+
+    <p>H5 构建产物：</p>
+    <pre><code>delta-mp/unpackage/dist/build/h5</code></pre>
+
+    <p>微信小程序开发构建：</p>
+    <pre><code>npm run dev:mp-weixin</code></pre>
+
+    <p>微信小程序打包：</p>
+    <pre><code>npm run build:mp-weixin</code></pre>
+
+    <p>微信小程序构建产物：</p>
+    <pre><code>delta-mp/unpackage/dist/build/mp-weixin</code></pre>
+
+    <p>用微信开发者工具导入上述 <code>mp-weixin</code> 目录即可运行小程序。</p>
+
+    <h2>3. 后端开关配置</h2>
+    <p>后端项目目录：</p>
+    <pre><code>cd delta-game</code></pre>
+
+    <p>后端需要 Java 17 或更高版本编译运行。当前机器如果默认是 Java 11，需要切换到 JDK 17+。</p>
+
+    <h3>3.1 纯 H5 模式</h3>
+    <p>纯 H5 模式不需要配置微信小程序 <code>appid/secret</code>，也不需要微信支付证书。</p>
+    <p>当前开发环境 H5 登录固定验证码为 <code>123456</code>，来源于 <code>delta-game/delta-admin/src/main/resources/application-dev.yml</code> 中的 <code>auth.h5.login-code</code> 配置。</p>
+    <pre><code>wx:
+  miniapp:
+    enabled: false
+  pay:
+    enabled: false
+
+auth:
+  h5:
+    login-code: 123456</code></pre>
+
+    <p>效果：</p>
+    <ul>
+      <li>后端不会创建微信小程序 SDK。</li>
+      <li><code>/user/auth/login</code> 微信登录接口会返回“微信小程序登录未启用，请使用H5手机号登录”。</li>
+      <li>微信订阅消息自动跳过。</li>
+      <li>后端不会创建微信支付 SDK，也不会读取支付证书文件。</li>
+      <li><code>/pay/wx/{orderId}</code> 和 <code>/pay/player-deposit</code> 会返回微信支付未启用相关提示。</li>
+      <li>H5 用户使用 <code>/user/auth/h5-login</code> 登录。</li>
+    </ul>
+
+    <h3>3.2 微信小程序模式</h3>
+    <p>如果要运行微信小程序登录和订阅消息，开启小程序配置：</p>
+    <pre><code>wx:
+  miniapp:
+    enabled: true
+    appid: wx_xxx
+    secret: xxx
+  pay:
+    enabled: false</code></pre>
+
+    <p>效果：</p>
+    <ul>
+      <li>小程序可以微信登录。</li>
+      <li>首次登录仍要求授权手机号。</li>
+      <li>可以发送微信订阅消息。</li>
+      <li>微信支付仍关闭，不需要支付证书。</li>
+    </ul>
+
+    <h3>3.3 微信小程序 + 微信支付模式</h3>
+    <p>如果要启用微信支付，必须同时配置小程序和支付参数：</p>
+    <pre><code>wx:
+  miniapp:
+    enabled: true
+    appid: wx_xxx
+    secret: xxx
+  pay:
+    enabled: true
+    mch-id: xxx
+    notify-url: https://your-domain.com/api/pay/wx/notify
+    api-v3-key: xxx
+    private-key-path: /path/to/apiclient_key.pem
+    cert-serial-no: xxx
+    public-key-path: /path/to/pub_key.pem
+    public-key-id: xxx</code></pre>
+
+    <p>效果：</p>
+    <ul>
+      <li>后端启动时会加载微信支付 SDK。</li>
+      <li><code>private-key-path</code> 和 <code>public-key-path</code> 指向的文件必须真实存在。</li>
+      <li>小程序端可以调用微信支付。</li>
+      <li>支付回调地址必须能被微信支付平台访问。</li>
+    </ul>
+
+    <h2>4. 生产环境建议</h2>
+    <p>生产环境不要把开发环境固定验证码 <code>123456</code> 写死在配置文件中。推荐用环境变量：</p>
+    <pre><code>auth:
+  h5:
+    login-code: ${H5_LOGIN_CODE:}</code></pre>
+
+    <p>如果 <code>H5_LOGIN_CODE</code> 为空，H5 登录接口会返回“H5登录验证码未配置”。正式上线建议接短信验证码服务，而不是使用固定验证码。</p>
+
+    <p>微信支付生产环境建议：</p>
+    <ul>
+      <li><code>wx.pay.enabled=true</code> 只在确实要使用微信支付的环境开启。</li>
+      <li>支付证书文件放在服务器固定目录，例如 <code>/www/certs/</code>。</li>
+      <li>证书目录权限只开放给后端运行用户读取。</li>
+      <li>不要把真实商户密钥提交到代码仓库。</li>
+    </ul>
+
+    <h2>5. 登录账号合并规则</h2>
+    <p>H5 用户使用手机号注册后，用户再从微信小程序首次登录并授权同一手机号时，后端会把微信 <code>openid</code> 绑定到原 H5 用户，避免生成两个账号。</p>
+
+    <p>规则：</p>
+    <ul>
+      <li>H5 首次登录时，<code>openid</code> 会临时保存为 <code>h5:{phone}</code>。</li>
+      <li>小程序首次登录授权手机号后，如果找到同手机号 H5 用户，会把该用户的 <code>openid</code> 更新为真实微信 <code>openid</code>。</li>
+      <li>如果该手机号已经绑定其他真实微信 <code>openid</code>，会拒绝绑定并提示“该手机号已绑定其他微信账号”。</li>
+    </ul>
+
+    <h2>6. 常见问题</h2>
+    <h3>不配置微信支付证书，Java 后台能启动吗？</h3>
+    <p>可以。设置：</p>
+    <pre><code>wx:
+  pay:
+    enabled: false</code></pre>
+
+    <p>关闭后不会读取 <code>apiclient_key.pem</code> 或 <code>pub_key.pem</code>。</p>
+
+    <h3>不配置微信 appid/secret，Java 后台能启动吗？</h3>
+    <p>可以。设置：</p>
+    <pre><code>wx:
+  miniapp:
+    enabled: false</code></pre>
+
+    <p>关闭后微信登录不可用，但 H5 手机号登录可用。</p>
+
+    <h3>H5 为什么不能直接用小程序微信支付？</h3>
+    <p>小程序微信支付使用 JSAPI 支付参数和小程序 <code>openid</code>。H5 在线支付需要单独接微信 H5 支付或公众号支付链路，不能直接复用当前小程序支付接口。</p>
+
+    <h3>H5 运行时请求哪个后端地址？</h3>
+    <p>前端接口基地址来自：</p>
+    <pre><code>VITE_API_BASE_URL</code></pre>
+
+    <p>如果没有配置，默认请求：</p>
+    <pre><code>http://localhost:8080</code></pre>
+
+    <p>本地开发可以在 <code>delta-mp/.env.development</code> 中配置。</p>
+
+    <h2>7. 相关代码位置</h2>
+    <p>前端平台判断：</p>
+    <pre><code>delta-mp/utils/platform.js</code></pre>
+
+    <p>前端登录：</p>
+    <pre><code>delta-mp/pages/login/index.vue
+delta-mp/store/user.js
+delta-mp/api/auth.js</code></pre>
+
+    <p>前端支付平台适配：</p>
+    <pre><code>delta-mp/pages/order/pay.vue
+delta-mp/pages-player/apply/index.vue</code></pre>
+
+    <p>后端微信小程序开关：</p>
+    <pre><code>delta-game/delta-common/src/main/java/com/delta/common/config/WxMaConfig.java
+delta-game/delta-user/src/main/java/com/delta/user/controller/UserAuthController.java
+delta-game/delta-message/src/main/java/com/delta/message/service/impl/WxSubscribeMessageServiceImpl.java</code></pre>
+
+    <p>后端微信支付开关：</p>
+    <pre><code>delta-game/delta-pay/src/main/java/com/delta/pay/config/WxPayConfiguration.java
+delta-game/delta-pay/src/main/java/com/delta/pay/controller/PayController.java
+delta-game/delta-pay/src/main/java/com/delta/pay/service/impl/PaymentServiceImpl.java</code></pre>
+  </main>
+</body>
+</html>
+

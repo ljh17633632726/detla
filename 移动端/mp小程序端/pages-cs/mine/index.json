@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "客服中心",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#f1f5f9",
+  "backgroundColorTop": "#f1f5f9",
+  "backgroundColorBottom": "#f1f5f9",
+  "initialRenderingCache": "static",
+  "usingComponents": {
+    "custom-tab-bar": "../../components/CustomTabBar"
+  }
+}
