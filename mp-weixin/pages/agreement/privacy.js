@@ -1,1 +1,0 @@
-"use strict";const e=require("../../common/vendor.js"),t={__name:"privacy",setup(t){const r=e.useSiteStore();return(t,a)=>({a:e.t(e.unref(r).fullName),b:e.t(e.unref(r).fullName)})}},r=e._export_sfc(t,[["__scopeId","data-v-b180af83"]]);wx.createPage(r);

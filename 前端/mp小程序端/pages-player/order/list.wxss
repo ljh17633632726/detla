@@ -1,0 +1,43 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.player-order-list.data-v-790a0bd3 {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.tabs.data-v-790a0bd3 {
+  background: #f1f5f9;
+  border-bottom: 1rpx solid #f1f5f9;
+  white-space: nowrap;
+}
+.tabs-inner.data-v-790a0bd3 {
+  display: inline-flex;
+  padding: 0 12rpx;
+}
+.tab.data-v-790a0bd3 {
+  padding: 24rpx 24rpx;
+  font-size: 26rpx;
+  color: #64748b;
+  flex-shrink: 0;
+}
+.tab.active.data-v-790a0bd3 {
+  color: #ff4544;
+  border-bottom: 4rpx solid rgba(255, 69, 68, 0.5);
+}
+.list.data-v-790a0bd3 {
+  height: calc(100vh - 280rpx);
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}

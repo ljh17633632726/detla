@@ -1,0 +1,129 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.withdraw-page.data-v-df8bbd78 {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.balance-card.data-v-df8bbd78 {
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  margin: 24rpx;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
+}
+.balance-card .label.data-v-df8bbd78 {
+  font-size: 26rpx;
+  opacity: 0.85;
+  display: block;
+}
+.balance-card .amount.data-v-df8bbd78 {
+  font-size: 56rpx;
+  font-weight: bold;
+  display: block;
+  margin-top: 12rpx;
+}
+.form-card.data-v-df8bbd78 {
+  margin: 24rpx;
+  background: #f1f5f9;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+}
+.form-item.data-v-df8bbd78 {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.form-item .item-label.data-v-df8bbd78 {
+  font-size: 28rpx;
+  color: #1e293b;
+  width: 160rpx;
+}
+.form-item .input.data-v-df8bbd78 {
+  flex: 1;
+  font-size: 28rpx;
+}
+.form-item .pick-text.data-v-df8bbd78 {
+  flex: 1;
+  font-size: 28rpx;
+  color: #1e293b;
+}
+.form-item .pick-text.placeholder.data-v-df8bbd78 {
+  color: #cbd5e1;
+}
+.form-item .arrow.data-v-df8bbd78 {
+  color: #cbd5e1;
+}
+.form-item .all-btn.data-v-df8bbd78 {
+  font-size: 26rpx;
+  color: #ff4544;
+}
+.btn-area.data-v-df8bbd78 {
+  padding: 40rpx 24rpx 16rpx;
+}
+.submit-btn.data-v-df8bbd78 {
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  padding: 24rpx;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+}
+.links.data-v-df8bbd78 {
+  display: flex;
+  justify-content: center;
+  gap: 48rpx;
+  padding: 24rpx;
+}
+.links .link.data-v-df8bbd78 {
+  font-size: 26rpx;
+  color: #ff4544;
+}
+.mask.data-v-df8bbd78 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 999;
+}
+.picker-popup.data-v-df8bbd78 {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  border-top: 1rpx solid #e2e8f0;
+  padding: 32rpx 24rpx;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.picker-popup .picker-title.data-v-df8bbd78 {
+  font-size: 30rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 24rpx;
+  text-align: center;
+}
+.account-option.data-v-df8bbd78 {
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+  font-size: 28rpx;
+}
+.account-option.active.data-v-df8bbd78 {
+  color: #ff4544;
+  background: #f0f5ff;
+  border-radius: 8rpx;
+}

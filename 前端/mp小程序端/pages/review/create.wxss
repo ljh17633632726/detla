@@ -1,0 +1,60 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.review-page.data-v-6a700c41 {
+  padding: 24rpx;
+  background: #ffffff;
+  min-height: 100vh;
+}
+.rating-area.data-v-6a700c41 {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-bottom: 24rpx;
+  background: #f1f5f9;
+  border: 1rpx solid #f1f5f9;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  color: #1e293b;
+}
+.stars.data-v-6a700c41 {
+  display: flex;
+  gap: 8rpx;
+}
+.star.data-v-6a700c41 {
+  font-size: 48rpx;
+  color: #cbd5e1;
+}
+.star.active.data-v-6a700c41 {
+  color: #ff9900;
+}
+textarea.data-v-6a700c41 {
+  width: 100%;
+  height: 240rpx;
+  background: #f1f5f9;
+  border: 1rpx solid #f1f5f9;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  margin-bottom: 24rpx;
+  color: #1e293b;
+}
+.btn.data-v-6a700c41 {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 32rpx;
+  border-radius: 999rpx;
+  margin-top: 40rpx;
+}

@@ -1,0 +1,1 @@
+<view class="{{['star-rating', 'data-v-99c21569', d && 'readonly']}}"><text wx:for="{{a}}" wx:for-item="i" wx:key="a" class="{{['star', 'data-v-99c21569', i.b && 'active', i.c && 'half']}}" bindtap="{{i.d}}">★</text><text wx:if="{{b}}" class="rating-text data-v-99c21569">{{c}}</text></view>

@@ -1,0 +1,1 @@
+<view class="empty-state data-v-3454b0cd"><image wx:if="{{a}}" class="empty-image data-v-3454b0cd" src="{{b}}" mode="aspectFit"/><text class="empty-text data-v-3454b0cd">{{c}}</text><view wx:if="{{d}}" class="empty-btn data-v-3454b0cd" bindtap="{{f}}">{{e}}</view></view>

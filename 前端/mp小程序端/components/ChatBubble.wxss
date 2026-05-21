@@ -1,0 +1,146 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.chat-bubble.data-v-76b25565 {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24rpx;
+  padding: 0 24rpx;
+}
+.chat-bubble.is-self.data-v-76b25565 {
+  flex-direction: row-reverse;
+}
+.chat-bubble .avatar.data-v-76b25565 {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.chat-bubble .avatar-placeholder.data-v-76b25565 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.chat-bubble .bubble-content.data-v-76b25565 {
+  max-width: 70%;
+  margin: 0 16rpx;
+  padding: 20rpx 24rpx;
+  background: #e2e8f0;
+  border: 1rpx solid #f1f5f9;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #1e293b;
+  word-break: break-all;
+}
+.chat-bubble .bubble-content.self.data-v-76b25565 {
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  border-color: transparent;
+  color: #1e293b;
+}
+.chat-bubble .bubble-content.self .card-msg.data-v-76b25565 {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+.chat-bubble .bubble-content.self .card-name.data-v-76b25565 {
+  color: #1e293b;
+}
+.chat-bubble .bubble-content.self .card-price.data-v-76b25565 {
+  color: #ff6b2b;
+}
+.chat-bubble .bubble-content.self .card-status.data-v-76b25565 {
+  color: #64748b;
+}
+.chat-bubble .bubble-content.self .card-order-no.data-v-76b25565 {
+  color: #64748b;
+}
+.chat-bubble .bubble-content.self .card-tag.data-v-76b25565 {
+  background: #e2e8f0;
+  color: #64748b;
+}
+.chat-bubble .bubble-content .msg-image.data-v-76b25565 {
+  max-width: 400rpx;
+  border-radius: 8rpx;
+}
+.chat-bubble .bubble-content .system-msg.data-v-76b25565 {
+  color: #94a3b8;
+  font-size: 24rpx;
+}
+
+/* 卡片消息通用样式 */
+.card-msg.data-v-76b25565 {
+  display: flex;
+  padding: 0;
+  background: #f1f5f9;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  overflow: hidden;
+  position: relative;
+  min-width: 400rpx;
+}
+.card-cover.data-v-76b25565 {
+  width: 160rpx;
+  height: 160rpx;
+  flex-shrink: 0;
+}
+.card-info.data-v-76b25565 {
+  flex: 1;
+  padding: 16rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.card-name.data-v-76b25565 {
+  font-size: 26rpx;
+  color: #1e293b;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card-price.data-v-76b25565 {
+  font-size: 28rpx;
+  color: #ff6b2b;
+  font-weight: bold;
+  margin-top: 8rpx;
+}
+.card-meta.data-v-76b25565 {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 8rpx;
+}
+.card-status.data-v-76b25565 {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+.card-order-no.data-v-76b25565 {
+  font-size: 20rpx;
+  color: #94a3b8;
+  margin-top: 4rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card-tag.data-v-76b25565 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 18rpx;
+  padding: 2rpx 12rpx;
+  background: #e2e8f0;
+  color: #6366f1;
+  border-radius: 0 12rpx 0 8rpx;
+}

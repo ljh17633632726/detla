@@ -1,0 +1,115 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.invite-list-page.data-v-3ea0d269 {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.tabs.data-v-3ea0d269 {
+  display: flex;
+  background: #f1f5f9;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.tabs .tab.data-v-3ea0d269 {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 28rpx;
+  color: #64748b;
+  position: relative;
+}
+.tabs .tab.active.data-v-3ea0d269 {
+  color: #ff4544;
+}
+.tabs .tab.active.data-v-3ea0d269::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  right: 30%;
+  height: 4rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  border-radius: 2rpx;
+}
+.list.data-v-3ea0d269 {
+  height: calc(100vh - 100rpx);
+  padding: 20rpx 24rpx;
+}
+.invite-card.data-v-3ea0d269 {
+  background: #f1f5f9;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+.invite-card .card-top.data-v-3ea0d269 {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.invite-card .avatar.data-v-3ea0d269 {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+}
+.invite-card .info.data-v-3ea0d269 {
+  flex: 1;
+}
+.invite-card .info .name.data-v-3ea0d269 {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+}
+.invite-card .info .order-no.data-v-3ea0d269 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 4rpx;
+}
+.invite-card .info .split-info.data-v-3ea0d269 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 4rpx;
+}
+.invite-card .status-label.data-v-3ea0d269 {
+  font-size: 24rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.invite-card .card-actions.data-v-3ea0d269 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f1f5f9;
+}
+.invite-card .btn-accept.data-v-3ea0d269 {
+  padding: 10rpx 32rpx;
+  background: linear-gradient(135deg, #ff4544, #e63939, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+}
+.invite-card .btn-reject.data-v-3ea0d269 {
+  padding: 10rpx 32rpx;
+  border: 1rpx solid #ee0a24;
+  color: #ee0a24;
+  font-size: 26rpx;
+  border-radius: 999rpx;
+}
+.loading-tip.data-v-3ea0d269 {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}

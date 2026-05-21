@@ -1,0 +1,92 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.pay-page.data-v-69d8188c {
+  padding: 40rpx 24rpx;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+.amount-area.data-v-69d8188c {
+  text-align: center;
+  padding: 60rpx 0;
+}
+.amount-area .label.data-v-69d8188c {
+  font-size: 28rpx;
+  color: #64748b;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.amount-area .countdown.data-v-69d8188c {
+  font-size: 26rpx;
+  color: #ff9900;
+  display: block;
+  margin-top: 16rpx;
+}
+.amount-area .countdown.expired.data-v-69d8188c {
+  color: #ee0a24;
+}
+.pay-methods.data-v-69d8188c {
+  background: #ffffff;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-bottom: 60rpx;
+}
+.method.data-v-69d8188c {
+  display: flex;
+  align-items: center;
+  padding: 32rpx 24rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+  gap: 16rpx;
+}
+.method .method-icon.data-v-69d8188c {
+  width: 40rpx;
+  height: 40rpx;
+  flex-shrink: 0;
+}
+.method .method-name.data-v-69d8188c {
+  font-size: 28rpx;
+  color: #1e293b;
+  flex: 1;
+}
+.method .method-info.data-v-69d8188c {
+  flex: 1;
+}
+.method .method-info .balance-text.data-v-69d8188c {
+  font-size: 22rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 4rpx;
+}
+.method .radio.data-v-69d8188c {
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid #cbd5e1;
+  border-radius: 50%;
+}
+.method .radio.checked.data-v-69d8188c {
+  border-color: #ff4544;
+  background: #ff4544;
+}
+.btn-pay.data-v-69d8188c {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 32rpx;
+  border-radius: 999rpx;
+}
+.btn-pay.disabled.data-v-69d8188c {
+  background: #e2e8f0;
+  color: #94a3b8;
+}

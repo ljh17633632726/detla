@@ -1,0 +1,94 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.profile-page.data-v-935803c6 {
+  padding: 24rpx;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+.avatar-section.data-v-935803c6 {
+  display: flex;
+  justify-content: center;
+  padding: 48rpx 0 32rpx;
+}
+.avatar-btn.data-v-935803c6 {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.avatar-btn.data-v-935803c6::after {
+  border: none;
+}
+.avatar-img.data-v-935803c6 {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(99, 102, 241, 0.2);
+}
+.avatar-edit-hint.data-v-935803c6 {
+  margin-top: 16rpx;
+}
+.avatar-edit-hint .hint-text.data-v-935803c6 {
+  font-size: 24rpx;
+  color: #ff4544;
+}
+.form-card.data-v-935803c6 {
+  background: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 20rpx rgba(99, 102, 241, 0.08);
+  overflow: hidden;
+}
+.form-item.data-v-935803c6 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 28rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.form-item.data-v-935803c6:last-child {
+  border-bottom: none;
+}
+.form-item .label.data-v-935803c6 {
+  font-size: 28rpx;
+  color: #334155;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+.form-item .input.data-v-935803c6 {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+  color: #1e293b;
+}
+.form-item .value.data-v-935803c6 {
+  font-size: 28rpx;
+  color: #64748b;
+}
+.form-item .uid.data-v-935803c6 {
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+.btn-save.data-v-935803c6 {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4544, #e63939);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 32rpx;
+  border-radius: 999rpx;
+  margin-top: 60rpx;
+}

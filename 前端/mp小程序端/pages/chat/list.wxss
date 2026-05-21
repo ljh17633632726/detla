@@ -1,0 +1,102 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.chat-list.data-v-32c40775 {
+  background: #f1f5f9;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.session-scroll.data-v-32c40775 {
+  height: calc(100vh - 110rpx);
+  position: relative;
+  z-index: 1;
+  padding: 20rpx 24rpx;
+  padding-bottom: 30rpx;
+  box-sizing: border-box;
+}
+.session-item.data-v-32c40775 {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 28rpx;
+  background: #ffffff;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+.session-item.data-v-32c40775:last-of-type {
+  margin-bottom: 0;
+}
+.avatar.data-v-32c40775 {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  border: 2rpx solid rgba(99, 102, 241, 0.1);
+}
+.avatar-placeholder.data-v-32c40775 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.session-info.data-v-32c40775 {
+  flex: 1;
+  overflow: hidden;
+}
+.top-row.data-v-32c40775 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-row .name.data-v-32c40775 {
+  font-size: 28rpx;
+  color: #1e293b;
+  font-weight: 500;
+  flex: 1;
+}
+.top-row .time.data-v-32c40775 {
+  font-size: 22rpx;
+  color: #94a3b8;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+.bottom-row.data-v-32c40775 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8rpx;
+}
+.bottom-row .last-msg.data-v-32c40775 {
+  font-size: 24rpx;
+  color: #94a3b8;
+  flex: 1;
+}
+.badge.data-v-32c40775 {
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding: 0 8rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background: #ee0a24;
+  border-radius: 32rpx;
+  text-align: center;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}

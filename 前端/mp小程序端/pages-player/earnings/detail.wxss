@@ -1,0 +1,63 @@
+/* ==================== 主题色 ==================== */
+/* ==================== 渐变 ==================== */
+/* ==================== 文字色 ==================== */
+/* ==================== 背景色 ==================== */
+/* ==================== 强调色 ==================== */
+/* ==================== 卡片 ==================== */
+/* ==================== 边框 ==================== */
+/* ==================== 字号 ==================== */
+/* ==================== 间距 ==================== */
+/* ==================== 订单状态颜色 ==================== */
+/* ==================== tabBar高度 ==================== */
+.detail-page.data-v-42e94b5b {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.list.data-v-42e94b5b {
+  height: 100vh;
+}
+.record-item.data-v-42e94b5b {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  background: #f1f5f9;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.record-item .left.data-v-42e94b5b {
+  flex: 1;
+}
+.record-item .left .desc.data-v-42e94b5b {
+  font-size: 28rpx;
+  color: #1e293b;
+  display: block;
+}
+.record-item .left .time.data-v-42e94b5b {
+  font-size: 22rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 4rpx;
+}
+.record-item .left .remark-info.data-v-42e94b5b {
+  margin-top: 8rpx;
+}
+.record-item .left .remark-info text.data-v-42e94b5b {
+  display: block;
+  font-size: 22rpx;
+  color: #64748b;
+  line-height: 1.6;
+}
+.record-item .amount.data-v-42e94b5b {
+  font-size: 30rpx;
+  color: #1e293b;
+  font-weight: bold;
+}
+.record-item .amount.income.data-v-42e94b5b {
+  color: #07c160;
+}
+.loading-tip.data-v-42e94b5b {
+  text-align: center;
+  padding: 32rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}
