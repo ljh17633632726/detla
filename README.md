@@ -65,7 +65,7 @@
 
 请将下载后的文件保存为本目录下的 `delta-game-images.tar`：
 
-- 主下载地址：https://lenglengyou.top/upload/delta-game-images.tar
+- 主下载地址：https://lenglengyou.top/file/delta-game-images.tar
 - 备用百度网盘：链接 https://pan.baidu.com/s/1v4SgG5p7Dey-ZjkU-0qgiA?pwd=ujdc，提取码：`ujdc`
 
 主下载地址速度较慢时可尝试开启 VPN。
