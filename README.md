@@ -1,121 +1,78 @@
-# 三角洲游戏平台 Docker 部署包
+# 护航小程序 Docker 部署包
 
-本目录为可直接上传和部署的 Docker 离线交付包，不包含项目源码。包含后端、PC 管理后台、H5 页面、MySQL、Redis 的镜像及一键部署文件。
+本目录是可直接部署的 Docker 交付包，不包含项目源码，包含后端、PC 管理后台、H5 页面、MySQL、Redis 镜像及一键部署文件。
 
-## 包含内容
+## 演示与测试账号
 
-| 文件 | 说明 |
-| --- | --- |
-| `delta-game-images.tar` | Docker 离线镜像包，需从下方下载后放入本目录 |
-| `docker-compose.yml` | 服务编排文件 |
-| `.env.example` | 环境变量配置模板 |
-| `start.bat` / `start.ps1` / `start.sh` | Windows/Linux 一键启动脚本 |
-| `stop.bat` / `stop.ps1` / `stop.sh` | 停止服务脚本 |
-| `delta_game.sql` | 数据库初始化脚本 |
-| `delta_game_recharge_migration.sql` | 已有数据库升级脚本 |
-| `部署文档.md` | 完整部署和配置说明 |
+### 在线体验
+
+| 入口 | 地址 | 登录说明 |
+| --- | --- | --- |
+| 小程序 H5 示例 | http://lenglengyou.top:81/ | 普通用户可随便输入手机号登录，固定验证码为 `123456`；客服请切换到账号密码登录 |
+| PC 管理后台 | https://lenglengyou.top | 使用下方管理员或客服测试账号登录 |
+
+> 打手端入口在用户端“我要入驻”一栏，需要申请并审核通过后再次点击进入。
+
+### 测试账号
+
+| 端 | 账号 | 密码 | 说明 |
+| --- | --- | --- | --- |
+| 管理员 | admin | UIUIUIUI | PC 管理后台登录 |
+| 客服 | kefu | UIUIUIUI | PC 管理后台可登录；小程序客服端需切换到账号密码登录 |
+| 打手 | 无 | 无 | 从用户端“我要入驻”申请 |
+
+> 如果 `lenglengyou.top` 相关地址无法访问，请开启 VPN，服务器位于新加坡。
 
 ## 最近更新（2026-07-17）
 
-- H5 页面已接入微信 H5 支付，支持手机浏览器完成订单支付和余额充值。
-- 增加 Docker 离线镜像包和 Windows/Linux 一键部署能力，无需拉取项目源码。
-- 微信支付配置支持后台动态维护，修改 AppID、商户号、回调地址、证书等内容后通常无需重启后端。
-- 增加余额充值套餐，后台可配置“充值金额、赠送金额、启用状态和排序”。
-- 用户从“我的 -> 钱包 -> 立即充值”进入充值页，支付成功后按“充值金额 + 赠送金额”入账并记录 `RECHARGE` 流水。
-- 充值支付单保存当时的赠送金额，后台修改套餐不会影响已经发起的历史支付单。
+- H5 页面已接入微信 H5 支付。
+- 增加 Docker 离线镜像包和 Windows 一键部署能力。
+- 微信支付配置支持后台动态维护。
+- 增加余额充值套餐，支持充值金额和赠送金额配置。
 
-## Docker 启动
+## Docker 文件
 
-### 镜像下载
+| 文件 | 说明 |
+| --- | --- |
+| `delta-game-images.tar` | Docker 离线镜像包，需从下载地址获取 |
+| `docker-compose.yml` | 服务编排文件 |
+| `.env.example` | 环境配置模板 |
+| `start.bat` / `start.ps1` | Windows 一键启动 |
+| `stop.bat` / `stop.ps1` | Windows 停止服务 |
+| `delta_game.sql` | 数据库初始化脚本 |
+| `delta_game_recharge_migration.sql` | 已有数据库升级脚本 |
+| `部署文档.md` | 完整部署说明 |
 
-镜像包不提交到 GitHub/Gitee 仓库，请先下载并保存为本目录下的 `delta-game-images.tar`：
+## 镜像下载
+
+请将下载后的文件保存为本目录下的 `delta-game-images.tar`：
 
 - 主下载地址：https://lenglengyou.top/upload/delta-game-images.tar
 - 备用百度网盘：链接 https://pan.baidu.com/s/1v4SgG5p7Dey-ZjkU-0qgiA?pwd=ujdc，提取码：`ujdc`
 
-主下载地址速度较慢时可尝试开启 VPN；百度网盘用于备用下载。
+主下载地址速度较慢时可尝试开启 VPN。
 
-### 运行要求
-
-- Windows 安装 Docker Desktop；Linux 安装 Docker Engine。
-- Docker Compose v2。
-- 建议至少 2 核 CPU、4GB 内存、40GB 可用磁盘。
-- H5 微信支付和支付回调必须使用公网 HTTPS 域名。
-
-### Windows
+## Windows 一键部署
 
 1. 下载 `delta-game-images.tar` 并放到本目录。
 2. 复制 `.env.example` 为 `.env`。
 3. 修改 `.env` 中的数据库密码、Redis 密码、JWT 密钥和 AES 密钥。
-4. 双击 `start.bat`，或在 PowerShell 执行 `./start.ps1`。
+4. 双击 `start.bat`，或使用 PowerShell 执行 `./start.ps1`。
 
 启动后访问：
 
 - 管理后台：`http://localhost:8081`
 - H5 页面：`http://localhost:8082`
 
-### Linux
+## 微信支付
 
-```bash
-cp .env.example .env
-vi .env
-chmod +x start.sh stop.sh
-./start.sh
-```
-
-常用命令：
-
-```bash
-docker compose ps
-docker compose logs -f backend
-docker compose restart backend
-./stop.sh
-```
-
-启动脚本会自动检查同目录的 `delta-game-images.tar`，缺少镜像时自动加载离线镜像，然后执行 `docker compose up -d`。
-
-## 微信支付配置
-
-启动后登录后台，进入“系统管理 -> 系统配置 -> 微信支付配置”，配置：
-
-1. 启用微信支付
-2. 微信支付 AppID
-3. 商户号
-4. 支付回调地址，例如 `https://你的域名/api/pay/wx/notify`
-5. API v3 密钥
-6. 商户证书序列号
-7. 微信支付公钥 ID
-8. 上传商户私钥和微信支付公钥
-9. H5 客户端类型，普通手机浏览器填写 `WAP`
-
-保存后配置动态生效，通常不需要重启容器。支付证书保存在 `upload-data` Docker 卷，请勿删除。
-
-H5 支付不能使用 `localhost` 或内网 IP，回调地址必须是微信可访问的 HTTPS 地址。
+后台“系统管理 -> 系统配置”支持微信支付动态配置。H5 支付和支付回调需要使用公网 HTTPS 域名，具体配置以 `部署文档.md` 为准。
 
 ## 余额充值套餐
 
-后台进入“系统管理 -> 余额充值套餐”，可配置套餐名称、充值金额、赠送金额、排序和启用状态。默认套餐为：
+后台“系统管理 -> 余额充值套餐”可配置充值金额和赠送金额，用户从钱包进入充值页面购买，支付成功后自动入账。
 
-- 充值 100 元，赠送 10 元
-- 充值 300 元，赠送 40 元
-- 充值 500 元，赠送 100 元
-
-已有数据库升级时，如果 `payment` 表没有 `recharge_bonus` 字段，执行：
-
-```sql
-ALTER TABLE payment
-  ADD COLUMN recharge_bonus decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT '余额充值赠送金额' AFTER amount;
-```
-
-也可以直接执行目录中的 `delta_game_recharge_migration.sql`。
-
-## 数据和安全要求
-
-- 首次启动 MySQL 会自动导入 `delta_game.sql`，已有数据卷不会重复导入。
-- `mysql-data`、`redis-data`、`upload-data` 是持久化卷，不能随意删除。
-- `docker compose down -v` 会删除数据库、Redis 和上传文件，只能用于测试环境。
-- 不要对公网开放 MySQL 3306 和 Redis 6379。
-- 不要把 `.env` 提交到代码仓库。
+已有数据库升级时，请执行目录中的 `delta_game_recharge_migration.sql`。
 
 ## 源码获取
 
