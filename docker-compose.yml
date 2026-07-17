@@ -1,0 +1,84 @@
+name: delta-game
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: delta-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_root_password}
+      MYSQL_DATABASE: delta_game
+      MYSQL_USER: ${MYSQL_USER:-delta_game}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-change_database_password}
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./delta_game.sql:/docker-entrypoint-initdb.d/01-delta_game.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$${MYSQL_ROOT_PASSWORD} --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  redis:
+    image: redis:7-alpine
+    container_name: delta-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:-change_redis_password}"]
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - redis-data:/data
+
+  backend:
+    image: delta-game-backend:latest
+    container_name: delta-backend
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/delta_game?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true"
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-delta_game}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-change_database_password}
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-change_redis_password}
+      FILE_UPLOAD_PATH: /app/data/upload
+      FILE_UPLOAD_URL_PREFIX: ${FILE_UPLOAD_URL_PREFIX:-/file/}
+      JWT_SECRET: ${JWT_SECRET:-change_jwt_secret_at_least_256_bits_long}
+      AES_KEY: ${AES_KEY:-change_aes_key_16}
+      AUTH_H5_LOGIN_CODE: ${AUTH_H5_LOGIN_CODE:-123456}
+      WX_PAY_ENABLED: ${WX_PAY_ENABLED:-false}
+      TZ: Asia/Shanghai
+    volumes:
+      - upload-data:/app/data/upload
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  admin:
+    image: delta-game-admin:latest
+    container_name: delta-admin-ui
+    restart: unless-stopped
+    ports:
+      - "${ADMIN_PORT:-8081}:80"
+    depends_on:
+      - backend
+
+  h5:
+    image: delta-game-h5:latest
+    container_name: delta-h5
+    restart: unless-stopped
+    ports:
+      - "${H5_PORT:-8082}:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql-data:
+  redis-data:
+  upload-data:
