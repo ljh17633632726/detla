@@ -1,0 +1,1 @@
+"use strict";const e=require("../../common/vendor.js"),r=require("../../store/site.js"),t={__name:"user",setup(t){const s=r.useSiteStore();return(r,t)=>({a:e.t(e.unref(s).fullName),b:e.t(e.unref(s).fullName)})}},s=e._export_sfc(t,[["__scopeId","data-v-b86f8e12"]]);wx.createPage(s);

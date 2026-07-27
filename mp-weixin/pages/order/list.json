@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "我的订单",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f1f5f9",
+  "backgroundColorTop": "#f1f5f9",
+  "backgroundColorBottom": "#f1f5f9",
+  "initialRenderingCache": "static",
+  "usingComponents": {
+    "order-card": "../../components/OrderCard",
+    "empty-state": "../../components/EmptyState",
+    "custom-tab-bar": "../../components/CustomTabBar"
+  }
+}

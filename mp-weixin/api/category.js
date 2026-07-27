@@ -1,0 +1,1 @@
+"use strict";const e=require("./request.js");exports.getAllCategories=(t={})=>e.get("/product/category/all",{},{auth:!1,...t}),exports.getCategoryTree=(t={})=>e.get("/product/category/tree",{},{auth:!1,...t});

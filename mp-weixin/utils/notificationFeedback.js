@@ -1,0 +1,1 @@
+"use strict";const t=require("../common/vendor.js");exports.playMessageNotification=function(){try{t.index.vibrateShort({type:"medium"})}catch(e){}try{const e=t.index.createInnerAudioContext();e.src="/static/sounds/notify.wav",e.volume=.6,e.autoplay=!0,e.obeyMuteSwitch=!1,e.onEnded(()=>e.destroy()),e.onError(()=>e.destroy())}catch(e){}};

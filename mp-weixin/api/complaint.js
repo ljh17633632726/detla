@@ -1,0 +1,1 @@
+"use strict";const t=require("./request.js");exports.appealComplaint=(e,o)=>t.post(`/order/complaint/${e}/appeal`,o),exports.createComplaint=e=>t.post("/order/complaint",e),exports.getComplaintDetail=e=>t.get(`/order/complaint/${e}`),exports.getMyComplaints=e=>t.get("/order/complaint/my",e);

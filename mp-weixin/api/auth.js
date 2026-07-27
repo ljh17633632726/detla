@@ -1,0 +1,1 @@
+"use strict";const o=require("./request.js");exports.csLogin=s=>o.post("/cs/auth/login",s,{auth:!1}),exports.h5Login=s=>o.post("/user/auth/h5-login",s,{auth:!1}),exports.switchToPlayerToken=()=>o.post("/user/auth/switch-to-player",{},{role:"user",loading:!0}),exports.userLogin=(s,t)=>o.post("/user/auth/login",{code:s,phoneCode:t},{auth:!1});

@@ -1,0 +1,1 @@
+"use strict";const e=require("./request.js");exports.getMessageList=s=>e.get("/message/list",s),exports.getRemind=(s={})=>e.get("/message/remind",{},s),exports.getUnreadCount=(s,t={})=>e.get("/message/unread-count",{type:s},t),exports.markAllRead=s=>e.post(`/message/read-all?userType=${encodeURIComponent(s)}`,{}),exports.markRead=s=>e.post(`/message/read/${s}`);

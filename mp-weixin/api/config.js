@@ -1,0 +1,1 @@
+"use strict";const e=require("./request.js");exports.getRechargePackages=function(){return e.get("/system/recharge-packages",{},{auth:!1,loading:!1})},exports.getSiteConfig=function(){return e.get("/system/config/site",{},{auth:!1,loading:!1})};
