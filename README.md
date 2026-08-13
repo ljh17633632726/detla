@@ -1,6 +1,6 @@
 # 护航小程序
 
-本目录是可直接部署的 Docker 配置包，不包含项目源码或离线镜像。启动脚本会从 Docker Hub 拉取后端、PC 管理后台、H5 页面、MySQL 和 Redis 镜像。
+本目录是可直接部署的 Docker 配置包，不包含项目源码或离线镜像。服务从 Docker Hub 拉取后端、PC 管理后台、H5 页面、MySQL 和 Redis 镜像。
 
 
 ##技术栈：Spring Boot、Vue 3、UniApp、微信小程序、微信支付、MySQL、Redis。
@@ -11,7 +11,7 @@
 
 ## 最近更新（2026-07-17）
 - H5 页面已接入微信 H5 支付。
-- 增加 Docker Hub 拉取式 Windows/Linux 一键部署能力。
+- 增加 Docker Hub 拉取式 Windows 一键部署能力。
 - 微信支付配置支持后台动态维护。
 - 增加余额充值套餐，支持充值金额和赠送金额配置。
 
@@ -54,18 +54,16 @@
 | --- | --- |
 | `docker-compose.yml` | 服务编排文件 |
 | `.env.example` | 环境配置模板 |
-| `start.bat` / `start.ps1` | Windows 一键启动 |
-| `stop.bat` / `stop.ps1` | Windows 停止服务 |
 | `delta_game.sql` | 数据库初始化脚本 |
 | `delta_game_recharge_migration.sql` | 已有数据库升级脚本 |
 | `部署文档.md` | 完整部署说明 |
 
-## Windows 一键部署
+## Docker 部署
 
 1. 复制 `.env.example` 为 `.env`。
 2. 修改 `.env` 中的数据库密码、Redis 密码、JWT 密钥、AES 密钥，以及每个实例自己的小程序 AppID/AppSecret。
 3. 私有镜像仓库先执行 `docker login`。
-4. 双击 `start.bat`，或使用 PowerShell 执行 `./start.ps1`。脚本会从 Docker Hub 自动拉取镜像。
+4. 按 [部署文档.md](部署文档.md) 中的 `docker pull` 命令拉取镜像，再执行 `docker compose up -d` 启动服务。
 
 启动后访问：
 
