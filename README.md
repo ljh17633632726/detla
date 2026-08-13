@@ -59,11 +59,7 @@
 | `部署文档.md` | 完整部署说明 |
 
 ## Docker 部署
-
-1. 复制 `.env.example` 为 `.env`。
-2. 修改 `.env` 中的数据库密码、Redis 密码、JWT 密钥、AES 密钥，以及每个实例自己的小程序 AppID/AppSecret。
-3. 私有镜像仓库先执行 `docker login`。
-4. 按 [部署文档.md](部署文档.md) 中的 `docker pull` 命令拉取镜像，再执行 `docker compose up -d` 启动服务。
+详情查看 [部署文档.md](部署文档.md) 
 
 启动后访问：
 
