@@ -9,11 +9,9 @@ if [ ! -f .env ]; then
   echo "已创建 .env，请按生产环境修改密码和密钥。"
 fi
 
-if [ -f delta-game-images.tar ] && ! docker image inspect delta-game-backend:latest delta-game-admin:latest delta-game-h5:latest mysql:8.0 redis:7-alpine >/dev/null 2>&1; then
-  docker load -i delta-game-images.tar
-fi
-
-docker compose up -d
+echo "正在从 Docker Hub 拉取镜像..."
+docker compose pull
+docker compose up -d --remove-orphans
 docker compose ps
 echo "管理后台: http://localhost:8081"
 echo "H5 页面:   http://localhost:8082"

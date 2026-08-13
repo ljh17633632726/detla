@@ -1,6 +1,6 @@
 # 护航小程序
 
-本目录是可直接部署的 Docker 交付包，不包含项目源码，包含后端、PC 管理后台、H5 页面、MySQL、Redis 镜像及一键部署文件。
+本目录是可直接部署的 Docker 配置包，不包含项目源码或离线镜像。启动脚本会从 Docker Hub 拉取后端、PC 管理后台、H5 页面、MySQL 和 Redis 镜像。
 
 
 ##技术栈：Spring Boot、Vue 3、UniApp、微信小程序、微信支付、MySQL、Redis。
@@ -11,7 +11,7 @@
 
 ## 最近更新（2026-07-17）
 - H5 页面已接入微信 H5 支付。
-- 增加 Docker 离线镜像包和 Windows 一键部署能力。
+- 增加 Docker Hub 拉取式 Windows/Linux 一键部署能力。
 - 微信支付配置支持后台动态维护。
 - 增加余额充值套餐，支持充值金额和赠送金额配置。
 
@@ -52,7 +52,6 @@
 
 | 文件 | 说明 |
 | --- | --- |
-| `delta-game-images.tar` | Docker 离线镜像包，需从下载地址获取 |
 | `docker-compose.yml` | 服务编排文件 |
 | `.env.example` | 环境配置模板 |
 | `start.bat` / `start.ps1` | Windows 一键启动 |
@@ -61,26 +60,19 @@
 | `delta_game_recharge_migration.sql` | 已有数据库升级脚本 |
 | `部署文档.md` | 完整部署说明 |
 
-## 镜像下载
-
-请将下载后的文件保存为本目录下的 `delta-game-images.tar`：
-
-- 主下载地址：https://lenglengyou.top/download/delta-game-images.tar
-- 备用百度网盘：链接 https://pan.baidu.com/s/1v4SgG5p7Dey-ZjkU-0qgiA?pwd=ujdc，提取码：`ujdc`
-
-主下载地址速度较慢时可尝试开启 VPN。
-
 ## Windows 一键部署
 
-1. 下载 `delta-game-images.tar` 并放到本目录。
-2. 复制 `.env.example` 为 `.env`。
-3. 修改 `.env` 中的数据库密码、Redis 密码、JWT 密钥和 AES 密钥（默认参数也可以启动）。
-4. 双击 `start.bat`，或使用 PowerShell 执行 `./start.ps1`。
+1. 复制 `.env.example` 为 `.env`。
+2. 修改 `.env` 中的数据库密码、Redis 密码、JWT 密钥、AES 密钥，以及每个实例自己的小程序 AppID/AppSecret。
+3. 私有镜像仓库先执行 `docker login`。
+4. 双击 `start.bat`，或使用 PowerShell 执行 `./start.ps1`。脚本会从 Docker Hub 自动拉取镜像。
 
 启动后访问：
 
 - 管理后台：`http://localhost:8081`
 - H5 页面：`http://localhost:8082`
+
+详细配置位置和 Linux 部署步骤见 [部署文档.md](部署文档.md)。
 
 ## 源码获取
 

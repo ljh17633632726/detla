@@ -10,28 +10,12 @@ if ($LASTEXITCODE -ne 0) {
 
 if (!(Test-Path ".env")) {
     Copy-Item ".env.example" ".env"
-    Write-Host "Created .env. Please update it for production."
+    Write-Host "已创建 .env，请先填写其中的生产环境配置。"
 }
 
-$images = @(
-    "delta-game-backend:latest",
-    "delta-game-admin:latest",
-    "delta-game-h5:latest",
-    "mysql:8.0",
-    "redis:7-alpine"
-)
-$imagesMissing = $false
-foreach ($image in $images) {
-    docker image inspect $image > $null 2>&1
-    if ($LASTEXITCODE -ne 0) { $imagesMissing = $true }
-}
-
-if ((Test-Path "delta-game-images.tar") -and $imagesMissing) {
-    Write-Host "Loading offline images..."
-    docker load --input "delta-game-images.tar"
-}
-
-docker compose up -d
+Write-Host "正在从 Docker Hub 拉取镜像..."
+docker compose pull
+docker compose up -d --remove-orphans
 docker compose ps
 Write-Host "Admin: http://localhost:8081"
 Write-Host "H5:    http://localhost:8082"

@@ -34,7 +34,7 @@ services:
       - redis-data:/data
 
   backend:
-    image: delta-game-backend:latest
+    image: lenglengyou/delta-game:tagname
     container_name: delta-backend
     restart: unless-stopped
     environment:
@@ -50,6 +50,9 @@ services:
       JWT_SECRET: ${JWT_SECRET:-change_jwt_secret_at_least_256_bits_long}
       AES_KEY: ${AES_KEY:-change_aes_key_16}
       AUTH_H5_LOGIN_CODE: ${AUTH_H5_LOGIN_CODE:-123456}
+      WX_MINIAPP_ENABLED: ${WX_MINIAPP_ENABLED:-false}
+      WX_MINIAPP_APPID: ${WX_MINIAPP_APPID:-}
+      WX_MINIAPP_SECRET: ${WX_MINIAPP_SECRET:-}
       WX_PAY_ENABLED: ${WX_PAY_ENABLED:-false}
       TZ: Asia/Shanghai
     volumes:
@@ -61,7 +64,7 @@ services:
         condition: service_started
 
   admin:
-    image: delta-game-admin:latest
+    image: lenglengyou/delta-game-admin:tagname
     container_name: delta-admin-ui
     restart: unless-stopped
     ports:
@@ -70,7 +73,7 @@ services:
       - backend
 
   h5:
-    image: delta-game-h5:latest
+    image: lenglengyou/delta-game-h5:tagname
     container_name: delta-h5
     restart: unless-stopped
     ports:
